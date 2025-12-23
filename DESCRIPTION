@@ -22,10 +22,11 @@ Description: Provides some easy-to-use functions to extract and visualize the
     visualization.
 License: GPL-2
 LazyData: true
+LazyDataCompression: xz
 Encoding: UTF-8
 Depends:
-    R (>= 3.1.2),
-    ggplot2
+    R (>= 4.0.0),
+    ggplot2 (>= 3.4.0)
 Imports:
     cluster,
     dendextend,

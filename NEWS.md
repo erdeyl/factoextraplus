@@ -2,6 +2,29 @@
 
 ## Major Changes
 
+### Package Metadata Updates
+
+* **Raised minimum R version** to R >= 4.0.0 (from R >= 3.1.2) to align with
+  current dependency requirements (ggplot2, rlang) and modern CRAN policies.
+
+* **Added ggplot2 version requirement** (>= 3.4.0) to ensure compatibility
+  with the modernized code that uses `linewidth` and other 3.4.0+ features.
+
+* **Added LazyDataCompression: xz** to comply with modern CRAN policies for
+  efficient data storage.
+
+### Deprecated Function Improvements
+
+* **Fixed `get_mfa_quali_var()` warning message**: Corrected copy-paste error
+
+  where the warning incorrectly suggested using `'quanti.var'` instead of
+  `'quali.var'`.
+
+* **Refactored deprecated MFA/HMFA helpers**: Replaced string-based `warning()`
+  calls with proper `.Deprecated()` function for R-standard deprecation handling.
+  Added internal `.deprecate_warn()` helper to consolidate duplicated
+  warning+dispatch patterns and reduce maintenance overhead.
+
 ### ggplot2 3.4.0+ Compatibility Fixes
 
 * **`aes_string()` deprecation** (Issues #179, #183, #188, #190, #191, #192):
