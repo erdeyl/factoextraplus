@@ -235,11 +235,17 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
 # Cluster package required
 # d: dist object
 # cluster: cluster number of observation
+# Returns NA if silhouette cannot be computed (e.g., k <= 1 or k >= n)
+# Fixes GitHub issues #113 and #147
 .get_ave_sil_width <- function(d, cluster){
   if (!requireNamespace("cluster", quietly = TRUE)) {
     stop("cluster package needed for this function to work. Please install it.")
   }
   ss <- cluster::silhouette(cluster, d)
+  # Handle case where silhouette() returns NA (when k <= 1 or k >= n)
+  if (length(ss) == 1 && is.na(ss)) {
+    return(NA_real_)
+  }
   mean(ss[, 3])
 }
 

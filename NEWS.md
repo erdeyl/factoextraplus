@@ -2,7 +2,7 @@
 
 ## Issues Addressed
 
-This version addresses the following **27 issues** from the original factoextra repository:
+This version addresses the following **30 issues** from the original factoextra repository:
 
 | Issue | Description |
 |-------|-------------|
@@ -32,23 +32,26 @@ This version addresses the following **27 issues** from the original factoextra 
 | #133 | Hopkins statistic biased sampling |
 | #131 | fviz_nbclust cluster ordering with k > 9 |
 | #129 | PR: fviz_pca_biplot rescaling fix |
+| #150 | fviz_ca_col() typo colcol.sup -> col.col.sup |
+| #147 | fviz_nbclust silhouette NA with fewer rows than columns |
 | #120 | fviz_mca_var mca.cor axes ignored |
+| #113 | fviz_nbclust silhouette error with k.max > 15 |
 | #64  | Documentation typos |
 
 ## Major Changes
 
 ### Package Metadata Updates
 
-* **Raised minimum R version** to R >= 4.0.0 (from R >= 3.1.2) to align with
+* **Raised minimum R version** to R >= 4.1.0 (from R >= 3.1.2) to align with
   current dependency requirements (ggplot2, rlang) and modern CRAN policies.
 
-* **Added ggplot2 version requirement** (>= 3.4.0) to ensure compatibility
-  with the modernized code that uses linewidth and other 3.4.0+ features.
+* **Added ggplot2 version requirement** (>= 3.5.2) to ensure compatibility
+  with the modernized code that uses linewidth and other 3.5.2+ features.
 
 * **Added LazyDataCompression: xz** to comply with modern CRAN policies for
   efficient data storage.
 
-### ggplot2 3.4.0+ Compatibility Fixes
+### ggplot2 3.5.2+ Compatibility Fixes
 
 * **aes_string() deprecation** (Issues #179, #183, #188, #190, #191, #192):
   Replaced all uses of the deprecated aes_string() function with aes() +
@@ -80,6 +83,8 @@ This version addresses the following **27 issues** from the original factoextra 
 * Fixed facto_summarize() axes parameter (Issues #120, #143, #166, #167)
 * Fixed fviz_pca_biplot() rescaling (PR #129)
 * Fixed fviz_nbclust() cluster ordering k > 9 (Issue #131)
+* Fixed fviz_nbclust() silhouette error when k >= n (Issues #113, #147)
+* Fixed fviz_ca_col() parameter name typo (Issue #150)
 * Fixed Hopkins statistic formula (Wright 2022)
 
 ## New Features
