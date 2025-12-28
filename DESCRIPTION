@@ -31,11 +31,13 @@ Imports:
     cluster,
     dendextend,
     FactoMineR,
-    ggpubr,
+    ggpubr (>= 0.6.3),
     grid,
     rlang,
     stats,
     ggrepel
+Remotes:
+    erdeyl/ggpubr-modern
 Suggests:
     ade4,
     ca,
