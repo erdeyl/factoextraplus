@@ -172,10 +172,13 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
   bar_width <- extra_args$bar_width
   linetype <- extra_args$linetype
   if(is.null(linetype)) linetype <- "solid"
-  
+
   p <- ggplot(df.eig, aes(dim, eig, group=1 ))
-  if("bar" %in% geom) p <- p + geom_bar(stat="identity", fill= barfill, 
-                                        color = barcolor, width = bar_width)
+  if("bar" %in% geom) {
+    bar_args <- list(stat = "identity", fill = barfill, color = barcolor)
+    if(!is.null(bar_width)) bar_args$width <- bar_width
+    p <- p + do.call(geom_bar, bar_args)
+  }
   if("line" %in% geom) p <- p + geom_line(color = linecolor, linetype = linetype)+
     geom_point(shape=19, color=linecolor)
   if(addlabels) p <- p + geom_text(label = text_labels, vjust=-0.4, hjust = hjust)
