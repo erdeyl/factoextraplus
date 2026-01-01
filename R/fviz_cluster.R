@@ -47,7 +47,7 @@
 #'@param xlab,ylab character vector specifying x and y axis labels,
 #'  respectively. Use xlab = FALSE and ylab = FALSE to hide xlab and ylab,
 #'  respectively.
-#'@inheritParams ggpubr::ggpar
+#'@inheritParams ggpubrplus::ggpar
 #'@param ... other arguments to be passed to the functions
 #'  \code{\link[ggpubr]{ggscatter}} and \code{\link[ggpubr]{ggpar}}.
 #'
@@ -256,7 +256,7 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
   if(inherits(object, "partition") & missing(show.clust.cent))
     show.clust.cent <- FALSE # hide mean point for PAM, CLARA
   
-  p <- ggpubr::ggscatter(plot.data, "x", "y",
+  p <- ggpubrplus::ggscatter(plot.data, "x", "y",
                          color="cluster", shape = shape, size = pointsize,
                          point = "point" %in% geom, 
                          label = lab,

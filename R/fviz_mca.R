@@ -66,11 +66,11 @@ NULL
 #'  then the top 5 individuals/variables with the highest cos2 are drawn. \item 
 #'  contrib if contrib > 1, ex: 5,  then the top 5 individuals/variables with 
 #'  the highest contrib are drawn }
-#'@inheritParams ggpubr::ggpar
+#'@inheritParams ggpubrplus::ggpar
 #'@inheritParams fviz
 #'@param ... Additional arguments. \itemize{ \item in fviz_mca_ind(), 
 #'  fviz_mca_var() and fviz_mca_cor(): Additional arguments are passed to the 
-#'  functions fviz() and ggpubr::ggpar(). \item in fviz_mca_biplot() and 
+#'  functions fviz() and ggpubrplus::ggpar(). \item in fviz_mca_biplot() and 
 #'  fviz_mca(): Additional arguments are passed to fviz_mca_ind() and 
 #'  fviz_mca_var().}
 #'@param map character string specifying the map type. Allowed options include: 

@@ -1,4 +1,13 @@
-# factoextra 1.0.8
+# factoextraplus 1.1.0
+
+## Package Rename
+
+This package is a modernized fork of `factoextra` renamed to `factoextraplus` to avoid
+conflicts while the upstream pull request (kassambara/factoextra#194) is pending.
+Once the PR is merged and the original `factoextra` is updated on CRAN, users can
+switch back to the original package.
+
+**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`).
 
 ## Issues Addressed
 
@@ -36,74 +45,35 @@ This version addresses the following **30 issues** from the original factoextra 
 | #147 | fviz_nbclust silhouette NA with fewer rows than columns |
 | #120 | fviz_mca_var mca.cor axes ignored |
 | #113 | fviz_nbclust silhouette error with k.max > 15 |
-| #64  | Documentation typos |
 
 ## Major Changes
 
 ### Package Metadata Updates
 
-* **Raised minimum R version** to R >= 4.1.0 (from R >= 3.1.2) to align with
-  current dependency requirements (ggplot2, rlang) and modern CRAN policies.
+* **Raised minimum R version** to R >= 4.1.0 (from R >= 3.1.2)
+* **Added ggplot2 version requirement** (>= 3.5.2)
+* **Changed dependency** from ggpubr to ggpubrplus (>= 0.7.0)
 
-* **Added ggplot2 version requirement** (>= 3.5.2) to ensure compatibility
-  with the modernized code that uses linewidth and other 3.5.2+ features.
+### ggplot2 3.4.0+ Compatibility
 
-* **Added LazyDataCompression: xz** to comply with modern CRAN policies for
-  efficient data storage.
-
-### ggplot2 3.5.2+ Compatibility Fixes
-
-* **aes_string() deprecation** (Issues #179, #183, #188, #190, #191, #192):
-  Replaced all uses of the deprecated aes_string() function with aes() +
-  .data pronoun from rlang package.
-
-* **guides(... = FALSE) deprecation** (Issues #141, #156, #159, #173, #174, #179, #183):
-  Replaced FALSE with "none" in all guides() calls as required by ggplot2 3.3.4+.
-
-* **size aesthetic deprecation for lines** (Issues #178, #191): Replaced size
-  with linewidth for line-based geoms (geom_path, geom_segment, ellipses).
+* Replaced all `aes_string()` calls with `aes()` + `.data` pronoun pattern
+* Changed `guides(... = FALSE)` to `guides(... = "none")` throughout
+* Converted `size` aesthetic to `linewidth` for line-based geoms
 
 ### Dependency Reduction
 
-* **Removed tidyr dependency** (Issues #162, #189): Replaced deprecated
-  tidyr::gather_() with base R stats::reshape().
+* Eliminated tidyr dependency by replacing `gather_()` with base R `reshape()`
 
-* **Removed reshape2 dependency**: Replaced reshape2::melt() with base R.
+### R 4.1.0+ Fixes
 
-### R 4.0+ Compatibility Fixes
+* Corrected "condition has length > 1" errors via proper `inherits()` checks
 
-* **class() == comparison bug** (Issues #148, #149, #151, #163, #171, #180):
-  Fixed condition has length > 1 warnings by using inherits() checks.
+### Bug Fixes
 
-## Bug Fixes
-
-* Fixed fviz_dend() rect_border error (Issues #151, #163, #180)
-* Fixed fviz_nbclust() condition length error (Issues #148, #149, #171)
-* Fixed biased Hopkins statistic sampling (Issue #133)
-* Fixed facto_summarize() axes parameter (Issues #120, #143, #166, #167)
-* Fixed fviz_pca_biplot() rescaling (PR #129)
-* Fixed fviz_nbclust() cluster ordering k > 9 (Issue #131)
-* Fixed fviz_nbclust() silhouette error when k >= n (Issues #113, #147)
-* Fixed fviz_ca_col() parameter name typo (Issue #150)
-* Fixed Hopkins statistic formula (Wright 2022)
-
-## New Features
-
-* fviz_eig() parallel analysis (Horn 1965)
-* fviz_pca_biplot() scaling types (Gabriel 1971)
-
-## Documentation Fixes
-
-* Fixed typos (Issue #64)
-* Added Hopkins statistic clarification
-* Added fviz_gap_stat() documentation
-
-## Contributors
-
-* Laszlo Erdey (University of Debrecen, Hungary)
-
----
-
-# factoextra 1.0.7
-
-See previous NEWS at https://github.com/kassambara/factoextra
+* `fviz_dend()` rect_border error resolution
+* `fviz_nbclust()` cluster ordering for k > 9
+* `fviz_nbclust()` silhouette calculation with k >= n
+* `fviz_ca_col()` parameter typo correction
+* Hopkins statistic formula and sampling corrections
+* `facto_summarize()` axes parameter handling
+* `fviz_pca_biplot()` rescaling corrections

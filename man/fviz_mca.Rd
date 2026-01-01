@@ -136,7 +136,7 @@ the highest contrib are drawn }}
 
 \item{...}{Additional arguments. \itemize{ \item in fviz_mca_ind(), 
 fviz_mca_var() and fviz_mca_cor(): Additional arguments are passed to the 
-functions fviz() and ggpubr::ggpar(). \item in fviz_mca_biplot() and 
+functions fviz() and ggpubrplus::ggpar(). \item in fviz_mca_biplot() and 
 fviz_mca(): Additional arguments are passed to fviz_mca_ind() and 
 fviz_mca_var().}}
 

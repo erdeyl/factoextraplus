@@ -69,7 +69,7 @@ dudi and pca [ade4]; expOutput/epPCA [ExPosition].}
 
 \item{...}{Additional arguments. \itemize{ \item in fviz_pca_ind() and 
 fviz_pca_var(): Additional arguments are passed to the functions fviz() and
-ggpubr::ggpar(). \item in fviz_pca_biplot() and fviz_pca(): Additional 
+ggpubrplus::ggpar(). \item in fviz_pca_biplot() and fviz_pca(): Additional 
 arguments are passed to fviz_pca_ind() and fviz_pca_var().}}
 
 \item{axes}{a numeric vector of length 2 specifying the dimensions to be 

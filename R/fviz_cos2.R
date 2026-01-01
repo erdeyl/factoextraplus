@@ -20,7 +20,7 @@ NULL
 #'   (for descending).
 #' @param top a numeric value specifying the number of top elements to be shown.
 #' @param xtickslab.rt rotation angle for x axis tick labels. Default is 45 degrees.
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #'   
 #' @return a ggplot
 #' @author Alboukadel Kassambara \email{alboukadel.kassambara@@gmail.com}
@@ -101,7 +101,7 @@ fviz_cos2 <- function(X, choice = c("row", "col", "var", "ind", "quanti.var", "q
    
    df <- data.frame(name = factor(names(cos2), levels = names(cos2)), cos2 = cos2)
    
-   p <- ggpubr::ggbarplot(df, x = "name", y = "cos2", fill = fill, color = color,
+   p <- ggpubrplus::ggbarplot(df, x = "name", y = "cos2", fill = fill, color = color,
                           sort.val = sort.val, top = top,
                           main = title, xlab = FALSE, ylab ="Cos2 - Quality of representation",
                           xtickslab.rt = xtickslab.rt, ggtheme = ggtheme, ...

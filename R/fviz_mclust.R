@@ -1,6 +1,6 @@
 #' Plot Model-Based Clustering Results using ggplot2
 #' @description Plots the classification, the uncertainty and the BIC values returned by the Mclust() function.
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #' @inheritParams fviz_cluster
 #' @param object an object of class Mclust
 #' @param what choose from one of the following three options: "classification" (default), "uncertainty" and "BIC".
@@ -93,11 +93,11 @@ fviz_mclust_bic <- function(object, model.names = NULL, shape = 19, color = "mod
   x$model <- factor(x$model, levels = dnx[[2]])
   x$cluster <- factor(x$cluster, levels = unique(x$cluster))
  
-  if(.is_color_palette(palette)) palette <- ggpubr::get_palette(palette, k = length(model.names))
+  if(.is_color_palette(palette)) palette <- ggpubrplus::get_palette(palette, k = length(model.names))
   ggline.opts <- list(data = x, x ="cluster", y = "BIC", group = "model",
                       color = color, shape = shape, palette = palette,
                       main = main, xlab = xlab, ylab = ylab,...)
-  p <- do.call(ggpubr::ggline, ggline.opts)+
+  p <- do.call(ggpubrplus::ggline, ggline.opts)+
     labs(subtitle = paste0("Best model: ", best_model, 
                            " | Optimal clusters: n = ",  number_of_cluster))+
     geom_vline(xintercept = number_of_cluster, linetype = 2, color = "red")+

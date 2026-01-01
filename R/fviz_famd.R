@@ -14,7 +14,7 @@ NULL
 #' @inheritParams fviz_mca
 #' @inheritParams fviz_pca
 #' @inheritParams fviz
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #' @param choice The graph to plot inf fviz_mfa_var(). Allowed values include 
 #'   one of c("var", quanti.var",  "quali.var").
 #' @param habillage an optional factor variable for coloring the observations by
@@ -105,7 +105,7 @@ fviz_famd_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FA
         select = select.ind, repel = repel, ggp = p,  ...)
   
   if(!is.null(gradient.cols))
-    p <- p + ggpubr::gradient_color(gradient.cols)
+    p <- p + ggpubrplus::gradient_color(gradient.cols)
   
  
   p

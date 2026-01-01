@@ -62,8 +62,8 @@ points); "text" to show only labels; c("point", "text") to show both types.}
 Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
 theme_minimal(), theme_classic(), theme_void(), ....}
 
-\item{...}{Arguments to be passed to the functions ggpubr::ggscatter()  &
-ggpubr::ggpar().}
+\item{...}{Arguments to be passed to the functions ggpubrplus::ggscatter()  &
+ggpubrplus::ggpar().}
 }
 \value{
 a ggplot

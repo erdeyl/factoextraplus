@@ -70,7 +70,7 @@ fviz_add <- function(ggp, df, axes = c(1,2), geom=c("point", "arrow"), color ="b
   #%%%%%%%%%%%%%%%%%%%%%%
   hjust <- vjust <- 0.5
   if("point" %in% geom) {
-    p <- ggp + ggpubr::geom_exec(geom_point, data = df, x = "x", y = "y",
+    p <- ggp + ggpubrplus::geom_exec(geom_point, data = df, x = "x", y = "y",
                                  color = color, shape = shape, size = pointsize)
     vjust <- -0.7
   }
@@ -91,12 +91,12 @@ fviz_add <- function(ggp, df, axes = c(1,2), geom=c("point", "arrow"), color ="b
   
   if(addlabel | "text" %in% geom){
     if(repel){
-      p <- p + ggpubr::geom_exec(ggrepel::geom_text_repel, data = df, x = "x", y = "y", 
+      p <- p + ggpubrplus::geom_exec(ggrepel::geom_text_repel, data = df, x = "x", y = "y", 
                                  label = "name", color = color, size = labelsize,
                                  family = font.family)
     }
     else{
-      p <- p + ggpubr::geom_exec(geom_text, data = df, x = "x", y = "y", 
+      p <- p + ggpubrplus::geom_exec(geom_text, data = df, x = "x", y = "y", 
                                  label = "name", color = color, size = labelsize,
                                  vjust=vjust, hjust = hjust, family = font.family)
       

@@ -88,11 +88,11 @@
 #'       Use when focus is on variable relationships.
 #'   }
 #'   Note: "form" and "covariance" scaling requires prcomp or princomp objects.
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #' @inheritParams fviz
 #' @param ... Additional arguments. \itemize{ \item in fviz_pca_ind() and 
 #'   fviz_pca_var(): Additional arguments are passed to the functions fviz() and
-#'   ggpubr::ggpar(). \item in fviz_pca_biplot() and fviz_pca(): Additional 
+#'   ggpubrplus::ggpar(). \item in fviz_pca_biplot() and fviz_pca(): Additional 
 #'   arguments are passed to fviz_pca_ind() and fviz_pca_var().}
 #'   
 #'   
@@ -319,13 +319,13 @@ fviz_pca_biplot <- function(X,  axes = c(1,2), geom = c("point", "text"),
                     scale.= r*0.7, ggp = p,  ...)
   
   if(!is.null(gradient.cols)){
-    if(is.gradient.color) p <- p + ggpubr::gradient_color(gradient.cols)
-    if(is.gradient.fill) p <- p + ggpubr::gradient_fill(gradient.cols)
+    if(is.gradient.color) p <- p + ggpubrplus::gradient_color(gradient.cols)
+    if(is.gradient.fill) p <- p + ggpubrplus::gradient_fill(gradient.cols)
   }
   
   if(!is.null(palette)){
-    if(is.discrete.color) p <- p + ggpubr::color_palette(palette)
-    if(is.discrete.fill) p <- p + ggpubr::fill_palette(palette)
+    if(is.discrete.color) p <- p + ggpubrplus::color_palette(palette)
+    if(is.discrete.fill) p <- p + ggpubrplus::fill_palette(palette)
      
   }
   

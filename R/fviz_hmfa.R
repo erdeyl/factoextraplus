@@ -51,7 +51,7 @@ NULL
 #'@param choice the graph to plot. Allowed values include one of c("quanti.var",
 #'  "quali.var", "group") for plotting quantitative variables, qualitative 
 #'  variables and group of variables, respectively.
-#'@param ... Arguments to be passed to the function fviz() and ggpubr::ggpar()
+#'@param ... Arguments to be passed to the function fviz() and ggpubrplus::ggpar()
 #'@param partial list of the individuals for which the partial points should be
 #'  drawn. (by default, partial = NULL and no partial points are drawn). Use
 #'  partial = "all" to visualize partial points for all individuals.
@@ -80,7 +80,7 @@ NULL
 #' 
 #' # Color individuals by groups, add concentration ellipses
 #' # Remove labels: label = "none".
-#' # Change color palette to "jco". See ?ggpubr::ggpar
+#' # Change color palette to "jco". See ?ggpubrplus::ggpar
 #' grp <- as.factor(wine[,1])
 #' p <- fviz_hmfa_ind(res.hmfa, label="none", habillage=grp,
 #'        addEllipses=TRUE, palette = "jco")
@@ -158,13 +158,13 @@ fviz_hmfa_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FA
     # Plot
     if(!hide$ind & "point" %in% geom) {
       # Partial point
-      p <- p + ggpubr::geom_exec(geom_point, data = ind.partial,
+      p <- p + ggpubrplus::geom_exec(geom_point, data = ind.partial,
                                  x = "x.partial", y = "y.partial", 
                                  colour = col.partial,
                                  shape = shape.ind, size = 1)
       # Partial segments
       # FIX: ggplot2 3.4.0+ deprecation - size replaced with linewidth for geom_segment
-      p <- p + ggpubr::geom_exec(geom_segment, data = ind.partial,
+      p <- p + ggpubrplus::geom_exec(geom_segment, data = ind.partial,
                                  x = "x", y = "y", xend = 'x.partial', yend = 'y.partial',
                                  linetype = "group.name", colour = col.partial, linewidth = 0.5)
     }

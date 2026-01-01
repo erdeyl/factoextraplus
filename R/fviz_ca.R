@@ -65,7 +65,7 @@ NULL
 #'  second value sets the columns.
 #'@param ... Additional arguments. \itemize{ \item in fviz_ca_row() and 
 #'  fviz_ca_col(): Additional arguments are passed to the functions fviz() and
-#'  ggpubr::ggpar(). \item in fviz_ca_biplot() and fviz_ca(): Additional 
+#'  ggpubrplus::ggpar(). \item in fviz_ca_biplot() and fviz_ca(): Additional 
 #'  arguments are passed to fviz_ca_row() and fviz_ca_col().}
 #'@details The default plot of (M)CA is a "symmetric" plot in which both rows
 #'  and columns are in principal coordinates. In this situation, it's not

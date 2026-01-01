@@ -17,7 +17,7 @@ NULL
 #'
 
 # Helper function to check if a palette name is a predefined color palette
-# Replaces ggpubr:::.is_col_palette to avoid using unexported functions
+# Replaces ggpubrplus:::.is_col_palette to avoid using unexported functions
 # Known palette names from RColorBrewer, ggsci, and ggpubr defaults
 .is_color_palette <- function(pal) {
  if (is.null(pal)) return(FALSE)

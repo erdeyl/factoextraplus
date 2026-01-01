@@ -14,3 +14,6 @@
 ^docs$
 ^_pkgdown\.yml$
 ^CRAN-RELEASE$
+^DEPENDENCY_AUDIT\.md$
+^tools/dependency-audit$
+^\.github$

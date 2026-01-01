@@ -15,7 +15,7 @@ package]; eclust and hcut [in factoextra].}
 \item{print.summary}{logical value. If true a summary of cluster silhouettes 
 are printed in fviz_silhouette().}
 
-\item{...}{other arguments to be passed to the function ggpubr::ggpar().}
+\item{...}{other arguments to be passed to the function ggpubrplus::ggpar().}
 }
 \value{
 return a ggplot

@@ -11,7 +11,7 @@ NULL
 #' Allowed values are "none" (no sorting), "asc" (for ascending) or "desc" (for descending).
 #' @param ... other arguments to be passed to the function \link[ggpubr]{ggpar}.
 #' @inheritParams fviz_cos2
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #' @details
 #' The function fviz_contrib() creates a barplot of row/column contributions.
 #' A reference dashed line is also shown on the barplot. This reference line
@@ -120,7 +120,7 @@ fviz_contrib <- function(X, choice = c("row", "col", "var", "ind", "quanti.var",
     if(missing(color)) color <- "Groups"
   }
   
-  p <- ggpubr::ggbarplot(df, x = "name", y = "contrib", fill = fill, color = color,
+  p <- ggpubrplus::ggbarplot(df, x = "name", y = "contrib", fill = fill, color = color,
                          sort.val = sort.val, top = top,
                          main = title, xlab = FALSE, ylab ="Contributions (%)",
                          xtickslab.rt = xtickslab.rt, ggtheme = ggtheme,

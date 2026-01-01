@@ -142,8 +142,8 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   
   k <- .get_k(dend, k, h)
   if(!is.null(k)) {
-    if(.is_color_palette(k_colors)) k_colors <- ggpubr::get_palette(k_colors, k = k)
-    else if(is.null(k_colors)) k_colors <- ggpubr::get_palette("default", k = k)
+    if(.is_color_palette(k_colors)) k_colors <- ggpubrplus::get_palette(k_colors, k = k)
+    else if(is.null(k_colors)) k_colors <- ggpubrplus::get_palette("default", k = k)
     dend <- dendextend::set(dend, what = "branches_k_color", k = k, value = k_colors)
     if(color_labels_by_k) dend <- dendextend::set(dend, "labels_col",  k = k, value = k_colors)
   }
@@ -274,13 +274,13 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   if(!labels) labels <- NULL
   else labels <- "label"
   
-  p <- ggpubr::ggscatter(data.labels, "x", "y", label = labels,
+  p <- ggpubrplus::ggscatter(data.labels, "x", "y", label = labels,
                          color = label_cols,
                          ggp = p, repel = repel, font.label = font.label, ...)
   
   if(is.null(palette)) p <- p + scale_colour_identity()
   
-  p <- ggpubr::ggpar(p, ggtheme = ggtheme, palette = palette, ...) 
+  p <- ggpubrplus::ggpar(p, ggtheme = ggtheme, palette = palette, ...) 
   
   p <- p + theme(axis.title.x = element_blank(), axis.title.y = element_blank(),
                  axis.text= element_blank(), 
@@ -354,11 +354,11 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
     data$labels$cex <- 5 * data$labels$cex
     data$labels$y <- data$labels$y + offset_labels
     if(is.null(label_cols)) label_cols <- "col"
-    p <- p + ggpubr::geom_exec(geom_text, data = data$labels,
+    p <- p + ggpubrplus::geom_exec(geom_text, data = data$labels,
                                x = "x", y = "y", label = "label", color = label_cols, size = "cex",
                                 angle = "angle", hjust = "hjust", vjust = "vjust")
   }
-  p <- ggpubr::ggpar(p, ggtheme = ggtheme, palette = palette, ...) + theme(axis.line = element_blank())
+  p <- ggpubrplus::ggpar(p, ggtheme = ggtheme, palette = palette, ...) + theme(axis.line = element_blank())
   if (horiz & !circular) {
     p <- p + coord_flip() + scale_y_reverse()+
       theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
@@ -518,7 +518,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   # Use length() == 1 check before scalar comparison
   # See: https://github.com/kassambara/factoextra/issues/163, #180
   if(length(color) == 1 && color == "cluster") color <- "default"
-  if(.is_color_palette(color)) color <- ggpubr::get_palette(color, k = k)
+  if(.is_color_palette(color)) color <- ggpubrplus::get_palette(color, k = k)
   else if(length(color) > 1 && length(color) < k){
     color <- rep(color, k)[1:k]
   }
@@ -533,7 +533,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   df$color <- color
   
   df$cluster <- as.factor(paste0("c", 1:k))
-  ggpubr::geom_exec(geom_rect, data = df, 
+  ggpubrplus::geom_exec(geom_rect, data = df, 
                     xmin = "xmin", ymin = "ymin", xmax = "xmax", ymax = "ymax",
                     fill = fill, color = color, linetype = rect_lty, alpha = alpha,  ...)
 }

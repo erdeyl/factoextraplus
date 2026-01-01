@@ -143,7 +143,7 @@ fviz_nbclust <- function (x, FUNcluster = NULL, method = c("silhouette", "wss", 
       ylab <- "Total Within Sum of Square"
       if(method == "silhouette") ylab <- "Average silhouette width"
       
-      p <- ggpubr::ggline(df, x = "clusters", y = "y", group = 1,
+      p <- ggpubrplus::ggline(df, x = "clusters", y = "y", group = 1,
                           color = linecolor, ylab = ylab,
                           xlab = "Number of clusters k",
                           main = "Optimal number of clusters"
@@ -217,7 +217,7 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
   df$clusters <- as.factor(1:nrow(df))
   df$ymin <- gap-se
   df$ymax <- gap + se
-  p <- ggpubr::ggline(df, x = "clusters", y = "gap", group = 1, color = linecolor)+
+  p <- ggpubrplus::ggline(df, x = "clusters", y = "gap", group = 1, color = linecolor)+
     # FIX: ggplot2 3.0.0+ deprecation - aes_string() replaced with aes() + .data pronoun
     # See: https://github.com/kassambara/factoextra/issues/190
     ggplot2::geom_errorbar(aes(ymin = .data[["ymin"]], ymax = .data[["ymax"]]), width=.2, color = linecolor)+
@@ -329,7 +329,7 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
       freq = ss,
       stringsAsFactors = FALSE
     )
-    p <- ggpubr::ggbarplot(df,  x = "Number_clusters", y = "freq", fill = barfill, color = barcolor)+
+    p <- ggpubrplus::ggbarplot(df,  x = "Number_clusters", y = "freq", fill = barfill, color = barcolor)+
       labs(x = "Number of clusters k", y = "Frequency among all indices",
            title = paste0("Optimal number of clusters - k = ", names(which.max(ss)) ))
     

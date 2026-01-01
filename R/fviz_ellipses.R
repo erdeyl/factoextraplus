@@ -3,15 +3,15 @@ NULL
 #' Draw confidence ellipses around the categories
 #' @description Draw confidence ellipses around the categories
 #' @inheritParams fviz
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #' @param X an object of class MCA, PCA or MFA.
 #' @param habillage a numeric vector of indexes of variables or a
 #'   character vector of names of variables. Can be also a data frame containing grouping variables.
 #' @param geom a text specifying the geometry to be used for the graph.  Allowed
 #'   values are the combination of c("point", "text"). Use "point" (to show only
 #'   points); "text" to show only labels; c("point", "text") to show both types.
-#' @param ... Arguments to be passed to the functions ggpubr::ggscatter()  &
-#'   ggpubr::ggpar().
+#' @param ... Arguments to be passed to the functions ggpubrplus::ggscatter()  &
+#'   ggpubrplus::ggpar().
 #'   
 #' @return a ggplot
 #' @author Alboukadel Kassambara \email{alboukadel.kassambara@@gmail.com}
@@ -48,7 +48,7 @@ fviz_ellipses <- function(X, habillage, axes = c(1,2),
   
   label <- NULL
   if("text" %in% geom) label <- "name"
-  p <- ggpubr::ggscatter(df, x = "x", y = "y", color = color, palette = palette,
+  p <- ggpubrplus::ggscatter(df, x = "x", y = "y", color = color, palette = palette,
                     ellipse = addEllipses, ellipse.type = ellipse.type,
                     legend = legend., ggtheme = ggtheme, mean.point = TRUE,
                     label = label, size = pointsize, ...)
@@ -57,12 +57,12 @@ fviz_ellipses <- function(X, habillage, axes = c(1,2),
   # in this case there is a column "facet_vars" in df
   if("facet_vars" %in% colnames(df)){
     groups <- c("facet_vars", "Groups")
-    xx <- ggpubr::desc_statby(df, measure.var = "x", grps = groups)[, c(groups, "mean")]
+    xx <- ggpubrplus::desc_statby(df, measure.var = "x", grps = groups)[, c(groups, "mean")]
     colnames(xx)[ncol(xx)] <- "x"
-    yy <- ggpubr::desc_statby(df, measure.var = "y", grps = groups)[, c(groups, "mean")]
+    yy <- ggpubrplus::desc_statby(df, measure.var = "y", grps = groups)[, c(groups, "mean")]
     xx$y <- yy$mean
     grp_coord <- xx
-    p <- ggpubr::ggtext(grp_coord, x = "x", y = "y", color = color,
+    p <- ggpubrplus::ggtext(grp_coord, x = "x", y = "y", color = color,
                              palette = palette,
                            legend = legend., ggtheme = ggtheme,
                            label = "Groups",  ggp = p, ...) 

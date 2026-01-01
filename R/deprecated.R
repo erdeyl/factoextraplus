@@ -39,7 +39,7 @@ NULL
 # Consolidates duplicated warning+dispatch pattern
 # Not exported or documented
 .deprecate_warn <- function(old_fn, new_fn) {
-  .Deprecated(new_fn, package = "factoextra", old = old_fn)
+  .Deprecated(new_fn, package = "factoextraplus", old = old_fn)
 }
 
 # ============================================================================

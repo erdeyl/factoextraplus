@@ -37,7 +37,7 @@
 #'@param parallel.color color of the parallel analysis threshold line. Default is "red".
 #'@param parallel.lty line type for the parallel analysis line. Default is "dashed".
 #'@param parallel.iter number of iterations for parallel analysis simulation. Default is 100.
-#' @inheritParams ggpubr::ggpar
+#' @inheritParams ggpubrplus::ggpar
 #'@param ... optional arguments to be passed to the function \link[ggpubr]{ggpar}.
 #'  
 #'@return \itemize{ \item{get_eig() (or get_eigenvalue()): returns a data.frame 
@@ -229,7 +229,7 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
   if(is.null(ylab)) ylab <- "Percentage of explained variances"
   
   p <- p + labs(title = main, x = xlab, y = ylab)
-  ggpubr::ggpar(p, ggtheme = ggtheme,  ...)
+  ggpubrplus::ggpar(p, ggtheme = ggtheme,  ...)
 }
 
 

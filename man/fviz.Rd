@@ -160,8 +160,8 @@ theme_minimal(), theme_classic(), theme_void(), ....}
 
 \item{font.family}{character vector specifying font family.}
 
-\item{...}{Arguments to be passed to the functions ggpubr::ggscatter() & 
-ggpubr::ggpar().}
+\item{...}{Arguments to be passed to the functions ggpubrplus::ggscatter() & 
+ggpubrplus::ggpar().}
 }
 \value{
 a ggplot

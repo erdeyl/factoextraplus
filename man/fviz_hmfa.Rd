@@ -119,7 +119,7 @@ NULL and the group are named group.1, group.2 and so on).}
 
 \item{node.level}{a single number indicating the HMFA node level to plot.}
 
-\item{...}{Arguments to be passed to the function fviz() and ggpubr::ggpar()}
+\item{...}{Arguments to be passed to the function fviz() and ggpubrplus::ggpar()}
 
 \item{choice}{the graph to plot. Allowed values include one of c("quanti.var",
 "quali.var", "group") for plotting quantitative variables, qualitative 
@@ -159,7 +159,7 @@ fviz_hmfa_ind(res.hmfa, repel = TRUE, col.ind = "#2E9FDF")
 
 # Color individuals by groups, add concentration ellipses
 # Remove labels: label = "none".
-# Change color palette to "jco". See ?ggpubr::ggpar
+# Change color palette to "jco". See ?ggpubrplus::ggpar
 grp <- as.factor(wine[,1])
 p <- fviz_hmfa_ind(res.hmfa, label="none", habillage=grp,
        addEllipses=TRUE, palette = "jco")

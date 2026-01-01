@@ -83,10 +83,10 @@ NULL
 #'  contrib > 1, ex: 5,  then the top 5 individuals/variables with the highest 
 #'  contrib are drawn }
 #'@param ggp a ggplot. If not NULL, points are added to an existing plot.
-#'@inheritParams ggpubr::ggpar
+#'@inheritParams ggpubrplus::ggpar
 #'@param font.family character vector specifying font family.
-#'@param ... Arguments to be passed to the functions ggpubr::ggscatter() & 
-#'  ggpubr::ggpar().
+#'@param ... Arguments to be passed to the functions ggpubrplus::ggscatter() & 
+#'  ggpubrplus::ggpar().
 #'  
 #'@return a ggplot
 #'@author Alboukadel Kassambara \email{alboukadel.kassambara@@gmail.com}
@@ -246,7 +246,7 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     if(is.null(ggp)) p <-ggplot()+geom_blank(data = df, aes(x = .data[["x"]], y = .data[["y"]]))
     else p <- ggp
   }
-  else p <- ggpubr::ggscatter(data = df, x = "x", y = "y",
+  else p <- ggpubrplus::ggscatter(data = df, x = "x", y = "y",
                          color = color, fill = fill,  alpha = alpha, shape = pointshape, 
                          point = point, size = pointsize, mean.point = mean.point,
                          label = label, font.label = labelsize*3, repel = repel,
@@ -257,7 +257,7 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     p <- p + scale_alpha(limits = range(df.all[, alpha]))
   
   if(!is.null(gradient.cols))
-    p <- p + ggpubr::gradient_color(gradient.cols)
+    p <- p + ggpubrplus::gradient_color(gradient.cols)
     
     
   if(is.null(extra_args$legend)) p <- p + theme(legend.position = "right" )
@@ -277,13 +277,13 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
   # in this case there is a column "facet_vars" in df
   if("facet_vars" %in% colnames(df)){
     groups <- c("facet_vars", "Groups")
-    xx <- ggpubr::desc_statby(df, measure.var = "x", grps = groups)[, c(groups, "mean")]
+    xx <- ggpubrplus::desc_statby(df, measure.var = "x", grps = groups)[, c(groups, "mean")]
     colnames(xx)[ncol(xx)] <- "x"
-    yy <- ggpubr::desc_statby(df, measure.var = "y", grps = groups)[, c(groups, "mean")]
+    yy <- ggpubrplus::desc_statby(df, measure.var = "y", grps = groups)[, c(groups, "mean")]
     xx$y <- yy$mean
     grp_coord <- xx
    
-    p <- p+ggpubr::geom_exec(geom_text, data = grp_coord, x = "x", y = "y",
+    p <- p+ggpubrplus::geom_exec(geom_text, data = grp_coord, x = "x", y = "y",
                              label = "Groups", color = color) 
     p <- p + facet_wrap(~facet_vars) + theme(legend.position = "none") 
   }
@@ -373,7 +373,7 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
                     origin = 0, xend = "x", yend = "y"){
   origin <- rep(origin, nrow(data))
   dd <- cbind.data.frame(data, xstart = origin, ystart = origin, stringsAsFactors = TRUE)
-  ggpubr::geom_exec(geom_segment, data = dd,
+  ggpubrplus::geom_exec(geom_segment, data = dd,
                     x = "xstart", y = "ystart", xend = xend, yend = yend,
                     arrow = grid::arrow(length = grid::unit(0.2, 'cm')),
                     color = color, alpha = alpha, linewidth = linewidth)
