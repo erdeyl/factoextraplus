@@ -1,6 +1,6 @@
 # factoextraplus
 
-[![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/erdeyl/factoextra-modern)
+[![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/erdeyl/factoextraplus)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
 
 **A modernized fork of factoextra with full compatibility for ggplot2 3.5.2+ and R 4.1.0+**
@@ -18,7 +18,7 @@ Once the PR is merged and the original `factoextra` is updated on CRAN, users ca
 ```r
 # Install from GitHub (will also install ggpubrplus)
 # install.packages("remotes")
-remotes::install_github("erdeyl/factoextra-modern")
+remotes::install_github("erdeyl/factoextraplus")
 ```
 
 ## Key Fixes

@@ -22,8 +22,8 @@ General resources:
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/erdeyl/factoextra-modern}
-  \item Report bugs at \url{https://github.com/erdeyl/factoextra-modern/issues}
+  \item \url{https://github.com/erdeyl/factoextraplus}
+  \item Report bugs at \url{https://github.com/erdeyl/factoextraplus/issues}
 }
 
 }

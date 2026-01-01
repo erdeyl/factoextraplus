@@ -35,7 +35,7 @@ Imports:
     stats,
     ggrepel
 Remotes:
-    erdeyl/ggpubr-modern
+    erdeyl/ggpubrplus
 Suggests:
     ade4,
     ca,
@@ -43,8 +43,8 @@ Suggests:
     MASS,
     knitr,
     mclust
-URL: https://github.com/erdeyl/factoextra-modern
-BugReports: https://github.com/erdeyl/factoextra-modern/issues
+URL: https://github.com/erdeyl/factoextraplus
+BugReports: https://github.com/erdeyl/factoextraplus/issues
 Collate:
     'cluster_utilities.R'
     'decathlon2.R'
