@@ -11,7 +11,7 @@ switch back to the original package.
 
 ## Issues Addressed
 
-This version addresses the following **30 issues** from the original factoextra repository:
+This version addresses the following **31 issues** from the original factoextra repository:
 
 | Issue | Description |
 |-------|-------------|
@@ -31,6 +31,7 @@ This version addresses the following **30 issues** from the original factoextra 
 | #166 | fviz_mca_var axes parameter ignored |
 | #163 | fviz_dend rect_border error |
 | #162 | tidyr::gather_() replacement |
+| #160 | Hopkins statistic formula correction (Wright 2022) |
 | #159 | PR: guides(FALSE) deprecation fix |
 | #156 | guides(FALSE) deprecation warning |
 | #151 | fviz_dend condition has length > 1 error |
