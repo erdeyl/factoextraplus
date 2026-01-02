@@ -43,7 +43,8 @@ Suggests:
     MASS,
     knitr,
     mclust
-URL: https://github.com/erdeyl/factoextraplus
+URL: https://github.com/erdeyl/factoextraplus,
+    https://doi.org/10.5281/zenodo.18131494
 BugReports: https://github.com/erdeyl/factoextraplus/issues
 Collate:
     'cluster_utilities.R'

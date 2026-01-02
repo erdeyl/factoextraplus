@@ -2,6 +2,7 @@
 
 [![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/erdeyl/factoextraplus)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131494.svg)](https://doi.org/10.5281/zenodo.18131494)
 
 **A modernized fork of factoextra with full compatibility for ggplot2 3.5.2+ and R 4.1.0+**
 
@@ -11,7 +12,7 @@ This package is a **fork of factoextra** renamed to `factoextraplus` to avoid pa
 
 Once the PR is merged and the original `factoextra` is updated on CRAN, users can switch back to the original package.
 
-**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`).
+**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`). [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
 
 ## Installation
 
@@ -35,8 +36,18 @@ remotes::install_github("erdeyl/factoextraplus")
 - `fviz_dend()` rect_border error
 - `fviz_nbclust()` cluster ordering for k > 9
 - `fviz_nbclust()` silhouette calculation issues
-- Hopkins statistic formula corrections
+- Hopkins statistic formula corrections (Wright 2022)
 - `facto_summarize()` axes parameter handling
+
+## Citation
+
+Please cite both the original package and this fork:
+
+**Original package:**
+> Kassambara A, Mundt F (2020). factoextra: Extract and Visualize the Results of Multivariate Data Analyses. R package version 1.0.7. https://CRAN.R-project.org/package=factoextra
+
+**This fork:**
+> Erdey L (2025). Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 >= 3.5.2, R >= 4.1.0). R package version 1.1.0. https://doi.org/10.5281/zenodo.18131494
 
 ## Original Package
 
