@@ -1,3 +1,10 @@
+# factoextraplus 1.1.1
+
+## Compatibility
+
+- Require ggpubrplus >= 0.8.4.1 for ggplot2 4.0.x compatibility fixes.
+- Document explicit ggpubrplus GitHub install to avoid older dependency resolution.
+
 # factoextraplus 1.1.0
 
 ## Package Rename

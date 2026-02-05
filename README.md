@@ -12,13 +12,14 @@ This package is a **fork of factoextra** renamed to `factoextraplus` to avoid pa
 
 Once the PR is merged and the original `factoextra` is updated on CRAN, users can switch back to the original package.
 
-**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`). [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
+**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`, version >= 0.8.4.1). [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
 
 ## Installation
 
 ```r
-# Install from GitHub (will also install ggpubrplus)
+# Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
+remotes::install_github("erdeyl/ggpubrplus@v0.8.4.1")
 remotes::install_github("erdeyl/factoextraplus")
 ```
 
@@ -47,7 +48,7 @@ Please cite both the original package and this fork:
 > Kassambara A, Mundt F (2020). factoextra: Extract and Visualize the Results of Multivariate Data Analyses. R package version 1.0.7. https://CRAN.R-project.org/package=factoextra
 
 **This fork:**
-> Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥3.5.2, R ≥4.1.0) — to be cited with the original package. R package version 1.1.0. https://doi.org/10.5281/zenodo.18131494
+> Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥3.5.2, R ≥4.1.0) — to be cited with the original package. R package version 1.1.1. https://doi.org/10.5281/zenodo.18131494
 
 ## Original Package
 
