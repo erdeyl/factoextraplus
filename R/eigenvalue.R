@@ -38,7 +38,7 @@
 #'@param parallel.lty line type for the parallel analysis line. Default is "dashed".
 #'@param parallel.iter number of iterations for parallel analysis simulation. Default is 100.
 #' @inheritParams ggpubrplus::ggpar
-#'@param ... optional arguments to be passed to the function \link[ggpubr]{ggpar}.
+#'@param ... optional arguments to be passed to the function \link[ggpubrplus]{ggpar}.
 #'  
 #'@return \itemize{ \item{get_eig() (or get_eigenvalue()): returns a data.frame 
 #'  containing 3 columns: the eigenvalues, the percentage of variance and  the 

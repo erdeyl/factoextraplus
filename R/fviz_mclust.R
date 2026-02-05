@@ -6,7 +6,7 @@
 #' @param what choose from one of the following three options: "classification" (default), "uncertainty" and "BIC".
 #' @param shape point shape. To change point shape by model names use shape = "model".
 #' @param color point and line color.
-#' @param ... other arguments to be passed to the functions \link{fviz_cluster} and \link[ggpubr]{ggpar}.
+#' @param ... other arguments to be passed to the functions \link{fviz_cluster} and \link[ggpubrplus]{ggpar}.
 #' 
 #' @examples
 #' 

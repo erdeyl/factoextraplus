@@ -189,8 +189,8 @@ Principal component analysis (PCA) reduces the dimensionality of
   
   Note that, \code{fviz_pca_xxx()} functions are wrapper around the core
   function \code{\link{fviz}()}, which is also a wrapper around the
-  function \code{\link[ggpubr]{ggscatter}()} [in ggpubr]. Therefore, further arguments, to be
-  passed to the function \code{\link{fviz}()} and \code{\link[ggpubr]{ggscatter}()}, can be specified in
+  function \code{\link[ggpubrplus]{ggscatter}()} [in ggpubrplus]. Therefore, further arguments, to be
+  passed to the function \code{\link{fviz}()} and \code{\link[ggpubrplus]{ggscatter}()}, can be specified in
   \code{\link{fviz_pca_ind}()} and \code{\link{fviz_pca_var}()}.
 }
 \examples{

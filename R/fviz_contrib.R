@@ -9,7 +9,7 @@ NULL
 #' and Multiple Factor Analysis (MFA) functions.
 #' @param sort.val a string specifying whether the value should be sorted. 
 #' Allowed values are "none" (no sorting), "asc" (for ascending) or "desc" (for descending).
-#' @param ... other arguments to be passed to the function \link[ggpubr]{ggpar}.
+#' @param ... other arguments to be passed to the function \link[ggpubrplus]{ggpar}.
 #' @inheritParams fviz_cos2
 #' @inheritParams ggpubrplus::ggpar
 #' @details

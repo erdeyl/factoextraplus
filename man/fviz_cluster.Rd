@@ -95,7 +95,7 @@ Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
 theme_minimal(), theme_classic(), theme_void(), ....}
 
 \item{...}{other arguments to be passed to the functions
-\code{\link[ggpubr]{ggscatter}} and \code{\link[ggpubr]{ggpar}}.}
+\code{\link[ggpubrplus]{ggscatter}} and \code{\link[ggpubrplus]{ggpar}}.}
 }
 \value{
 return a ggpplot.

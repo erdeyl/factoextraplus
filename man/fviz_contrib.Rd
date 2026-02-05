@@ -55,7 +55,7 @@ Allowed values are "none" (no sorting), "asc" (for ascending) or "desc" (for des
 Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
 theme_minimal(), theme_classic(), theme_void(), ....}
 
-\item{...}{other arguments to be passed to the function \link[ggpubr]{ggpar}.}
+\item{...}{other arguments to be passed to the function \link[ggpubrplus]{ggpar}.}
 
 \item{sortcontrib}{see the argument sort.val}
 }
