@@ -77,7 +77,7 @@ choice = "eigenvalue" and X is a prcomp or princomp object. Default is FALSE.}
 
 \item{parallel.iter}{number of iterations for parallel analysis simulation. Default is 100.}
 
-\item{...}{optional arguments to be passed to the function \link[ggpubr]{ggpar}.}
+\item{...}{optional arguments to be passed to the function \link[ggpubrplus]{ggpar}.}
 }
 \value{
 \itemize{ \item{get_eig() (or get_eigenvalue()): returns a data.frame 

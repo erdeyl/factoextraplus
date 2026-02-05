@@ -50,7 +50,7 @@
 #'  respectively.
 #'@inheritParams ggpubrplus::ggpar
 #'@param ... other arguments to be passed to the functions
-#'  \code{\link[ggpubr]{ggscatter}} and \code{\link[ggpubr]{ggpar}}.
+#'  \code{\link[ggpubrplus]{ggscatter}} and \code{\link[ggpubrplus]{ggpar}}.
 #'
 #'@return return a ggpplot.
 #'@author Alboukadel Kassambara \email{alboukadel.kassambara@@gmail.com}

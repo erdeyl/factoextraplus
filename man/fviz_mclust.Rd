@@ -45,7 +45,7 @@ probability. Passed for \code{ggplot2::stat_ellipse} 's level. Ignored in
 Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
 theme_minimal(), theme_classic(), theme_void(), ....}
 
-\item{...}{other arguments to be passed to the functions \link{fviz_cluster} and \link[ggpubr]{ggpar}.}
+\item{...}{other arguments to be passed to the functions \link{fviz_cluster} and \link[ggpubrplus]{ggpar}.}
 
 \item{model.names}{one or more model names corresponding to models fit in object. The default
 is to plot the BIC for all of the models fit.}
