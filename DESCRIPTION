@@ -29,12 +29,12 @@ Depends:
     ggpubrplus (>= 0.8.4.1),
     FactoMineR (>= 2.0)
 Imports:
-    cluster (>= 2.1.0),
-    dendextend (>= 1.15.0),
+    cluster (>= 2.1.8.2),
+    dendextend (>= 1.19.1),
     grid,
-    rlang (>= 1.0.0),
+    rlang (>= 1.1.7),
     stats,
-    ggrepel (>= 0.9.0)
+    ggrepel (>= 0.9.6)
 Remotes:
     erdeyl/ggpubrplus@v0.8.4.1
 Suggests:

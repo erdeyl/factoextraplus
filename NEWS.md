@@ -4,6 +4,7 @@
 
 - Require ggpubrplus >= 0.8.4.1 for ggplot2 4.0.x compatibility fixes.
 - Document explicit ggpubrplus GitHub install to avoid older dependency resolution.
+- Bump minimum versions for cluster, dendextend, rlang, and ggrepel.
 
 # factoextraplus 1.1.0
 
