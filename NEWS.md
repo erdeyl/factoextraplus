@@ -1,3 +1,13 @@
+# factoextraplus (unreleased)
+
+## Compatibility
+
+- Require ggplot2 >= 4.0.0 and FactoMineR >= 2.13.
+- MFA mixed-group support for quantitative/qualitative grouping and supplementary
+  qualitative categories.
+- Added FactoMineR category mapping helpers with verbose migration warnings.
+- Robust partial coordinate name parsing when category labels contain dots.
+
 # factoextraplus 1.1.1
 
 ## Compatibility
