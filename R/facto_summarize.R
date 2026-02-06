@@ -182,13 +182,9 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
   # and apply() with rowSums()
   if("coord.partial" %in% result){
     dd <- data.frame(elmt$coord.partiel[, axes, drop=FALSE], stringsAsFactors = TRUE)
-    # OPTIMIZED: Extract group names using vectorized sub() and strsplit()
     rnames <- rownames(dd)
-    # Split at the first instance of "." - vectorized approach
-    split_pos <- regexpr(".", rnames, fixed = TRUE)
-    name_part <- substr(rnames, 1, split_pos - 1)
-    group_part <- substr(rnames, split_pos + 1, nchar(rnames))
-    groupnames <- data.frame(name = name_part, group.name = group_part, stringsAsFactors = TRUE)
+    group.names <- .mfa_group_names(X)
+    groupnames <- .split_partial_names(rnames, group.names)
     # OPTIMIZED: Use rowSums instead of apply
     coord.partial <- rowSums(dd^2)
     res.partial <- data.frame(groupnames, dd, coord.partial, stringsAsFactors = TRUE)
@@ -236,6 +232,9 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
     name <- as.character(name)
     res <- cbind.data.frame(name = name, res, stringsAsFactors = TRUE)
     rownames(res) <- name
+    if(!is.null(select) && !is.null(select$name) && .factominer_needs_category_map(facto_class, element)){
+      select$name <- map_factominer_legacy_names(X, select$name, element = element)
+    }
     if(!is.null(select)) res <- .select(res, select)
     if("coord.partial" %in% result){
     res = list(res = res, res.partial = res.partial)

@@ -232,12 +232,7 @@ fviz_mfa_var <- function(X, choice = c("quanti.var", "group", "quali.var"), axes
   if(choice == "quanti.var") {
     .check_if_quanti_exists(X)
     if(missing(geom)) geom <- c("arrow", "text")
-    group <- data.frame(name = rownames(X$group$Lg[-nrow(X$group$Lg),,drop=FALSE]),
-                        nvar = X$call$group, type = X$call$type, stringsAsFactors = TRUE)
-    is.group.sup <- !is.null(X$call$num.group.sup)
-    if(is.group.sup) group <- group[-X$call$num.group.sup, , drop = FALSE]
-    group <- subset(group, group$type == "c")
-    habillage <- rep(group$name, group$nvar)
+    habillage <- .get_quanti_var_groups(X)
   }
   else if(choice== "quali.var"){
     .check_if_quali_exists(X)
@@ -290,25 +285,16 @@ fviz_mfa <- function(X, partial = "all", ...){
 
 # Check if there are quantitative variables.
 .check_if_quanti_exists <- function(X){
-  if(!is.null(X$call$num.group.sup))
-    group.all <- X$call$type[-X$call$num.group.sup]
-  else
-    group.all <- X$call$type
-  if(!c("c" %in% group.all) )
-    if(!c("s" %in% group.all)) 
-      stop("There are no quantitative variables to plot.")
+  map <- .mfa_group_map(X)
+  if(is.null(map) || !any(map$var.type == "quanti" & !map$is.group.sup))
+    stop("There are no quantitative variables to plot.")
   
 }
 
 # Check if qualitative variables exists
 .check_if_quali_exists <- function (X){
-  # Check if there are qualitative variables.
-  if(!is.null(X$call$num.group.sup))
-    group.all <- X$call$type[-X$call$num.group.sup]
-  else
-    group.all <- X$call$type
-  if(!("n" %in% group.all))
+  map <- .mfa_group_map(X)
+  if(is.null(map) || !any(map$var.type == "quali" & !map$is.group.sup))
     stop("There are no qualitative variables to plot.")
 }
-
 

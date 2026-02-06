@@ -792,40 +792,293 @@ NULL
 }
 
 
+# MFA helpers
+.mfa_group_names <- function(X){
+  if(!inherits(X, "MFA")) return(NULL)
+  group.names <- NULL
+  if(!is.null(X$group$Lg)){
+    group.names <- rownames(X$group$Lg)
+    if(!is.null(group.names) && length(group.names) > 0){
+      if(length(group.names) == length(X$call$group) + 1)
+        group.names <- group.names[-length(group.names)]
+      else if(length(group.names) > length(X$call$group))
+        group.names <- group.names[seq_len(length(X$call$group))]
+    }
+  }
+  if(is.null(group.names) || length(group.names) == 0){
+    if(!is.null(X$call$name.group)) group.names <- X$call$name.group
+  }
+  if(is.null(group.names) || length(group.names) == 0){
+    group.names <- paste0("Gr", seq_along(X$call$group))
+  }
+  group.names
+}
+
+.mfa_group_map <- function(X){
+  if(!inherits(X, "MFA")) return(NULL)
+  data <- X$call$X
+  if(is.null(data)) return(NULL)
+  data <- as.data.frame(data)
+  group.sizes <- X$call$group
+  group.types <- X$call$type
+  if(is.null(group.sizes) || is.null(group.types)) return(NULL)
+
+  group.names <- .mfa_group_names(X)
+  vars <- colnames(data)
+  if(is.null(vars)) vars <- paste0("V", seq_len(ncol(data)))
+
+  group.id <- rep(seq_along(group.sizes), group.sizes)
+  if(length(group.id) != length(vars)){
+    n <- min(length(group.id), length(vars))
+    group.id <- group.id[seq_len(n)]
+    vars <- vars[seq_len(n)]
+  }
+
+  is.group.sup <- rep(FALSE, length(group.sizes))
+  if(!is.null(X$call$num.group.sup)) is.group.sup[X$call$num.group.sup] <- TRUE
+  var.is.numeric <- sapply(data[, seq_along(vars), drop = FALSE], is.numeric)
+
+  var.type <- character(length(vars))
+  for(i in seq_along(vars)){
+    g <- group.id[i]
+    gtype <- group.types[g]
+    if(gtype %in% c("c", "s")) var.type[i] <- "quanti"
+    else if(gtype == "n") var.type[i] <- "quali"
+    else if(gtype == "m") var.type[i] <- ifelse(var.is.numeric[i], "quanti", "quali")
+    else var.type[i] <- NA_character_
+  }
+
+  data.frame(
+    var = vars,
+    group = group.names[group.id],
+    group.id = group.id,
+    group.type = group.types[group.id],
+    var.type = var.type,
+    is.group.sup = is.group.sup[group.id],
+    stringsAsFactors = FALSE
+  )
+}
+
 # MFA: get quantitative variables groups
 # For plotting
 .get_quanti_var_groups <- function(X){
-  group <- data.frame(name = rownames(X$group$Lg[-nrow(X$group$Lg),,drop=FALSE]),
-                      nvar = X$call$group, type = X$call$type, stringsAsFactors = TRUE)
-  is.group.sup <- !is.null(X$call$num.group.sup)
-  if(is.group.sup) group <- group[-X$call$num.group.sup, , drop = FALSE]
-  group <- subset(group, group$type == "c")
-  group <- rep(group$name, group$nvar)
-  group
+  map <- .mfa_group_map(X)
+  if(is.null(map)) return(NULL)
+  quanti <- map[map$var.type == "quanti" & !map$is.group.sup, , drop = FALSE]
+  if(nrow(quanti) == 0) return(NULL)
+  if(!is.null(X$quanti.var$coord)){
+    qnames <- rownames(X$quanti.var$coord)
+    idx <- match(qnames, quanti$var)
+    if(any(is.na(idx))) return(quanti$group)
+    return(quanti$group[idx])
+  }
+  quanti$group
 }
 
 # Get qualitative supplementary variables
-# Each variables is repeated xtimes = levels(variables)
+# Each variable is repeated xtimes = levels(variables)
 # Used to color variable categories by variables
 .get_quali_var_sup_names <- function(X){
-  group <- data.frame(name = rownames(X$group$Lg[-nrow(X$group$Lg),,drop=FALSE]),
-                      nvar = X$call$group, type = X$call$type, stringsAsFactors = TRUE)
-  is.group.sup <- !is.null(X$call$num.group.sup)
+  map <- .mfa_group_map(X)
+  if(is.null(map)) return(NULL)
+  sup <- map[map$is.group.sup & map$var.type == "quali", , drop = FALSE]
+  if(nrow(sup) == 0) return(NULL)
+  data <- X$call$X
   res <- NULL
-  if(is.group.sup){
-    # Get group sup names
-    group.sup <- group[X$call$num.group.sup, , drop = FALSE]
-    group.sup <- subset(group.sup, group.sup$type == "n", drop = FALSE)
-    group.sup.name <- as.character(group.sup$name)
-    # Names of variables in the data
-    data <- X$call$X
-    vars <- colnames(data)
-    vars.groups <- rep(group$name, group$nvar)
-    group.sup.vars <- vars[vars.groups %in% group.sup.name]
-    for(v in group.sup.vars){
-      res <- c(res, rep(v, length(levels(data[,v]))))
+  for(v in sup$var){
+    res <- c(res, rep(v, length(levels(as.factor(data[, v])))))
+  }
+  res
+}
+
+.factominer_needs_category_map <- function(facto.class, element){
+  if(!(facto.class %in% c("MCA", "MFA", "FAMD", "HMFA"))) return(FALSE)
+  if(element == "var") return(facto.class == "MCA")
+  element %in% c("quali.var", "quali.sup")
+}
+
+.split_partial_names <- function(names, group.names = NULL){
+  if(length(names) == 0) return(data.frame(name = character(0), group.name = character(0), stringsAsFactors = TRUE))
+  name.part <- rep(NA_character_, length(names))
+  group.part <- rep(NA_character_, length(names))
+
+  if(!is.null(group.names) && length(group.names) > 0){
+    escaped <- gsub("([\\.^$|()\\[\\]{}*+?\\\\])", "\\\\\\1", group.names)
+    pattern <- paste0("\\.(", paste(escaped, collapse = "|"), ")$")
+    matched <- grepl(pattern, names)
+    if(any(matched)){
+      group.part[matched] <- sub(pattern, "\\1", names[matched])
+      name.part[matched] <- sub(pattern, "", names[matched])
+    }
+  } else {
+    matched <- rep(FALSE, length(names))
+  }
+
+  fallback <- !matched
+  if(any(fallback)){
+    split.pos <- regexpr(".", names[fallback], fixed = TRUE)
+    name.part[fallback] <- ifelse(split.pos > 0, substr(names[fallback], 1, split.pos - 1), names[fallback])
+    group.part[fallback] <- ifelse(split.pos > 0, substr(names[fallback], split.pos + 1, nchar(names[fallback])), NA_character_)
+  }
+
+  data.frame(name = name.part, group.name = group.part, stringsAsFactors = TRUE)
+}
+
+#' Map FactoMineR category labels to legacy naming patterns
+#'
+#' @param X a FactoMineR object (MCA, MFA, FAMD, HMFA).
+#' @param element element to map. Use "var" for MCA categories or "quali.var"
+#'   for MFA/FAMD/HMFA qualitative categories. "quali.sup" maps supplementary
+#'   qualitative categories when available.
+#' @return A data.frame with current labels, variable names, levels, and legacy
+#'   naming patterns.
+#' @export
+factominer_category_map <- function(X, element = c("quali.var", "quali.sup", "var")){
+  element <- match.arg(element)
+  facto.class <- .get_facto_class(X)
+  if(!facto.class %in% c("MCA", "MFA", "FAMD", "HMFA"))
+    stop("factominer_category_map() supports MCA, MFA, FAMD, and HMFA objects only.")
+
+  elmt <- NULL
+  if(element == "var"){
+    if(!inherits(X, "MCA")) stop("element = 'var' is only supported for MCA outputs.")
+    elmt <- X$var
+  } else if(element == "quali.var"){
+    if(!is.null(X$quali.var)) elmt <- X$quali.var
+    else if(inherits(X, "MCA")) elmt <- X$var
+  } else if(element == "quali.sup"){
+    elmt <- X$quali.sup
+  }
+
+  if(is.null(elmt) || is.null(elmt$coord)){
+    warning("No qualitative categories found for element = '", element, "'.")
+    return(data.frame(current = character(0), variable = character(0), level = character(0),
+                      legacy_dot = character(0), legacy_underscore = character(0),
+                      legacy_equals = character(0), legacy_colon = character(0),
+                      legacy_level = character(0), stringsAsFactors = FALSE))
+  }
+
+  current.names <- rownames(elmt$coord)
+  if(is.null(current.names)) current.names <- character(0)
+
+  data <- X$call$X
+  if(is.null(data)){
+    warning("Original data not found in X$call$X; cannot build category map.")
+    return(data.frame(current = current.names, variable = NA_character_, level = NA_character_,
+                      legacy_dot = NA_character_, legacy_underscore = NA_character_,
+                      legacy_equals = NA_character_, legacy_colon = NA_character_,
+                      legacy_level = NA_character_, stringsAsFactors = FALSE))
+  }
+  data <- as.data.frame(data)
+  is.quali <- which(!sapply(data, is.numeric))
+  if(length(is.quali) == 0){
+    return(data.frame(current = current.names, variable = NA_character_, level = NA_character_,
+                      legacy_dot = NA_character_, legacy_underscore = NA_character_,
+                      legacy_equals = NA_character_, legacy_colon = NA_character_,
+                      legacy_level = NA_character_, stringsAsFactors = FALSE))
+  }
+
+  data.quali <- data[, is.quali, drop = FALSE]
+  data.quali <- droplevels(as.data.frame(lapply(data.quali, as.factor)))
+  level.orig <- lapply(data.quali, levels)
+
+  niveau <- unlist(level.orig)
+  if(sum(duplicated(niveau)) > 0){
+    for(j in seq_along(data.quali)){
+      if (sum(niveau %in% levels(data.quali[[j]])) != nlevels(data.quali[[j]])) {
+        levels(data.quali[[j]]) <- paste(names(data.quali)[j], levels(data.quali[[j]]), sep = "_")
+      }
     }
   }
+
+  variable <- rep(names(data.quali), sapply(data.quali, nlevels))
+  listModa <- unlist(lapply(data.quali, levels))
+  wlistModa <- which(listModa %in% c("y", "n", "Y", "N"))
+  if(length(wlistModa) > 0){
+    listModa[wlistModa] <- paste(variable[wlistModa], listModa[wlistModa], sep = ".")
+  }
+  level <- unlist(level.orig)
+
+  map.all <- data.frame(current = listModa, variable = variable, level = level, stringsAsFactors = FALSE)
+  map <- data.frame(current = current.names, variable = NA_character_, level = NA_character_, stringsAsFactors = FALSE)
+  if(length(current.names) > 0){
+    idx <- match(current.names, map.all$current)
+    matched <- !is.na(idx)
+    if(any(matched)){
+      map[matched, c("variable", "level")] <- map.all[idx[matched], c("variable", "level")]
+    }
+  }
+
+  map$legacy_dot <- ifelse(is.na(map$variable), NA_character_, paste(map$variable, map$level, sep = "."))
+  map$legacy_underscore <- ifelse(is.na(map$variable), NA_character_, paste(map$variable, map$level, sep = "_"))
+  map$legacy_equals <- ifelse(is.na(map$variable), NA_character_, paste(map$variable, map$level, sep = "="))
+  map$legacy_colon <- ifelse(is.na(map$variable), NA_character_, paste(map$variable, map$level, sep = ":"))
+  map$legacy_level <- map$level
+  map
+}
+
+#' Map legacy FactoMineR category names to current labels
+#'
+#' @param X a FactoMineR object (MCA, MFA, FAMD, HMFA).
+#' @param names character vector of category labels.
+#' @param element element to map. Use "var" for MCA categories or "quali.var"
+#'   for MFA/FAMD/HMFA qualitative categories. "quali.sup" maps supplementary
+#'   qualitative categories when available.
+#' @param quiet if TRUE, suppress warnings.
+#' @return Character vector of mapped labels.
+#' @export
+map_factominer_legacy_names <- function(X, names, element = c("quali.var", "quali.sup", "var"), quiet = FALSE){
+  element <- match.arg(element)
+  names <- as.character(names)
+  map <- factominer_category_map(X, element = element)
+  if(nrow(map) == 0) return(names)
+
+  candidate.cols <- c("current", "legacy_dot", "legacy_underscore", "legacy_equals", "legacy_colon", "legacy_level")
+  candidate.tbl <- do.call(rbind, lapply(candidate.cols, function(col){
+    data.frame(candidate = map[[col]], current = map$current, stringsAsFactors = FALSE)
+  }))
+  candidate.tbl <- candidate.tbl[!is.na(candidate.tbl$candidate) & nzchar(candidate.tbl$candidate), , drop = FALSE]
+  if(nrow(candidate.tbl) == 0) return(names)
+
+  counts <- table(candidate.tbl$candidate)
+  ambiguous <- names(counts[counts > 1])
+  lookup <- candidate.tbl[!candidate.tbl$candidate %in% ambiguous, , drop = FALSE]
+  lookup <- setNames(lookup$current, lookup$candidate)
+
+  res <- names
+  mapped <- logical(length(names))
+  unmatched <- character(0)
+
+  for(i in seq_along(names)){
+    nm <- names[i]
+    if(is.na(nm) || !nzchar(nm)) next
+    if(nm %in% map$current) next
+    if(nm %in% names(lookup)){
+      res[i] <- lookup[[nm]]
+      mapped[i] <- TRUE
+    } else {
+      unmatched <- c(unmatched, nm)
+    }
+  }
+
+  if(!quiet){
+    if(any(mapped)){
+      warning(
+        "Mapped legacy FactoMineR category labels to current names. ",
+        "Use factominer_category_map() to inspect mappings."
+      )
+    }
+    if(length(unmatched) > 0){
+      unmatched <- unique(unmatched)
+      warning(
+        "Some category labels were not found in the current FactoMineR output: ",
+        paste(utils::head(unmatched, 8), collapse = ", "),
+        if(length(unmatched) > 8) " ..." else "",
+        ". Use factominer_category_map() and map_factominer_legacy_names() to map legacy labels."
+      )
+    }
+  }
+
   res
 }
 
@@ -834,4 +1087,3 @@ NULL
 f_pca <- function(X, graph = FALSE){
   FactoMineR::PCA(X, graph = FALSE)
 }
-

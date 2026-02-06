@@ -217,6 +217,9 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
   }
   # Selection
   df.all <- df
+  if(!is.null(select) && !is.null(select$name) && .factominer_needs_category_map(facto.class, element)){
+    select$name <- map_factominer_legacy_names(X, select$name, element = element)
+  }
   if(!is.null(select)) df <- .select(df, select)
   
   # Special cases: data transformation
@@ -422,5 +425,4 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
   res$shape <- shape.sup
   res
 }
-
 
