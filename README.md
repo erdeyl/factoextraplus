@@ -4,7 +4,7 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131494.svg)](https://doi.org/10.5281/zenodo.18131494)
 
-**A modernized fork of factoextra with full compatibility for ggplot2 3.5.2+ and R 4.1.0+**
+**A modernized fork of factoextra with full compatibility for ggplot2 4.0.0+, FactoMineR 2.13+, and R 4.1.0+**
 
 ## About This Package
 
@@ -12,7 +12,7 @@ This package is a **fork of factoextra** renamed to `factoextraplus` to avoid pa
 
 Once the PR is merged and the original `factoextra` is updated on CRAN, users can switch back to the original package.
 
-**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`, version >= 0.8.4.1). [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
+**Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`, version >= 0.8.4.1) and `FactoMineR` (>= 2.13). [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
 
 ## Installation
 
@@ -29,6 +29,11 @@ remotes::install_github("erdeyl/factoextraplus")
 - Replaced all `aes_string()` calls with `aes()` + `.data` pronoun
 - Changed `guides(... = FALSE)` to `guides(... = "none")`
 - Converted `size` to `linewidth` for line-based geoms
+
+### FactoMineR 2.13 Compatibility
+- MFA mixed-group support for quantitative/qualitative grouping and supplementary qualitative categories
+- FactoMineR category mapping helpers for legacy label selections
+- Robust partial coordinate name parsing when category labels contain dots
 
 ### R 4.1.0+ Fixes
 - Fixed "condition has length > 1" errors with proper `inherits()` checks
@@ -48,7 +53,7 @@ Please cite both the original package and this fork:
 > Kassambara A, Mundt F (2020). factoextra: Extract and Visualize the Results of Multivariate Data Analyses. R package version 1.0.7. https://CRAN.R-project.org/package=factoextra
 
 **This fork:**
-> Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥3.5.2, R ≥4.1.0) — to be cited with the original package. R package version 1.1.1. https://doi.org/10.5281/zenodo.18131494
+> Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥4.0.0, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the original package. R package version 1.1.1. https://doi.org/10.5281/zenodo.18131494
 
 ## Original Package
 

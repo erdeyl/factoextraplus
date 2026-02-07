@@ -1,6 +1,7 @@
 templates:
   params:
     bootswatch: lumen
+url: https://erdeyl.github.io/factoextraplus
 reference:
   - title: Visualizing Dimension Reduction Analysis Outputs
     desc:  Visualization of PCA, CA, MCA, FAMD, MFA and HMFA.
@@ -46,8 +47,13 @@ reference:
       - multishapes
   - title: Others
     contents: 
+      - clean_lock_files
+      - deprecated
+      - factominer_category_map
       - fviz_add
+      - fviz
+      - fviz_ellipses
+      - map_factominer_legacy_names
       - print.factoextra
     
-
 

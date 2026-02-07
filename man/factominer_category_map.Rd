@@ -14,18 +14,9 @@ for MFA/FAMD/HMFA qualitative categories. "quali.sup" maps supplementary
 qualitative categories when available.}
 }
 \value{
-A data.frame with current labels, variable names, levels, and legacy naming
-patterns.
+A data.frame with current labels, variable names, levels, and legacy
+  naming patterns.
 }
 \description{
-Builds a mapping table between current FactoMineR category labels and
-common legacy naming patterns to support backward-compatible selection.
-}
-\examples{
-\dontrun{
-library(FactoMineR)
-data(poison)
-res.mca <- MCA(poison, graph = FALSE)
-head(factominer_category_map(res.mca, element = "var"))
-}
+Map FactoMineR category labels to legacy naming patterns
 }
