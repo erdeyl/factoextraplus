@@ -4,7 +4,7 @@ NULL
 #' 
 #' @description Provides solution for enhancing the workflow of clustering
 #'   analyses and ggplot2-based elegant data visualization. Read more: 
-#'  \href{http://www.sthda.com/english/wiki/visual-enhancement-of-clustering-analysis-unsupervised-machine-learning}{Visual enhancement of clustering analysis}.
+#'  \href{https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/}{Visual enhancement of clustering analysis}.
 #' @param x numeric vector, data matrix or data frame
 #' @param FUNcluster a clustering function including "kmeans", "pam", "clara", 
 #'   "fanny", "hclust", "agnes" and "diana". Abbreviation is allowed.

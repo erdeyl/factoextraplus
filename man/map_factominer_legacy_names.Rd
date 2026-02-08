@@ -2,7 +2,7 @@
 % Please edit documentation in R/utilities.R
 \name{map_factominer_legacy_names}
 \alias{map_factominer_legacy_names}
-\title{Map legacy FactoMineR category labels to current names}
+\title{Map legacy FactoMineR category names to current labels}
 \usage{
 map_factominer_legacy_names(
   X,
@@ -26,15 +26,5 @@ qualitative categories when available.}
 Character vector of mapped labels.
 }
 \description{
-Attempts to map legacy FactoMineR category names to current labels using
-known naming patterns. Unmatched or ambiguous labels are left unchanged.
-}
-\examples{
-\dontrun{
-library(FactoMineR)
-data(poison)
-res.mca <- MCA(poison, graph = FALSE)
-legacy <- c("Vomiting.yes", "Nausea.no")
-map_factominer_legacy_names(res.mca, legacy, element = "var")
-}
+Map legacy FactoMineR category names to current labels
 }

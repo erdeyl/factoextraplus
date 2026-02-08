@@ -20,18 +20,18 @@ bibentry(
 # Secondary citation - This fork
 bibentry(
   bibtype  = "Manual",
-  title    = "Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥3.5.2, R ≥4.1.0)",
+  title    = "Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support (ggplot2 ≥4.0.0, FactoMineR ≥2.13, R ≥4.1.0)",
   author   = person("Laszlo", "Erdey"),
   year     = "2026",
-  note     = "R package version 1.1.1",
+  note     = "R package version 1.2.0",
   url      = "https://github.com/erdeyl/factoextraplus",
   doi      = "10.5281/zenodo.18131494",
   textVersion = paste(
     "Erdey L (2026).",
     "Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020):",
-    "Modern R ecosystem support (ggplot2 ≥3.5.2, R ≥4.1.0)",
+    "Modern R ecosystem support (ggplot2 ≥4.0.0, FactoMineR ≥2.13, R ≥4.1.0)",
     "— to be cited with the original package.",
-    "R package version 1.1.1.",
+    "R package version 1.2.0.",
     "https://doi.org/10.5281/zenodo.18131494"
   )
 )
@@ -39,7 +39,7 @@ bibentry(
 citFooter(
   "Note: This is factoextraplus, a compatibility fork maintained by",
   "Laszlo Erdey (Faculty of Economics and Business, University of Debrecen, Hungary).",
-  "This package requires ggpubrplus (https://doi.org/10.5281/zenodo.18131490).",
+  "This package requires ggpubrplus >= 0.9.0 (https://doi.org/10.5281/zenodo.18131490).",
   "A pull request has been submitted to the original package (PR #194).",
   "Once accepted, users should switch back to the official CRAN package."
 )

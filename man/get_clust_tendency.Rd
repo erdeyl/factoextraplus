@@ -46,7 +46,7 @@ Before applying cluster methods, the first step is to assess
   image (ODI) is shown. Objects belonging to the same cluster are displayed 
   in consecutive order using hierarchical clustering. For more details and 
   interpretation, see 
-  \href{http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/}{STHDA
+  \href{https://www.datanovia.com/en/lessons/assessing-clustering-tendency/}{STHDA
    website: Assessing clustering tendency}.
 }
 \details{
@@ -62,6 +62,11 @@ where values close to 1 indicate clusterable data. Some other packages (e.g.,
 \code{performance::check_clusterstructure}) return 1-H, where values close to
 0 indicate clusterability. Always check the documentation of the specific
 implementation you are using.
+
+\strong{Breaking change}: factoextraplus uses the corrected Hopkins statistic
+formula (Wright 2022). Results differ from legacy factoextra and a one-time
+warning is emitted. Set \code{options(factoextraplus.warn_hopkins = FALSE)} to
+silence the warning.
 
 \strong{VAT (Visual Assessment of cluster Tendency)}: The VAT detects the
 clustering tendency in a visual form by counting the number of square shaped
