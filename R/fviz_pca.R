@@ -9,7 +9,7 @@
 #'   visualization of PCA outputs from: i) prcomp and princomp [in built-in R 
 #'   stats], ii) PCA [in FactoMineR], iii) dudi.pca [in ade4] and epPCA 
 #'   [ExPosition]. Read more: 
-#'   \href{http://www.sthda.com/english/wiki/factominer-and-factoextra-principal-component-analysis-visualization-r-software-and-data-mining}{Principal
+#'   \href{https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/}{Principal
 #'    Component Analysis}
 #'   
 #'   \itemize{ \item{fviz_pca_ind(): Graph of individuals} \item{fviz_pca_var():

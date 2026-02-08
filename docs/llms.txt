@@ -105,7 +105,7 @@ package version 1.0.7. <https://CRAN.R-project.org/package=factoextra>
 **This fork:** \> Erdey L (2026). Supplementary compatibility updates
 for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support
 (ggplot2 ≥4.0.0, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the
-original package. R package version 1.1.1.
+original package. R package version 1.2.0.
 <https://doi.org/10.5281/zenodo.18131494>
 
 ## Original Package

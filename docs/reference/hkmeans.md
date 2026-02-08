@@ -6,7 +6,7 @@ using an hybrid approach by combining the hierarchical clustering and
 the k-means methods. The procedure is explained in "Details" section.
 Read more: [Hybrid hierarchical k-means clustering for optimizing
 clustering
-outputs](http://www.sthda.com/english/wiki/hybrid-hierarchical-k-means-clustering-for-optimizing-clustering-outputs-unsupervised-machine-learning).
+outputs](https://www.datanovia.com/en/lessons/hierarchical-k-means-clustering-optimize-clusters/).
 
 - hkmeans(): compute hierarchical k-means clustering
 

@@ -15,7 +15,7 @@ and
 \[in factoextra\].
 
 Read more: [Clustering Validation
-Statistics](http://www.sthda.com/english/wiki/clustering-validation-statistics-4-vital-things-everyone-should-know-unsupervised-machine-learning).
+Statistics](https://www.datanovia.com/en/lessons/cluster-validation-statistics-must-know-methods/).
 
 ## Usage
 

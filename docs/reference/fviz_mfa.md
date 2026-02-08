@@ -243,7 +243,7 @@ fviz_mfa_var(res.mfa, "group")
 # Quantitative variables
 fviz_mfa_var(res.mfa, "quanti.var", palette = "jco", 
   col.var.sup = "violet", repel = TRUE)
-#> Error in `[.data.frame`(X$call$X, rownames(ind), grp, drop = FALSE): undefined columns selected
+
 # Graph of individuals colored by cos2
 fviz_mfa_ind(res.mfa, col.ind = "cos2", 
   gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
@@ -251,8 +251,10 @@ fviz_mfa_ind(res.mfa, col.ind = "cos2",
 
 # Partial individuals
 fviz_mfa_ind(res.mfa, partial = "all") 
-#> Warning: TRE pattern compilation error 'Invalid contents of {}'
-#> Error in gsub("([\\.^$|()\\[\\]{}*+?\\\\])", "\\\\\\1", group.names): invalid regular expression '([\.^$|()\[\]{}*+?\\])', reason 'Invalid contents of {}'
+#> Warning: This manual palette can handle a maximum of 13 values. You have supplied 84
+#> Warning: Removed 71 rows containing missing values or values outside the scale range
+#> (`geom_segment()`).
+
 # Partial axes
 fviz_mfa_axes(res.mfa)
 

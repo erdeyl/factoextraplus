@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">factoextraplus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,22 @@
       <small>Source: <a href="https://github.com/erdeyl/factoextraplus/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="factoextraplus-120">factoextraplus 1.2.0<a class="anchor" aria-label="anchor" href="#factoextraplus-120"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-1-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-0"></a></h3>
+<ul><li>Require R &gt;= 4.1.0, ggplot2 &gt;= 4.0.0, FactoMineR &gt;= 2.13, and ggpubrplus &gt;= 0.9.0.</li>
+<li>Dependency switched from ggpubr to ggpubrplus (&gt;= 0.9.0).</li>
+<li>Hopkins statistic uses the corrected formula (Wright 2022); results differ from legacy factoextra and a one-time warning is emitted.</li>
+<li>Legacy FactoMineR category labels may no longer match; use map_factominer_legacy_names() to translate them.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="compatibility-1-2-0">Compatibility<a class="anchor" aria-label="anchor" href="#compatibility-1-2-0"></a></h3>
+<ul><li>MFA mixed-group support for quantitative/qualitative grouping and supplementary qualitative categories.</li>
+<li>Added FactoMineR category mapping helpers with verbose migration warnings.</li>
+<li>Robust partial coordinate name parsing when category labels contain dots.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.1" id="factoextraplus-111">factoextraplus 1.1.1<a class="anchor" aria-label="anchor" href="#factoextraplus-111"></a></h2>
 <div class="section level3">

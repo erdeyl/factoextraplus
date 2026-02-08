@@ -6,7 +6,7 @@ fviz_mca() provides ggplot2-based elegant visualization of MCA outputs
 from the R functions: MCA \[in FactoMineR\], acm \[in ade4\], and
 expOutput/epMCA \[in ExPosition\]. Read more: [Multiple Correspondence
 Analysis
-Essentials.](http://www.sthda.com/english/wiki/multiple-correspondence-analysis-essentials-interpretation-and-application-to-investigate-the-associations-between-categories-of-multiple-qualitative-variables-r-software-and-data-mining)
+Essentials.](https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/114-mca-multiple-correspondence-analysis-in-r-essentials/)
 
 - fviz_mca_ind(): Graph of individuals
 

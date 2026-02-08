@@ -1,8 +1,8 @@
 Package: factoextraplus
 Type: Package
 Title: Extract and Visualize the Results of Multivariate Data Analyses (Extended)
-Version: 1.1.1
-Date: 2026-02-05
+Version: 1.2.0
+Date: 2026-02-08
 Authors@R: c(
     person("Laszlo", "Erdey", role = c("aut", "cre"), email = "erdey.laszlo@econ.unideb.hu",
            comment = "Faculty of Economics and Business, University of Debrecen, Hungary"),
@@ -45,8 +45,7 @@ Suggests:
     MASS,
     knitr,
     mclust
-URL: https://erdeyl.github.io/factoextraplus,
-    https://github.com/erdeyl/factoextraplus,
+URL: https://github.com/erdeyl/factoextraplus,
     https://doi.org/10.5281/zenodo.18131494
 BugReports: https://github.com/erdeyl/factoextraplus/issues
 Collate:

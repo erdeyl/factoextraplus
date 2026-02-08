@@ -6,7 +6,7 @@ with minimal loss of information. fviz_pca() provides ggplot2-based
 elegant visualization of PCA outputs from: i) prcomp and princomp \[in
 built-in R stats\], ii) PCA \[in FactoMineR\], iii) dudi.pca \[in ade4\]
 and epPCA \[ExPosition\]. Read more: [Principal Component
-Analysis](http://www.sthda.com/english/wiki/factominer-and-factoextra-principal-component-analysis-visualization-r-software-and-data-mining)
+Analysis](https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/112-pca-principal-component-analysis-essentials/)
 
 - fviz_pca_ind(): Graph of individuals
 

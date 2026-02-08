@@ -743,7 +743,22 @@ NULL
 # grp: group column index or factor
 .add_ind_groups <- function(X, ind, grp){
   if(inherits(X, c("PCA", "MCA", "MFA", "FAMD")) & length(grp) > 1){
-    if(is.numeric(grp) | is.character(grp)) grp <- as.data.frame(X$call$X[rownames(ind), grp, drop = FALSE], stringsAsFactors = TRUE)
+    if(is.numeric(grp) | is.character(grp)){
+      data <- X$call$X
+      # Only treat grp as column selectors when it isn't a per-row grouping vector.
+      if(length(grp) != nrow(ind)){
+        if(is.numeric(grp)){
+          if(!all(grp %in% seq_len(ncol(data)))){
+            stop("Some grouping variable indices are out of range for the original data.")
+          }
+        } else {
+          if(!all(grp %in% colnames(data))){
+            stop("Some grouping variable names are not present in the original data.")
+          }
+        }
+        grp <- as.data.frame(data[rownames(ind), grp, drop = FALSE], stringsAsFactors = TRUE)
+      }
+    }
     #if(!is.null(X$call$ind.sup)) grp <- grp[-X$call$ind.sup, , drop = FALSE]
   }
   habillage <- grp
@@ -903,7 +918,15 @@ NULL
   group.part <- rep(NA_character_, length(names))
 
   if(!is.null(group.names) && length(group.names) > 0){
-    escaped <- gsub("([\\.^$|()\\[\\]{}*+?\\\\])", "\\\\\\1", group.names)
+    escape_regex <- function(x){
+      if(is.na(x)) return(NA_character_)
+      specials <- c("\\", ".", "^", "$", "|", "(", ")", "[", "]", "{", "}", "*", "+", "?")
+      for(s in specials){
+        x <- gsub(s, paste0("\\\\", s), x, fixed = TRUE)
+      }
+      x
+    }
+    escaped <- vapply(group.names, escape_regex, character(1))
     pattern <- paste0("\\.(", paste(escaped, collapse = "|"), ")$")
     matched <- grepl(pattern, names)
     if(any(matched)){
@@ -1043,7 +1066,7 @@ map_factominer_legacy_names <- function(X, names, element = c("quali.var", "qual
   counts <- table(candidate.tbl$candidate)
   ambiguous <- names(counts[counts > 1])
   lookup <- candidate.tbl[!candidate.tbl$candidate %in% ambiguous, , drop = FALSE]
-  lookup <- setNames(lookup$current, lookup$candidate)
+  lookup <- stats::setNames(lookup$current, lookup$candidate)
 
   res <- names
   mapped <- logical(length(names))

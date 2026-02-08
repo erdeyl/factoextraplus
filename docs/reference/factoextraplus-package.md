@@ -55,8 +55,6 @@ General resources:
 
 Useful links:
 
-- <https://erdeyl.github.io/factoextraplus>
-
 - <https://github.com/erdeyl/factoextraplus>
 
 - [doi:10.5281/zenodo.18131494](https://doi.org/10.5281/zenodo.18131494)

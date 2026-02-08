@@ -3,7 +3,7 @@
 Provides solution for enhancing the workflow of clustering analyses and
 ggplot2-based elegant data visualization. Read more: [Visual enhancement
 of clustering
-analysis](http://www.sthda.com/english/wiki/visual-enhancement-of-clustering-analysis-unsupervised-machine-learning).
+analysis](https://www.datanovia.com/en/blog/cluster-analysis-in-r-simplified-and-enhanced/).
 
 ## Usage
 

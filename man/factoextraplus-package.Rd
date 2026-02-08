@@ -46,7 +46,6 @@ options(factoextraplus.warn_hopkins = FALSE)
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://erdeyl.github.io/factoextraplus}
   \item \url{https://github.com/erdeyl/factoextraplus}
   \item \doi{10.5281/zenodo.18131494}
   \item Report bugs at \url{https://github.com/erdeyl/factoextraplus/issues}

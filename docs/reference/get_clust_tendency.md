@@ -7,7 +7,7 @@ Hopkins' statistic and a visual approach. An ordered dissimilarity image
 (ODI) is shown. Objects belonging to the same cluster are displayed in
 consecutive order using hierarchical clustering. For more details and
 interpretation, see [STHDA website: Assessing clustering
-tendency](http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/).
+tendency](https://www.datanovia.com/en/lessons/assessing-clustering-tendency/).
 
 ## Usage
 

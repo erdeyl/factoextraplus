@@ -4,7 +4,7 @@ Clustering methods classify data samples into groups of similar objects.
 This process requires some methods for measuring the distance or the
 (dis)similarity between the observations. Read more: [STHDA website -
 clarifying distance
-measures.](http://www.sthda.com/english/wiki/clarifying-distance-measures-unsupervised-machine-learning).
+measures.](https://www.datanovia.com/en/lessons/clustering-distance-measures/).
 
 - get_dist(): Computes a distance matrix between the rows of a data
   matrix. Compared to the standard

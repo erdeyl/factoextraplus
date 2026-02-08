@@ -1,5 +1,26 @@
 # Changelog
 
+## factoextraplus 1.2.0
+
+### Breaking changes
+
+- Require R \>= 4.1.0, ggplot2 \>= 4.0.0, FactoMineR \>= 2.13, and
+  ggpubrplus \>= 0.9.0.
+- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0).
+- Hopkins statistic uses the corrected formula (Wright 2022); results
+  differ from legacy factoextra and a one-time warning is emitted.
+- Legacy FactoMineR category labels may no longer match; use
+  map_factominer_legacy_names() to translate them.
+
+### Compatibility
+
+- MFA mixed-group support for quantitative/qualitative grouping and
+  supplementary qualitative categories.
+- Added FactoMineR category mapping helpers with verbose migration
+  warnings.
+- Robust partial coordinate name parsing when category labels contain
+  dots.
+
 ## factoextraplus 1.1.1
 
 ### Compatibility

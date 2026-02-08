@@ -9,7 +9,7 @@ NULL
 #'   image (ODI) is shown. Objects belonging to the same cluster are displayed 
 #'   in consecutive order using hierarchical clustering. For more details and 
 #'   interpretation, see 
-#'   \href{http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/}{STHDA
+#'   \href{https://www.datanovia.com/en/lessons/assessing-clustering-tendency/}{STHDA
 #'    website: Assessing clustering tendency}.
 #' @param data a numeric data frame or matrix. Columns are variables and rows 
 #'   are samples. Computation are done on rows (samples) by default. If you want

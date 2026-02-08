@@ -13,7 +13,7 @@ specify the number of clusters to be generated.
   the "firstmax" method (?cluster::clustGap).
 
 Read more: [Determining the optimal number of
-clusters](http://www.sthda.com/english/wiki/determining-the-optimal-number-of-clusters-3-must-known-methods-unsupervised-machine-learning)
+clusters](https://www.datanovia.com/en/lessons/determining-the-optimal-number-of-clusters-3-must-know-methods/)
 
 ## Usage
 

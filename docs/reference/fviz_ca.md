@@ -6,7 +6,7 @@ variables. fviz_ca() provides ggplot2-based elegant visualization of CA
 outputs from the R functions: CA \[in FactoMineR\], ca \[in ca\], coa
 \[in ade4\], correspondence \[in MASS\] and expOutput/epCA \[in
 ExPosition\]. Read more: [Correspondence
-Analysis](http://www.sthda.com/english/wiki/correspondence-analysis-in-r-the-ultimate-guide-for-the-analysis-the-visualization-and-the-interpretation-r-software-and-data-mining)
+Analysis](https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/113-ca-correspondence-analysis-in-r-essentials/)
 
 - fviz_ca_row(): Graph of row variables
 

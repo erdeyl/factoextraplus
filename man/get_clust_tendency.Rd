@@ -46,7 +46,7 @@ Before applying cluster methods, the first step is to assess
   image (ODI) is shown. Objects belonging to the same cluster are displayed 
   in consecutive order using hierarchical clustering. For more details and 
   interpretation, see 
-  \href{http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/}{STHDA
+  \href{https://www.datanovia.com/en/lessons/assessing-clustering-tendency/}{STHDA
    website: Assessing clustering tendency}.
 }
 \details{
