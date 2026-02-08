@@ -37,6 +37,11 @@ NULL
 #' \code{performance::check_clusterstructure}) return 1-H, where values close to
 #' 0 indicate clusterability. Always check the documentation of the specific
 #' implementation you are using.
+#'
+#' \strong{Breaking change}: factoextraplus uses the corrected Hopkins statistic
+#' formula (Wright 2022). Results differ from legacy factoextra and a one-time
+#' warning is emitted. Set \code{options(factoextraplus.warn_hopkins = FALSE)} to
+#' silence the warning.
 #' 
 #' \strong{VAT (Visual Assessment of cluster Tendency)}: The VAT detects the
 #' clustering tendency in a visual form by counting the number of square shaped
@@ -81,6 +86,16 @@ get_clust_tendency <- function(data, n, graph = TRUE,
 
   data <- na.omit(data)
   rownames(data) <- paste0("r", 1:nrow(data))
+
+  if (isTRUE(getOption("factoextraplus.warn_hopkins", TRUE))) {
+    warning(
+      "Hopkins statistic uses the corrected formula (Wright 2022); results ",
+      "differ from legacy factoextra. Set options(factoextraplus.warn_hopkins = FALSE) ",
+      "to silence this warning.",
+      call. = FALSE
+    )
+    options(factoextraplus.warn_hopkins = FALSE)
+  }
   plot <- NULL
   if(graph){
     plot <- fviz_dist(stats::dist(data), order = TRUE, 

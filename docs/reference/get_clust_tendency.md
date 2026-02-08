@@ -75,6 +75,11 @@ H where values close to 1 indicate clusterable data. Some other packages
 close to 0 indicate clusterability. Always check the documentation of
 the specific implementation you are using.
 
+**Breaking change**: factoextraplus uses the corrected Hopkins statistic
+formula (Wright 2022). Results differ from legacy factoextra and a
+one-time warning is emitted. Set
+`options(factoextraplus.warn_hopkins = FALSE)` to silence the warning.
+
 **VAT (Visual Assessment of cluster Tendency)**: The VAT detects the
 clustering tendency in a visual form by counting the number of square
 shaped dark (or colored) blocks along the diagonal in a VAT image.
@@ -95,6 +100,7 @@ data(iris)
 # Clustering tendency
 gradient_col = list(low = "steelblue", high = "white")
 get_clust_tendency(iris[,-5], n = 50, gradient = gradient_col)
+#> Warning: Hopkins statistic uses the corrected formula (Wright 2022); results differ from legacy factoextra. Set options(factoextraplus.warn_hopkins = FALSE) to silence this warning.
 #> $hopkins_stat
 #> [1] 0.9949145
 #> 

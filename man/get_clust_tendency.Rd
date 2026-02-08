@@ -63,6 +63,11 @@ where values close to 1 indicate clusterable data. Some other packages (e.g.,
 0 indicate clusterability. Always check the documentation of the specific
 implementation you are using.
 
+\strong{Breaking change}: factoextraplus uses the corrected Hopkins statistic
+formula (Wright 2022). Results differ from legacy factoextra and a one-time
+warning is emitted. Set \code{options(factoextraplus.warn_hopkins = FALSE)} to
+silence the warning.
+
 \strong{VAT (Visual Assessment of cluster Tendency)}: The VAT detects the
 clustering tendency in a visual form by counting the number of square shaped
 dark (or colored) blocks along the diagonal in a VAT image.

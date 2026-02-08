@@ -1,15 +1,16 @@
 # factoextraplus: Extract and Visualize the Results of Multivariate Data Analyses (Extended)
 
 Supplementary compatibility updates for factoextra (Kassambara & Mundt,
-2020). Modern R ecosystem support (ggplot2 \>= 4.0.0, R \>= 4.1.0) - to
-be cited with the original package. Provides easy-to-use functions to
-extract and visualize the output of multivariate data analyses,
-including 'PCA' (Principal Component Analysis), 'CA' (Correspondence
-Analysis), 'MCA' (Multiple Correspondence Analysis), 'FAMD' (Factor
-Analysis of Mixed Data), 'MFA' (Multiple Factor Analysis) and 'HMFA'
-(Hierarchical Multiple Factor Analysis) functions from different R
-packages. It contains also functions for simplifying some clustering
-analysis steps and provides 'ggplot2'-based elegant data visualization.
+2020). Modern R ecosystem support (ggplot2 \>= 4.0.0, ggpubrplus \>=
+0.9.0, FactoMineR \>= 2.13, R \>= 4.1.0) - to be cited with the original
+package. Provides easy-to-use functions to extract and visualize the
+output of multivariate data analyses, including 'PCA' (Principal
+Component Analysis), 'CA' (Correspondence Analysis), 'MCA' (Multiple
+Correspondence Analysis), 'FAMD' (Factor Analysis of Mixed Data), 'MFA'
+(Multiple Factor Analysis) and 'HMFA' (Hierarchical Multiple Factor
+Analysis) functions from different R packages. It contains also
+functions for simplifying some clustering analysis steps and provides
+'ggplot2'-based elegant data visualization.
 
 ## Details
 
@@ -25,6 +26,30 @@ General resources:
 
 - [Original factoextra
   documentation](https://rpkgs.datanovia.com/factoextra/)
+
+## Breaking changes
+
+- Requires R \>= 4.1.0, ggplot2 \>= 4.0.0, FactoMineR \>= 2.13, and
+  ggpubrplus \>= 0.9.0.
+
+- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0).
+
+- Hopkins statistic uses the corrected formula (Wright 2022); results
+  differ from legacy factoextra.
+
+- Legacy FactoMineR category labels may no longer match; use
+  [`map_factominer_legacy_names`](https://erdeyl.github.io/factoextraplus/reference/map_factominer_legacy_names.md)
+  to translate them.
+
+
+    # Install ggpubrplus first
+    remotes::install_github("erdeyl/ggpubrplus@v0.9.0")
+    remotes::install_github("erdeyl/factoextraplus")
+
+    # Hopkins statistic (corrected formula; warns once per session)
+    get_clust_tendency(iris[, -5], n = 50)
+    # Silence the one-time warning if needed
+    options(factoextraplus.warn_hopkins = FALSE)
 
 ## See also
 

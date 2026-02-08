@@ -123,6 +123,10 @@ where values close to 1 indicate clusterable data. Some other packages (e.g.,
 <code>performance::check_clusterstructure</code>) return 1-H, where values close to
 0 indicate clusterability. Always check the documentation of the specific
 implementation you are using.</p>
+<p><strong>Breaking change</strong>: factoextraplus uses the corrected Hopkins statistic
+formula (Wright 2022). Results differ from legacy factoextra and a one-time
+warning is emitted. Set <code>options(factoextraplus.warn_hopkins = FALSE)</code> to
+silence the warning.</p>
 <p><strong>VAT (Visual Assessment of cluster Tendency)</strong>: The VAT detects the
 clustering tendency in a visual form by counting the number of square shaped
 dark (or colored) blocks along the diagonal in a VAT image.</p>
@@ -143,6 +147,7 @@ dark (or colored) blocks along the diagonal in a VAT image.</p>
 <span class="r-in"><span><span class="co"># Clustering tendency</span></span></span>
 <span class="r-in"><span><span class="va">gradient_col</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"steelblue"</span>, high <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">get_clust_tendency</span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, n <span class="op">=</span> <span class="fl">50</span>, gradient <span class="op">=</span> <span class="va">gradient_col</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Hopkins statistic uses the corrected formula (Wright 2022); results differ from legacy factoextra. Set options(factoextraplus.warn_hopkins = FALSE) to silence this warning.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $hopkins_stat</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9949145</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

@@ -19,8 +19,37 @@ Once the PR is merged and the original `factoextra` is updated on CRAN,
 users can switch back to the original package.
 
 **Note:** This package depends on `ggpubrplus` (the modernized fork of
-`ggpubr`, version \>= 0.8.4.1) and `FactoMineR` (\>= 2.13).
+`ggpubr`, version \>= 0.9.0) and `FactoMineR` (\>= 2.13).
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
+
+## Breaking changes (since factoextra 1.0.7)
+
+- Requires R \>= 4.1.0, ggplot2 \>= 4.0.0, FactoMineR \>= 2.13, and
+  ggpubrplus \>= 0.9.0.
+- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0).
+- Hopkins statistic uses the corrected formula (Wright 2022); results
+  differ from legacy factoextra and a one-time warning is emitted.
+- Legacy FactoMineR category labels may no longer match; use
+  [`map_factominer_legacy_names()`](https://erdeyl.github.io/factoextraplus/reference/map_factominer_legacy_names.md)
+  to translate them.
+
+### Migration examples
+
+``` r
+
+# Install from GitHub (install ggpubrplus first)
+# install.packages("remotes")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0")
+remotes::install_github("erdeyl/factoextraplus")
+
+# Hopkins statistic (corrected formula; warns once per session)
+get_clust_tendency(iris[, -5], n = 50)
+# Silence the one-time warning if needed
+options(factoextraplus.warn_hopkins = FALSE)
+
+# Map legacy category labels from FactoMineR outputs
+map_factominer_legacy_names(res.mfa, c("var.level"))
+```
 
 ## Installation
 
@@ -28,7 +57,7 @@ users can switch back to the original package.
 
 # Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
-remotes::install_github("erdeyl/ggpubrplus@v0.8.4.1")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0")
 remotes::install_github("erdeyl/factoextraplus")
 ```
 

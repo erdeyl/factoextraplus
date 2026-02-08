@@ -39,7 +39,7 @@ bibentry(
 citFooter(
   "Note: This is factoextraplus, a compatibility fork maintained by",
   "Laszlo Erdey (Faculty of Economics and Business, University of Debrecen, Hungary).",
-  "This package requires ggpubrplus (https://doi.org/10.5281/zenodo.18131490).",
+  "This package requires ggpubrplus >= 0.9.0 (https://doi.org/10.5281/zenodo.18131490).",
   "A pull request has been submitted to the original package (PR #194).",
   "Once accepted, users should switch back to the official CRAN package."
 )
