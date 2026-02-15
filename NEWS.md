@@ -1,3 +1,12 @@
+# factoextraplus 1.2.0.1
+
+## Maintenance
+
+- Raise minimum ggplot2 requirement to >= 4.0.2.
+- Track ggpubrplus patch dependency >= 0.9.0.1 (including Remotes pin).
+- Synchronize DESCRIPTION, README, CITATION, and package docs for this patch release.
+- No functional API changes.
+
 # factoextraplus 1.2.0
 
 ## Breaking changes
