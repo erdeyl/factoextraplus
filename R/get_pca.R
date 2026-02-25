@@ -160,7 +160,7 @@ get_pca_var<-function(res.pca){
 # - Maintains full econometric precision (identical numerical results)
 .get_pca_ind_results <- function(ind.coord, data, eigenvalues, pca.center, pca.scale){
 
-  eigenvalues <- eigenvalues[1:ncol(ind.coord)]
+  eigenvalues <- eigenvalues[seq_len(ncol(ind.coord))]
   n.ind <- nrow(ind.coord)
   n.dim <- ncol(ind.coord)
 
@@ -224,7 +224,7 @@ get_pca_var<-function(res.pca){
   var.contrib <- sweep(var.cos2, 2, comp.cos2, "/") * 100
 
   # Set column names
-  dim.names <- paste0("Dim.", 1:ncol(var.coord))
+  dim.names <- paste0("Dim.", seq_len(ncol(var.coord)))
   colnames(var.coord) <- colnames(var.cor) <- colnames(var.cos2) <-
     colnames(var.contrib) <- dim.names
 

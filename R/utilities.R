@@ -531,7 +531,7 @@ NULL
       else if(filter$cos2 > 1){
         cos2 <- round(filter$cos2)
         d <- d[order(d$cos2, decreasing = TRUE), , drop = FALSE]
-        d <- d[1:min(filter$cos2, nrow(d)),, drop = FALSE]
+        d <- d[seq_len(min(filter$cos2, nrow(d))),, drop = FALSE]
       }
     }
     
@@ -540,7 +540,7 @@ NULL
       contrib <- round(filter$contrib)
       if(contrib < 1) stop("The value of the argument contrib >", 1)
       d <- d[order(d$contrib, decreasing = TRUE), , drop = FALSE]
-      d <- d[1:min(contrib, nrow(d)), , drop = FALSE]
+      d <- d[seq_len(min(contrib, nrow(d))), , drop = FALSE]
     }
     
   }
@@ -572,7 +572,7 @@ NULL
   if(sort.value[1]=="desc") x <- sort(x, decreasing = TRUE)
   else if(sort.value[1]=="asc") x <- sort(x, decreasing = FALSE)
   # bar names
-  if(is.null(names(x))) names(x) <- 1:length(x)
+  if(is.null(names(x))) names(x) <- seq_along(x)
   
   #data frame for ggplot2
   d <- cbind.data.frame(name = factor(names(x), levels = names(x)), val = x, stringsAsFactors = TRUE)
@@ -817,7 +817,7 @@ NULL
       if(length(group.names) == length(X$call$group) + 1)
         group.names <- group.names[-length(group.names)]
       else if(length(group.names) > length(X$call$group))
-        group.names <- group.names[seq_len(length(X$call$group))]
+        group.names <- group.names[seq_along(X$call$group)]
     }
   }
   if(is.null(group.names) || length(group.names) == 0){

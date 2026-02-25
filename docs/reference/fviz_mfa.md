@@ -4,8 +4,8 @@ Multiple factor analysis (MFA) is used to analyze a data set in which
 individuals are described by several sets of variables (quantitative
 and/or qualitative) structured into groups. fviz_mfa() provides
 ggplot2-based elegant visualization of MFA outputs from the R function:
-MFA \[FactoMineR\].  
-  
+MFA \[FactoMineR\].\
+\
 
 - fviz_mfa_ind(): Graph of individuals
 

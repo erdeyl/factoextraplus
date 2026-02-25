@@ -2,8 +2,8 @@
 
 Extract all the results (coordinates, squared cosine and contributions)
 for the active individuals and variables from Factor Analysis of Mixed
-Date (FAMD) outputs.  
-  
+Date (FAMD) outputs.\
+\
 
 - get_famd(): Extract the results for variables and individuals
 

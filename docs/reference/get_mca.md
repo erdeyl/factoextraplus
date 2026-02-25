@@ -2,8 +2,8 @@
 
 Extract all the results (coordinates, squared cosine and contributions)
 for the active individuals/variable categories from Multiple
-Correspondence Analysis (MCA) outputs.  
-  
+Correspondence Analysis (MCA) outputs.\
+\
 
 - get_mca(): Extract the results for variables and individuals
 

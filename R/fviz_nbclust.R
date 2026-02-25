@@ -218,7 +218,7 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
   #k = if (any(decr)) which.max(decr) else k
 
   df <- as.data.frame(gap_stat$Tab, stringsAsFactors = TRUE)
-  df$clusters <- as.factor(1:nrow(df))
+  df$clusters <- as.factor(seq_len(nrow(df)))
   df$ymin <- gap-se
   df$ymax <- gap + se
   p <- ggpubrplus::ggline(df, x = "clusters", y = "gap", group = 1, color = linecolor)+
@@ -317,7 +317,7 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
     if(print.summary){
       ss <- summary(best_nc$Number_clusters)
       cat ("Among all indices: \n===================\n")
-      for(i in 1 :length(ss)){
+      for(i in seq_along(ss)){
         cat("*", ss[i], "proposed ", names(ss)[i], "as the best number of clusters\n" )
       }
       cat("\nConclusion\n=========================\n")

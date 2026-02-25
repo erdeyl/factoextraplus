@@ -91,7 +91,7 @@ fviz_silhouette <- function(sil.obj, label = FALSE, print.summary = TRUE, ...){
   # order by cluster and by sil_width
   df <- df[order(df$cluster, -df$sil_width), ]
   if(!is.null(rownames(df))) df$name <- factor(rownames(df), levels = rownames(df))
-  else df$name <- as.factor(1:nrow(df))
+  else df$name <- as.factor(seq_len(nrow(df)))
   df$cluster <- as.factor(df$cluster)
   # FIX: ggplot2 3.0.0+ deprecation - aes_string() replaced with aes() + .data pronoun
   # See: https://github.com/kassambara/factoextra/issues/190

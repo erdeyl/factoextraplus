@@ -124,7 +124,7 @@ get_eig<-function(X){
   
   colnames(eig) <- c("eigenvalue", "variance.percent", 
                      "cumulative.variance.percent")
-  rownames(eig) <- paste0("Dim.", 1:nrow(eig))
+  rownames(eig) <- paste0("Dim.", seq_len(nrow(eig)))
   
   eig 
 }
@@ -147,7 +147,7 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
 {
   
   eig <- get_eigenvalue(X)
-  eig <-eig[1:min(ncp, nrow(eig)), , drop=FALSE]
+  eig <-eig[seq_len(min(ncp, nrow(eig))), , drop=FALSE]
   
   choice <- choice[1]
   if(choice=="eigenvalue") {
@@ -166,7 +166,7 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
   
   
   
-  df.eig <- data.frame(dim = factor(1:length(eig)), eig=eig )
+  df.eig <- data.frame(dim = factor(seq_along(eig)), eig=eig )
   
   extra_args <- list(...)
   bar_width <- extra_args$bar_width
@@ -197,8 +197,8 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
       }
       # Use 95th percentile as threshold (more conservative than mean)
       parallel_threshold <- apply(sim_eigs, 2, function(x) stats::quantile(x, 0.95))
-      parallel_threshold <- parallel_threshold[1:min(ncp, length(parallel_threshold))]
-      df.parallel <- data.frame(dim = factor(1:length(parallel_threshold)),
+      parallel_threshold <- parallel_threshold[seq_len(min(ncp, length(parallel_threshold)))]
+      df.parallel <- data.frame(dim = factor(seq_along(parallel_threshold)),
                                  threshold = parallel_threshold)
       p <- p + geom_line(data = df.parallel, aes(x = .data[["dim"]], y = .data[["threshold"]]),
                          color = parallel.color, linetype = parallel.lty, linewidth = 0.8) +
@@ -213,8 +213,8 @@ fviz_eig<-function(X, choice=c("variance", "eigenvalue"), geom=c("bar", "line"),
         sim_eigs[i, ] <- stats::princomp(random_data, cor = TRUE)$sdev^2
       }
       parallel_threshold <- apply(sim_eigs, 2, function(x) stats::quantile(x, 0.95))
-      parallel_threshold <- parallel_threshold[1:min(ncp, length(parallel_threshold))]
-      df.parallel <- data.frame(dim = factor(1:length(parallel_threshold)),
+      parallel_threshold <- parallel_threshold[seq_len(min(ncp, length(parallel_threshold)))]
+      df.parallel <- data.frame(dim = factor(seq_along(parallel_threshold)),
                                  threshold = parallel_threshold)
       p <- p + geom_line(data = df.parallel, aes(x = .data[["dim"]], y = .data[["threshold"]]),
                          color = parallel.color, linetype = parallel.lty, linewidth = 0.8) +

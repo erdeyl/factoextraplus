@@ -1,3 +1,12 @@
+# factoextraplus 1.2.0.2
+
+## Maintenance
+
+- Track ggpubrplus patch dependency >= 0.9.0.2 (including Remotes pin).
+- Replace remaining `1:n*` and `1:length()` patterns with `seq_len()`/`seq_along()` in core paths to harden empty-edge handling.
+- Add testthat scaffolding and smoke/regression tests for PCA/CA extraction and clustering visual utilities.
+- Synchronize DESCRIPTION, README, CITATION, manuals, and pkgdown docs for this patch release.
+
 # factoextraplus 1.2.0.1
 
 ## Maintenance
