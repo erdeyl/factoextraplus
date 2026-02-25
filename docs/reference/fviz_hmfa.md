@@ -3,8 +3,8 @@
 Hierarchical Multiple Factor Analysis (HMFA) is, an extension of MFA,
 used in a situation where the data are organized into a hierarchical
 structure. fviz_hmfa() provides ggplot2-based elegant visualization of
-HMFA outputs from the R function: HMFA \[FactoMineR\].  
-  
+HMFA outputs from the R function: HMFA \[FactoMineR\].\
+\
 
 - fviz_hmfa_ind(): Graph of individuals
 

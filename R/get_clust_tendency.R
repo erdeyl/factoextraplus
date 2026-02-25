@@ -85,7 +85,7 @@ get_clust_tendency <- function(data, n, graph = TRUE,
     stop("n must be no larger than num of samples")
 
   data <- na.omit(data)
-  rownames(data) <- paste0("r", 1:nrow(data))
+  rownames(data) <- paste0("r", seq_len(nrow(data)))
 
   if (isTRUE(getOption("factoextraplus.warn_hopkins", TRUE))) {
     warning(
@@ -113,10 +113,10 @@ get_clust_tendency <- function(data, n, graph = TRUE,
   distq = 0
   minp = rep(0, n)
   minq = rep(0, n)
-  for (i in 1:n) {
+  for (i in seq_len(n)) {
     distp[1] <- stats::dist(rbind(p[i, ], data[1, ]))
     minqi <- stats::dist(rbind(q[i, ], data[1, ]))
-    for (j in 2:nrow(data)) {
+    for (j in seq_len(nrow(data))[-1]) {
       distp[j] <- stats::dist(rbind(p[i, ], data[j, ]))
       error <- q[i, ] - data[j, ]
       if (sum(abs(error)) != 0) {

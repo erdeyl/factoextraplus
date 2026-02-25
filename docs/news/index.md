@@ -1,5 +1,28 @@
 # Changelog
 
+## factoextraplus 1.2.0.2
+
+### Maintenance
+
+- Track ggpubrplus patch dependency \>= 0.9.0.2 (including Remotes pin).
+- Replace remaining `1:n*` and `1:length()` patterns with
+  [`seq_len()`](https://rdrr.io/r/base/seq.html)/[`seq_along()`](https://rdrr.io/r/base/seq.html)
+  in core paths to harden empty-edge handling.
+- Add testthat scaffolding and smoke/regression tests for PCA/CA
+  extraction and clustering visual utilities.
+- Synchronize DESCRIPTION, README, CITATION, manuals, and pkgdown docs
+  for this patch release.
+
+## factoextraplus 1.2.0.1
+
+### Maintenance
+
+- Raise minimum ggplot2 requirement to \>= 4.0.2.
+- Track ggpubrplus patch dependency \>= 0.9.0.1 (including Remotes pin).
+- Synchronize DESCRIPTION, README, CITATION, and package docs for this
+  patch release.
+- No functional API changes.
+
 ## factoextraplus 1.2.0
 
 ### Breaking changes

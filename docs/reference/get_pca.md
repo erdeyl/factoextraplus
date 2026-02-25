@@ -2,8 +2,8 @@
 
 Extract all the results (coordinates, squared cosine, contributions) for
 the active individuals/variables from Principal Component Analysis (PCA)
-outputs.  
-  
+outputs.\
+\
 
 - get_pca(): Extract the results for variables and individuals
 

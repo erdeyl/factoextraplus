@@ -3,8 +3,8 @@
 Extract all the results (coordinates, squared cosine and contributions)
 for the active individuals/quantitative variables/qualitative variable
 categories/groups/partial axes from Multiple Factor Analysis (MFA)
-outputs.  
-  
+outputs.\
+\
 
 - get_mfa(): Extract the results for variables and individuals
 

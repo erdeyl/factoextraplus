@@ -98,8 +98,8 @@ a ggplot2 plot
 The function fviz_contrib() creates a barplot of row/column
 contributions. A reference dashed line is also shown on the barplot.
 This reference line corresponds to the expected value if the
-contribution where uniform.  
-  
+contribution where uniform.\
+\
 For a given dimension, any row/column with a contribution above the
 reference line could be considered as important in contributing to the
 dimension.

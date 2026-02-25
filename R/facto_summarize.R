@@ -228,7 +228,7 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
     res <- res.partial
   else {
     name <- rownames(elmt$coord)
-    if(is.null(name)) name <- as.character(1:nrow(elmt$coord))
+    if(is.null(name)) name <- as.character(seq_len(nrow(elmt$coord)))
     name <- as.character(name)
     res <- cbind.data.frame(name = name, res, stringsAsFactors = TRUE)
     rownames(res) <- name

@@ -8,7 +8,7 @@ v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131494.svg)](https://doi.org/10.5281/zenodo.18131494)
 
 **A modernized fork of factoextra with full compatibility for ggplot2
-4.0.0+, FactoMineR 2.13+, and R 4.1.0+**
+4.0.2+, FactoMineR 2.13+, and R 4.1.0+**
 
 ## About This Package
 
@@ -27,8 +27,8 @@ users can switch back to the original package.
 ## Breaking changes (since factoextra 1.0.7)
 
 - Requires R \>= 4.1.0, ggplot2 \>= 4.0.2, FactoMineR \>= 2.13, and
-  ggpubrplus \>= 0.9.0.
-- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0).
+  ggpubrplus \>= 0.9.0.2.
+- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0.2).
 - Hopkins statistic uses the corrected formula (Wright 2022); results
   differ from legacy factoextra and a one-time warning is emitted.
 - Legacy FactoMineR category labels may no longer match; use
@@ -39,7 +39,7 @@ users can switch back to the original package.
 ``` r
 # Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
-remotes::install_github("erdeyl/ggpubrplus@v0.9.0.1")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0.2")
 remotes::install_github("erdeyl/factoextraplus")
 
 # Hopkins statistic (corrected formula; warns once per session)
@@ -56,7 +56,7 @@ map_factominer_legacy_names(res.mfa, c("var.level"))
 ``` r
 # Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
-remotes::install_github("erdeyl/ggpubrplus@v0.9.0.1")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0.2")
 remotes::install_github("erdeyl/factoextraplus")
 ```
 
@@ -100,7 +100,7 @@ package version 1.0.7. <https://CRAN.R-project.org/package=factoextra>
 **This fork:** \> Erdey L (2026). Supplementary compatibility updates
 for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support
 (ggplot2 ≥4.0.2, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the
-original package. R package version 1.2.0.1.
+original package. R package version 1.2.0.2.
 <https://doi.org/10.5281/zenodo.18131494>
 
 ## Original Package

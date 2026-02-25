@@ -72,9 +72,9 @@ get_ca_col <- function(res.ca){
     cc <- apply(coord^2, 2, "*", res.ca$colmass)
     contrib <- t(apply(cc, 1, "/", res.ca$sv^2)) *100
     inertia <- res.ca$colinertia
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     # remove supplementary points
-    index <- setdiff(1:nrow(res.ca$colcoord), res.ca$colsup)
+    index <- setdiff(seq_len(nrow(res.ca$colcoord)), res.ca$colsup)
     cols <- list(coord = coord[index, , drop = FALSE], 
                  contrib = contrib[index, , drop = FALSE],
                  cos2 = cos2[index, , drop = FALSE], inertia = inertia[index]) 
@@ -99,7 +99,7 @@ get_ca_col <- function(res.ca){
     contrib <- t(apply(cc, 1, "/", res.ca$cor^2)) *100
     # inertia = mass * d^2
     inertia <- mass * d2
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     cols <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = inertia)
   }
   # ade4 package
@@ -113,15 +113,15 @@ get_ca_col <- function(res.ca){
     cc <- utils::compareVersion(vv, "1.7.4") > 0
     if(cc){
       # "v>1.7.4"
-      cos2 <- abs(inertia$col.rel/100)[, 1:ncol(coord)]
-      contrib <- (inertia$col.abs)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$col.rel/100)[, seq_len(ncol(coord))]
+      contrib <- (inertia$col.abs)[, seq_len(ncol(coord))]
     }
     # v<=1.7.4
     else {
-    cos2 <- abs(inertia$col.rel/10000)[, 1:ncol(coord)]
-    contrib <- (inertia$col.abs/100)[, 1:ncol(coord)]
+    cos2 <- abs(inertia$col.rel/10000)[, seq_len(ncol(coord))]
+    contrib <- (inertia$col.abs/100)[, seq_len(ncol(coord))]
     }
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     cols <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = NA)
   }
   # ExPosition package
@@ -131,7 +131,7 @@ get_ca_col <- function(res.ca){
     cos2 <- res.ca$ExPosition.Data$rj
     contrib <- res.ca$ExPosition.Data$cj*100
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 
-                                                                     1:ncol(coord))
+                                                                     seq_len(ncol(coord)))
     cols <- list(coord = coord, contrib = contrib, cos2 = cos2, 
                  inertia = inertia)
   }
@@ -158,9 +158,9 @@ get_ca_row <- function(res.ca){
     cc <- apply(coord^2, 2, "*", res.ca$rowmass)
     contrib <- t(apply(cc, 1, "/", res.ca$sv^2)) *100
     inertia <- res.ca$rowinertia
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     # remove supplementary points
-    index <- setdiff(1:nrow(res.ca$rowcoord), res.ca$rowsup)
+    index <- setdiff(seq_len(nrow(res.ca$rowcoord)), res.ca$rowsup)
     row <- list(coord = coord[index, , drop = FALSE], 
                 contrib = contrib[index, , drop = FALSE],
                 cos2 = cos2[index, , drop = FALSE], inertia = inertia[index])  
@@ -185,7 +185,7 @@ get_ca_row <- function(res.ca){
     contrib <- t(apply(cc, 1, "/", res.ca$cor^2)) *100
     # inertia = mass * d^2
     inertia <- mass * d2
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     row <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = inertia)
   }
   
@@ -200,15 +200,15 @@ get_ca_row <- function(res.ca){
     cc <- utils::compareVersion(vv, "1.7.4") > 0
     if(cc){
       # "v>1.7.4"
-      cos2 <- abs(inertia$row.rel/100)[, 1:ncol(coord)]
-      contrib <- (inertia$row.abs)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$row.rel/100)[, seq_len(ncol(coord))]
+      contrib <- (inertia$row.abs)[, seq_len(ncol(coord))]
     }
     # v<=1.7.4
     else {
-      cos2 <- abs(inertia$row.rel/10000)[, 1:ncol(coord)]
-      contrib <- (inertia$row.abs/100)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$row.rel/10000)[, seq_len(ncol(coord))]
+      contrib <- (inertia$row.abs/100)[, seq_len(ncol(coord))]
     }
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     row <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = NA)
   }
   # ExPosition package
@@ -218,7 +218,7 @@ get_ca_row <- function(res.ca){
     cos2 <- res.ca$ExPosition.Data$ri
     contrib <- res.ca$ExPosition.Data$ci*100
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 
-                                                                     1:ncol(coord))
+                                                                     seq_len(ncol(coord)))
     row <- list(coord = coord, contrib = contrib, cos2 = cos2, 
                 inertia = inertia)
   }

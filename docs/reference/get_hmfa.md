@@ -3,8 +3,8 @@
 Extract all the results (coordinates, squared cosine and contributions)
 for the active individuals/quantitative variables/qualitative variable
 categories/groups/partial axes from Hierarchical Multiple Factor
-Analysis (HMFA) outputs.  
-  
+Analysis (HMFA) outputs.\
+\
 
 - get_hmfa(): Extract the results for variables and individuals
 

@@ -2,8 +2,8 @@
 
 Extract all the results (coordinates, squared cosine, contributions and
 inertia) for the active row/column variables from Correspondence
-Analysis (CA) outputs.  
-  
+Analysis (CA) outputs.\
+\
 
 - get_ca(): Extract the results for rows and columns
 

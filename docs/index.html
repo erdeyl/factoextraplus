@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><script src="extra.js"></script><meta property="og:title" content="Extract and Visualize the Results of Multivariate Data Analyses (Extended)">
-<meta name="description" content="Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020). Modern R ecosystem support (ggplot2 &gt;= 4.0.0, ggpubrplus &gt;= 0.9.0, FactoMineR &gt;= 2.13, R &gt;= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including PCA (Principal Component Analysis), CA (Correspondence Analysis), MCA (Multiple Correspondence Analysis), FAMD (Factor Analysis of Mixed Data), MFA (Multiple Factor Analysis) and HMFA (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides ggplot2-based elegant data visualization.">
-<meta property="og:description" content="Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020). Modern R ecosystem support (ggplot2 &gt;= 4.0.0, ggpubrplus &gt;= 0.9.0, FactoMineR &gt;= 2.13, R &gt;= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including PCA (Principal Component Analysis), CA (Correspondence Analysis), MCA (Multiple Correspondence Analysis), FAMD (Factor Analysis of Mixed Data), MFA (Multiple Factor Analysis) and HMFA (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides ggplot2-based elegant data visualization.">
+<meta name="description" content="Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020). Modern R ecosystem support (ggplot2 &gt;= 4.0.2, ggpubrplus &gt;= 0.9.0.2, FactoMineR &gt;= 2.13, R &gt;= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including PCA (Principal Component Analysis), CA (Correspondence Analysis), MCA (Multiple Correspondence Analysis), FAMD (Factor Analysis of Mixed Data), MFA (Multiple Factor Analysis) and HMFA (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides ggplot2-based elegant data visualization.">
+<meta property="og:description" content="Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020). Modern R ecosystem support (ggplot2 &gt;= 4.0.2, ggpubrplus &gt;= 0.9.0.2, FactoMineR &gt;= 2.13, R &gt;= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including PCA (Principal Component Analysis), CA (Correspondence Analysis), MCA (Multiple Correspondence Analysis), FAMD (Factor Analysis of Mixed Data), MFA (Multiple Factor Analysis) and HMFA (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides ggplot2-based elegant data visualization.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">factoextraplus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
 <div class="page-header"><h1 id="factoextraplus">factoextraplus<a class="anchor" aria-label="anchor" href="#factoextraplus"></a>
 </h1></div>
 <p><a href="https://github.com/erdeyl/factoextraplus" class="external-link"><img src="https://img.shields.io/badge/R--CMD--check-passing-brightgreen" alt="R-CMD-check"></a> <a href="https://www.gnu.org/licenses/gpl-2.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v2-blue.svg" alt="License: GPL v2"></a> <a href="https://doi.org/10.5281/zenodo.18131494" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.18131494.svg" alt="DOI"></a></p>
-<p><strong>A modernized fork of factoextra with full compatibility for ggplot2 4.0.0+, FactoMineR 2.13+, and R 4.1.0+</strong></p>
+<p><strong>A modernized fork of factoextra with full compatibility for ggplot2 4.0.2+, FactoMineR 2.13+, and R 4.1.0+</strong></p>
 <div class="section level2">
 <h2 id="about-this-package">About This Package<a class="anchor" aria-label="anchor" href="#about-this-package"></a>
 </h2>
@@ -62,8 +62,8 @@
 <h2 id="breaking-changes-since-factoextra-107">Breaking changes (since factoextra 1.0.7)<a class="anchor" aria-label="anchor" href="#breaking-changes-since-factoextra-107"></a>
 </h2>
 <ul>
-<li>Requires R &gt;= 4.1.0, ggplot2 &gt;= 4.0.0, FactoMineR &gt;= 2.13, and ggpubrplus &gt;= 0.9.0.</li>
-<li>Dependency switched from ggpubr to ggpubrplus (&gt;= 0.9.0).</li>
+<li>Requires R &gt;= 4.1.0, ggplot2 &gt;= 4.0.2, FactoMineR &gt;= 2.13, and ggpubrplus &gt;= 0.9.0.2.</li>
+<li>Dependency switched from ggpubr to ggpubrplus (&gt;= 0.9.0.2).</li>
 <li>Hopkins statistic uses the corrected formula (Wright 2022); results differ from legacy factoextra and a one-time warning is emitted.</li>
 <li>Legacy FactoMineR category labels may no longer match; use <code><a href="reference/map_factominer_legacy_names.html">map_factominer_legacy_names()</a></code> to translate them.</li>
 </ul>
@@ -73,7 +73,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install from GitHub (install ggpubrplus first)</span></span>
 <span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/ggpubrplus@v0.9.0"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/ggpubrplus@v0.9.0.2"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/factoextraplus"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Hopkins statistic (corrected formula; warns once per session)</span></span>
@@ -91,7 +91,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install from GitHub (install ggpubrplus first)</span></span>
 <span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/ggpubrplus@v0.9.0"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/ggpubrplus@v0.9.0.2"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"erdeyl/factoextraplus"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -144,7 +144,7 @@
 </h2>
 <p>Please cite both the original package and this fork:</p>
 <p><strong>Original package:</strong> &gt; Kassambara A, Mundt F (2020). factoextra: Extract and Visualize the Results of Multivariate Data Analyses. R package version 1.0.7. <a href="https://CRAN.R-project.org/package=factoextra" class="external-link uri">https://CRAN.R-project.org/package=factoextra</a></p>
-<p><strong>This fork:</strong> &gt; Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020): Modern R ecosystem support (ggplot2 ≥4.0.0, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the original package. R package version 1.2.0. <a href="https://doi.org/10.5281/zenodo.18131494" class="external-link uri">https://doi.org/10.5281/zenodo.18131494</a></p>
+<p><strong>This fork:</strong> &gt; Erdey L (2026). Supplementary compatibility updates for factoextra (Kassambara &amp; Mundt, 2020): Modern R ecosystem support (ggplot2 ≥4.0.2, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the original package. R package version 1.2.0.2. <a href="https://doi.org/10.5281/zenodo.18131494" class="external-link uri">https://doi.org/10.5281/zenodo.18131494</a></p>
 </div>
 <div class="section level2">
 <h2 id="original-package">Original Package<a class="anchor" aria-label="anchor" href="#original-package"></a>

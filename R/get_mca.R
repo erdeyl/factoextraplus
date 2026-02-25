@@ -92,15 +92,15 @@ get_mca_var <- function(res.mca, element = c( "var", "mca.cor", "quanti.sup")){
     cc <- utils::compareVersion(vv, "1.7.4") > 0
     if(cc){
       # "v>1.7.4"
-      cos2 <- abs(inertia$col.rel/100)[, 1:ncol(coord)]
-      contrib <- (inertia$col.abs)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$col.rel/100)[, seq_len(ncol(coord))]
+      contrib <- (inertia$col.abs)[, seq_len(ncol(coord))]
     }
     # v<=1.7.4
     else {
-      cos2 <- abs(inertia$col.rel/10000)[, 1:ncol(coord)]
-      contrib <- (inertia$col.abs/100)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$col.rel/10000)[, seq_len(ncol(coord))]
+      contrib <- (inertia$col.abs/100)[, seq_len(ncol(coord))]
     }
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     vars <- list(coord = coord, contrib = contrib, cos2 = cos2)
     }
     else{
@@ -117,7 +117,7 @@ get_mca_var <- function(res.mca, element = c( "var", "mca.cor", "quanti.sup")){
     inertia <- res$dj*res$W
     cos2 <- res$rj
     contrib <- res$cj*100
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     vars <- list(coord = coord, contrib = contrib, cos2 = cos2)
   }
   else stop("An object of class : ", class(res.mca), 
@@ -145,15 +145,15 @@ get_mca_ind <- function(res.mca){
     cc <- utils::compareVersion(vv, "1.7.4") > 0
     if(cc){
       # "v>1.7.4"
-      cos2 <- abs(inertia$row.rel/100)[, 1:ncol(coord)]
-      contrib <- (inertia$row.abs)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$row.rel/100)[, seq_len(ncol(coord))]
+      contrib <- (inertia$row.abs)[, seq_len(ncol(coord))]
     }
     # v<=1.7.4
     else {
-      cos2 <- abs(inertia$row.rel/10000)[, 1:ncol(coord)]
-      contrib <- (inertia$row.abs/100)[, 1:ncol(coord)]
+      cos2 <- abs(inertia$row.rel/10000)[, seq_len(ncol(coord))]
+      contrib <- (inertia$row.abs/100)[, seq_len(ncol(coord))]
     }
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     ind <- list(coord = coord, contrib = contrib, cos2 = cos2)
   }
   # ExPosition package
@@ -163,7 +163,7 @@ get_mca_ind <- function(res.mca){
     inertia <- res$di*res$M
     cos2 <- res$ri
     contrib <- res$ci*100
-    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", 1:ncol(coord)) 
+    colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     ind <- list(coord = coord, contrib = contrib, cos2 = cos2)
   }
   
