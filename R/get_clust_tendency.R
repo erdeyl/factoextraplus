@@ -116,7 +116,7 @@ get_clust_tendency <- function(data, n, graph = TRUE,
   for (i in seq_len(n)) {
     distp[1] <- stats::dist(rbind(p[i, ], data[1, ]))
     minqi <- stats::dist(rbind(q[i, ], data[1, ]))
-    for (j in 2:nrow(data)) {
+    for (j in seq_len(nrow(data))[-1]) {
       distp[j] <- stats::dist(rbind(p[i, ], data[j, ]))
       error <- q[i, ] - data[j, ]
       if (sum(abs(error)) != 0) {
