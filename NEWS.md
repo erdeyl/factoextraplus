@@ -1,3 +1,11 @@
+# factoextraplus 1.2.0.3
+
+## Maintenance
+
+- Remove leaked README front matter from generated `README.md`.
+- Harden `get_clust_tendency()` inner loop indexing to avoid `2:nrow(...)` edge cases.
+- Synchronize DESCRIPTION, README, CITATION, manuals, and pkgdown docs for this patch release.
+
 # factoextraplus 1.2.0.2
 
 ## Maintenance
