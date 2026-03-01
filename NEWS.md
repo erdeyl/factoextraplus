@@ -1,3 +1,12 @@
+# factoextraplus 1.2.0.6
+
+## Maintenance
+
+- Fix citation metadata drift and align `inst/CITATION` with the current release metadata.
+- Eliminate residual RNG side effects in `eclust()` and internal deterministic plotting/data helpers.
+- Replace remaining runtime `sapply()` usage with type-stable `vapply()` paths.
+- Refresh examples/manuals/docs, rerun checks, and finalize release housekeeping for 1.2.0.6.
+
 # factoextraplus 1.2.0.5
 
 ## Maintenance

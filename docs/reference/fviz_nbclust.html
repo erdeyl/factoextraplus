@@ -33,7 +33,7 @@ Read more:
 
     <a class="navbar-brand me-2" href="../index.html">factoextraplus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,7 +156,11 @@ are printed in fviz_nbclust().</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>optionally further arguments for FUNcluster()</p></dd>
+<dd><p>optionally further arguments:
+arguments for FUNcluster() in "wss"/"silhouette" modes; arguments for
+<code><a href="https://rdrr.io/pkg/cluster/man/clusGap.html" class="external-link">clusGap</a></code>() in "gap_stat" mode. A <code>maxSE</code> list
+can also be supplied in "gap_stat" mode and is forwarded to
+<code>fviz_gap_stat()</code>.</p></dd>
 
 
 <dt id="arg-gap-stat">gap_stat<a class="anchor" aria-label="anchor" href="#arg-gap-stat"></a></dt>

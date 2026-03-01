@@ -40,7 +40,8 @@ hkmeans_tree(hkmeans, rect.col = NULL, ...)
 
 - k:
 
-  the number of clusters to be generated
+  a single integer specifying the number of clusters to be generated.
+  Must be at least 2 and smaller than `nrow(x)`.
 
 - hc.metric:
 

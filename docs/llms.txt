@@ -1,6 +1,6 @@
 # factoextraplus
 
-[![R-CMD-check](https://img.shields.io/badge/R--CMD--check-passing-brightgreen)](https://github.com/erdeyl/factoextraplus)
+[![R-CMD-check](https://github.com/erdeyl/factoextraplus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/erdeyl/factoextraplus/actions/workflows/R-CMD-check.yaml)
 [![License: GPL
 v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131494.svg)](https://doi.org/10.5281/zenodo.18131494)
@@ -11,22 +11,20 @@ v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org
 ## About This Package
 
 This package is a **fork of factoextra** renamed to `factoextraplus` to
-avoid package name conflicts while the upstream pull request
+avoid package name conflicts. The upstream pull request
 ([kassambara/factoextra#194](https://github.com/kassambara/factoextra/pull/194))
-is pending review.
-
-Once the PR is merged and the original `factoextra` is updated on CRAN,
-users can switch back to the original package.
+was closed unmerged on 2026-02-25, so this fork remains the maintained
+compatibility path for modern R/ggplot2/FactoMineR stacks.
 
 **Note:** This package depends on `ggpubrplus` (the modernized fork of
-`ggpubr`, version \>= 0.9.0) and `FactoMineR` (\>= 2.13).
+`ggpubr`, version \>= 0.9.0.6) and `FactoMineR` (\>= 2.13).
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18131490.svg)](https://doi.org/10.5281/zenodo.18131490)
 
 ## Breaking changes (since factoextra 1.0.7)
 
 - Requires R \>= 4.1.0, ggplot2 \>= 4.0.2, FactoMineR \>= 2.13, and
-  ggpubrplus \>= 0.9.0.2.
-- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0.2).
+  ggpubrplus \>= 0.9.0.6.
+- Dependency switched from ggpubr to ggpubrplus (\>= 0.9.0.6).
 - Hopkins statistic uses the corrected formula (Wright 2022); results
   differ from legacy factoextra and a one-time warning is emitted.
 - Legacy FactoMineR category labels may no longer match; use
@@ -39,7 +37,7 @@ users can switch back to the original package.
 
 # Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
-remotes::install_github("erdeyl/ggpubrplus@v0.9.0.2")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0.6")
 remotes::install_github("erdeyl/factoextraplus")
 
 # Hopkins statistic (corrected formula; warns once per session)
@@ -57,7 +55,7 @@ map_factominer_legacy_names(res.mfa, c("var.level"))
 
 # Install from GitHub (install ggpubrplus first)
 # install.packages("remotes")
-remotes::install_github("erdeyl/ggpubrplus@v0.9.0.2")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0.6")
 remotes::install_github("erdeyl/factoextraplus")
 ```
 
@@ -94,6 +92,20 @@ remotes::install_github("erdeyl/factoextraplus")
 - [`facto_summarize()`](https://erdeyl.github.io/factoextraplus/reference/facto_summarize.md)
   axes parameter handling
 
+## Latest Maintenance (1.2.0.6)
+
+- Synchronized stale `inst/CITATION` metadata with the current release
+  version and dependency baseline.
+- Removed residual global RNG side effects in
+  [`eclust()`](https://erdeyl.github.io/factoextraplus/reference/eclust.md)
+  and internal deterministic helper paths.
+- Replaced remaining runtime
+  [`sapply()`](https://rdrr.io/r/base/lapply.html) calls with
+  type-stable [`vapply()`](https://rdrr.io/r/base/lapply.html)
+  implementations.
+- Refreshed examples/manuals/documentation and reran full check/release
+  workflow.
+
 ## Citation
 
 Please cite both the original package and this fork:
@@ -105,7 +117,7 @@ package version 1.0.7. <https://CRAN.R-project.org/package=factoextra>
 **This fork:** \> Erdey L (2026). Supplementary compatibility updates
 for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support
 (ggplot2 ≥4.0.2, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the
-original package. R package version 1.2.0.3.
+original package. R package version 1.2.0.6.
 <https://doi.org/10.5281/zenodo.18131494>
 
 ## Original Package

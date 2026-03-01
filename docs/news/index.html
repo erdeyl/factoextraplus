@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">factoextraplus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,41 @@
       <small>Source: <a href="https://github.com/erdeyl/factoextraplus/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0.6" id="factoextraplus-1206">factoextraplus 1.2.0.6<a class="anchor" aria-label="anchor" href="#factoextraplus-1206"></a></h2>
+<div class="section level3">
+<h3 id="maintenance-1-2-0-6">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-1-2-0-6"></a></h3>
+<ul><li>Fix citation metadata drift and align <code>inst/CITATION</code> with the current release metadata.</li>
+<li>Eliminate residual RNG side effects in <code><a href="../reference/eclust.html">eclust()</a></code> and internal deterministic plotting/data helpers.</li>
+<li>Replace remaining runtime <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code> usage with type-stable <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply()</a></code> paths.</li>
+<li>Refresh examples/manuals/docs, rerun checks, and finalize release housekeeping for 1.2.0.6.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0.5" id="factoextraplus-1205">factoextraplus 1.2.0.5<a class="anchor" aria-label="anchor" href="#factoextraplus-1205"></a></h2>
+<div class="section level3">
+<h3 id="maintenance-1-2-0-5">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-1-2-0-5"></a></h3>
+<ul><li>Synchronize package-level examples and breaking-change documentation with the current <code>ggpubrplus</code> baseline (<code>&gt;= 0.9.0.6</code>).</li>
+<li>Regenerate manuals and package documentation metadata after release-prep updates.</li>
+<li>Finalize release workflow checks and branch/release housekeeping for the 1.2.0.5 publication.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0.4" id="factoextraplus-1204">factoextraplus 1.2.0.4<a class="anchor" aria-label="anchor" href="#factoextraplus-1204"></a></h2>
+<div class="section level3">
+<h3 id="maintenance-1-2-0-4">Maintenance<a class="anchor" aria-label="anchor" href="#maintenance-1-2-0-4"></a></h3>
+<ul><li>Replace residual legacy extraction via <code>eval(parse(...))</code> with deterministic nested list access in supplementary-element helpers.</li>
+<li>Refactor CA extractors (<code>ca</code> and <code>MASS::correspondence</code> backends) to vectorized <code>sweep()/rowSums()/colSums()</code> paths.</li>
+<li>Vectorize Hopkins nearest-neighbor distance computation and harden input validation in <code><a href="../reference/get_clust_tendency.html">get_clust_tendency()</a></code>.</li>
+<li>Add stricter <code>k</code> and scaling validations for <code><a href="../reference/hcut.html">hcut()</a></code> and <code><a href="../reference/hkmeans.html">hkmeans()</a></code>.</li>
+<li>Clarify <code>hcut(isdiss = TRUE)</code> behavior with explicit dist-class validation.</li>
+<li>Remove deprecated Travis CI config and add GitHub Actions <code>R-CMD-check</code> workflow.</li>
+<li>Expand CI checks to a multi-platform/multi-R matrix (Linux/macOS/Windows; release/devel/oldrel).</li>
+<li>Expand regression/smoke test coverage across clustering, CA backends, and visualization helpers.</li>
+<li>Refresh README upstream-status narrative and update <code>ggpubrplus</code> pinning to <code>v0.9.0.6</code>.</li>
+<li>Remove explicit <code>stringsAsFactors = TRUE</code> legacy settings and stale commented-out code blocks.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.0.3" id="factoextraplus-1203">factoextraplus 1.2.0.3<a class="anchor" aria-label="anchor" href="#factoextraplus-1203"></a></h2>
 <div class="section level3">
@@ -90,7 +125,7 @@
 <h2 class="pkg-version" data-toc-text="1.1.0" id="factoextraplus-110">factoextraplus 1.1.0<a class="anchor" aria-label="anchor" href="#factoextraplus-110"></a></h2>
 <div class="section level3">
 <h3 id="package-rename-1-1-0">Package Rename<a class="anchor" aria-label="anchor" href="#package-rename-1-1-0"></a></h3>
-<p>This package is a modernized fork of <code>factoextra</code> renamed to <code>factoextraplus</code> to avoid conflicts while the upstream pull request (kassambara/factoextra#194) is pending. Once the PR is merged and the original <code>factoextra</code> is updated on CRAN, users can switch back to the original package.</p>
+<p>This package is a modernized fork of <code>factoextra</code> renamed to <code>factoextraplus</code> to avoid conflicts while pursuing upstream compatibility alignment. Historical note: the upstream pull request (kassambara/factoextra#194) was later closed unmerged on 2026-02-25.</p>
 <p><strong>Note:</strong> This package depends on <code>ggpubrplus</code> (the modernized fork of <code>ggpubr</code>).</p>
 </div>
 <div class="section level3">

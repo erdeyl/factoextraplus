@@ -9,7 +9,7 @@ correlation based distance measure methods such as "pearson", "spearman" and "ke
 
     <a class="navbar-brand me-2" href="../index.html">factoextraplus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,11 +64,14 @@ correlation based distance measure methods such as "pearson", "spearman" and "ke
 
 
 <dt id="arg-k">k<a class="anchor" aria-label="anchor" href="#arg-k"></a></dt>
-<dd><p>the number of clusters to be generated.</p></dd>
+<dd><p>a single integer specifying the number of clusters to be generated.
+Must be at least 2 and smaller than the number of observations.</p></dd>
 
 
 <dt id="arg-isdiss">isdiss<a class="anchor" aria-label="anchor" href="#arg-isdiss"></a></dt>
-<dd><p>logical value specifying wether x is a dissimilarity matrix.</p></dd>
+<dd><p>logical value specifying whether <code>x</code> is already a
+dissimilarity matrix. If TRUE, <code>x</code> must inherit from class
+<code>"dist"</code>.</p></dd>
 
 
 <dt id="arg-hc-func">hc_func<a class="anchor" aria-label="anchor" href="#arg-hc-func"></a></dt>
