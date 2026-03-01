@@ -125,7 +125,7 @@ fviz_mfa_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FAL
   extra_args <- list(...)
   
   if(col.ind %in% c("cos2","contrib", "coord")) partial = NULL
-  if(!is.null(partial) & missing(col.ind)) col.ind <- "black"
+  if(!is.null(partial) && missing(col.ind)) col.ind <- "black"
   
   p <- fviz (X, element = "ind", axes = axes, geom = geom, habillage = habillage, 
         addEllipses = addEllipses, palette = palette, pointshape = shape.ind,
@@ -134,10 +134,10 @@ fviz_mfa_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FAL
         select = select.ind, repel = repel, ...)
   
   # Add supplementary qualitative variables if they exist
-  show.quali.var <- !("quali.var" %in% extra_args$invisible) & is.null(partial)
+  show.quali.var <- !("quali.var" %in% extra_args$invisible) && is.null(partial)
   is_habillage <- habillage[1] != "none" 
-  if(!is.null(X$quali.var.sup) & show.quali.var){
-    if(!(col.ind %in% c("cos2", "contrib")) & !is_habillage) col.quali.var.sup  = "quali.sup"
+  if(!is.null(X$quali.var.sup) && show.quali.var){
+    if(!(col.ind %in% c("cos2", "contrib")) && !is_habillage) col.quali.var.sup  = "quali.sup"
     quali.sup <- .get_supp(X, element = "quali.var.sup", axes = axes)
     quali.sup$quali.sup <- .get_quali_var_sup_names(X)
     colnames(quali.sup)[2:3] <-  c("x", "y")
@@ -173,7 +173,7 @@ fviz_mfa_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FAL
     # elements to be hidden
     hide <- .hide(invisible)
     # Plot
-    if(!hide$ind & "point" %in% geom) {
+    if(!hide$ind && "point" %in% geom) {
       # Partial point
       p <- p + ggpubrplus::geom_exec(geom_point, data = ind.partial,
                                  x = "x.partial", y = "y.partial", 
@@ -224,7 +224,7 @@ fviz_mfa_var <- function(X, choice = c("quanti.var", "group", "quali.var"), axes
 {
   
   extra_args <- list(...)
-  if(missing(choice) & !is.null(extra_args$choix)) choice <- extra_args$choix
+  if(missing(choice) && !is.null(extra_args$choix)) choice <- extra_args$choix
   choice <- match.arg(choice)
  
  
@@ -297,4 +297,3 @@ fviz_mfa <- function(X, partial = "all", ...){
   if(is.null(map) || !any(map$var.type == "quali" & !map$is.group.sup))
     stop("There are no qualitative variables to plot.")
 }
-

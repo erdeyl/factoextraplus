@@ -157,7 +157,7 @@ fviz_hmfa_ind <- function(X,  axes = c(1,2), geom=c("point", "text"), repel = FA
     # elements to be hidden
     hide <- .hide(invisible)
     # Plot
-    if(!hide$ind & "point" %in% geom) {
+    if(!hide$ind && "point" %in% geom) {
       # Partial point
       p <- p + ggpubrplus::geom_exec(geom_point, data = ind.partial,
                                  x = "x.partial", y = "y.partial", 
@@ -219,4 +219,3 @@ fviz_hmfa <- function(X, ...){
   # fviz_hmfa_ind_starplot(X, ...)
   fviz_hmfa_ind(X, ...)
 }
-

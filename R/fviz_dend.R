@@ -95,13 +95,11 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
                       sub = NULL, ggtheme = theme_classic(),  ...)
 {
   
-#  if(.is_col_palette(k_colors)) palette <- k_colors
- # else palette <- NULL
-  if(missing(k_colors) & !is.null(palette)) {
+  if(missing(k_colors) && !is.null(palette)) {
     k_colors <- palette
     palette <- NULL
   }
-  if(!color_labels_by_k & is.null(label_cols)) label_cols <- "black"
+  if(!color_labels_by_k && is.null(label_cols)) label_cols <- "black"
   type <- match.arg(type)
   circular <- type == "circular"
   phylogenic <- type == "phylogenic"
@@ -134,7 +132,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   else stop("Can't handle an object of class ", paste(class(x), collapse =", ") )
   if(is.null(method)) method <- ""
   else if(is.na(method)) method <- ""
-  if(is.null(sub) & method!="") sub = paste0("Method: ", method)
+  if(is.null(sub) && method != "") sub = paste0("Method: ", method)
   
   if(!is.null(dendextend::labels_cex(dend))) cex <- dendextend::labels_cex(dend)
   dend <- dendextend::set(dend, "labels_cex", cex) 
@@ -163,7 +161,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   if(max_height < 1) offset_labels <- -max_height/100
   else offset_labels <- -0.1
   
-  if(rectangle | circular){
+  if(rectangle || circular){
     p <- .ggplot_dend(dend, type = "rectangle", offset_labels = offset_labels, nodes = FALSE,
                       ggtheme = ggtheme, horiz = horiz, circular = circular, palette = palette,
                       labels = show_labels, label_cols = label_cols, 
@@ -175,18 +173,9 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
                                  palette = palette, repel = repel,
                                  ggtheme = ggtheme, phylo_layout = phylo_layout, ...)
   }
-#   base plot
-#   else{
-#     plot(dend,  type = type[1], xlab = xlab, ylab = ylab, main = main,
-#          leaflab = leaflab, sub = sub, horiz = horiz,...)
-#     if(rect & !is.null(k))
-#       dendextend::rect.dendrogram(dend, k=k, border = rect_border, 
-#                                   lty = rect_lty, lwd = lwd)
-#   }
-  
   # Add rectangle around clusters
-  if(circular | phylogenic | is.null(k)) rect <- FALSE
-  if(rect_fill & missing(rect_lty)) rect_lty = "blank"
+  if(circular || phylogenic || is.null(k)) rect <- FALSE
+  if(rect_fill && missing(rect_lty)) rect_lty = "blank"
   if(missing(lower_rect)) lower_rect = -(labels_track_height+0.5)
   if(rect){
     p <- p + .rect_dendrogram(dend, k = k, palette = rect_border, rect_fill = rect_fill,
@@ -245,15 +234,13 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
     x = graph_layout[graph_edges[,1],1], 
     y = graph_layout[graph_edges[,1],2],
     xend = graph_layout[graph_edges[,2],1],
-    yend = graph_layout[graph_edges[,2],2],
-    stringsAsFactors = TRUE
+    yend = graph_layout[graph_edges[,2],2]
   )
   
   data.labels <- data.frame(
     x = graph_layout[1:nobs,1], 
     y = graph_layout[1:nobs,2],
-    label = phylo_tree$tip.label,
-    stringsAsFactors = TRUE
+    label = phylo_tree$tip.label
   )
   data.labels <- data.labels[order(as.vector(data.labels$label)), ]
   
@@ -359,7 +346,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
                                 angle = "angle", hjust = "hjust", vjust = "vjust")
   }
   p <- ggpubrplus::ggpar(p, ggtheme = ggtheme, palette = palette, ...) + theme(axis.line = element_blank())
-  if (horiz & !circular) {
+  if (horiz && !circular) {
     p <- p + coord_flip() + scale_y_reverse()+
       theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
             axis.text.x = element_text())
@@ -450,7 +437,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
 .get_k <- function(dend, k = NULL, h = NULL){
   
   if (!dendextend::is.dendrogram(dend)) stop("x is not a dendrogram object.")
-  if (length(h) > 1L | length(k) > 1L) 
+  if (length(h) > 1L || length(k) > 1L) 
     stop("'k' and 'h' must be a scalar(i.e.: of length 1)")
   tree_heights <- dendextend::heights_per_k.dendrogram(dend)[-1]
   tree_order <- stats::order.dendrogram(dend)
@@ -473,7 +460,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
           ...) 
 {
   
-  if(missing(k_colors) & !is.null(palette)) k_colors <- palette
+  if(missing(k_colors) && !is.null(palette)) k_colors <- palette
   # value (should be between 0 to 1): proportion of the height 
   # our rect will be between the height needed for k and k+1 clustering.
   prop_k_height <-  0.5
@@ -511,7 +498,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
       prop_k_height + next_k_height * (1 - prop_k_height)
   }
   
-  df <- data.frame(xmin = unlist(xleft), ymin = unlist(ybottom), xmax = unlist(xright), ymax = unlist(ytop), stringsAsFactors = TRUE)
+  df <- data.frame(xmin = unlist(xleft), ymin = unlist(ybottom), xmax = unlist(xright), ymax = unlist(ytop))
   
   color <- k_colors
   # FIX: R 4.2.0+ deprecation - condition has length > 1 warning

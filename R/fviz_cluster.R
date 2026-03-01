@@ -126,7 +126,7 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
 
   # jitter -> repel (silent conversion)
   if (!is.null(extra_args$jitter)) {
-    if(!is.null(extra_args$jitter$width) | !is.null(extra_args$jitter$height) ) repel = TRUE
+    if(!is.null(extra_args$jitter$width) || !is.null(extra_args$jitter$height) ) repel = TRUE
   }
 
   # frame -> ellipse (silent conversion)
@@ -140,7 +140,7 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
   # object from cluster package
   if(inherits(object, c("partition", "hkmeans", "eclust"))) data <- object$data
   # Object from kmeans (stats package)
-  else if((inherits(object, "kmeans") & !inherits(object, "eclust"))| inherits(object, "dbscan")){
+  else if((inherits(object, "kmeans") && !inherits(object, "eclust")) || inherits(object, "dbscan")){
     if(is.null(data)) stop("data is required for plotting kmeans/dbscan clusters")
   } 
   # Object from mclust package
@@ -163,11 +163,11 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
     else data <- object$data
   }
   # Any obects containing data and cluster elements
-  else if(!is.null(object$data) & !is.null(object$cluster)){
+  else if(!is.null(object$data) && !is.null(object$cluster)){
     data <- object$data
     cluster <- object$cluster
   }
-  else stop("Can't handle an object of class ", class(object))
+  else stop("Can't handle an object of class ", paste(class(object), collapse = ", "))
   
   # Choose variables
   if(!is.null(choose.vars))
@@ -191,8 +191,8 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
     }
     # PCA is not performed
     else if(ncol(data) == 2){
-      ind <- as.data.frame(data, stringsAsFactors = TRUE)
-      ind <- cbind.data.frame(name = rownames(ind), ind, stringsAsFactors = TRUE)
+      ind <- as.data.frame(data)
+      ind <- cbind.data.frame(name = rownames(ind), ind)
       if(is.null(xlab)) xlab <- colnames(data)[1]
       if(is.null(ylab)) ylab <- colnames(data)[2]
       
@@ -208,14 +208,14 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
   else if(inherits(data, "HCPC")){
     ind <- res.hcpc$call$X[, c(axes, ncol(res.hcpc$call$X))]
     colnames(ind) <- c("Dim.1", "Dim.2", "clust")
-    ind <- cbind.data.frame(name = rownames(ind), ind, stringsAsFactors = TRUE)
+    ind <- cbind.data.frame(name = rownames(ind), ind)
     colnames(ind)[2:3] <-  c("x", "y")
     label_coord <- ind
     eig <- get_eigenvalue(res.hcpc$call$t$res)[axes,2]
     if(is.null(xlab)) xlab = paste0("Dim", axes[1], " (", round(eig[1], 1), "%)") 
     if(is.null(ylab)) ylab = paste0("Dim", axes[2], " (", round(eig[2], 1),"%)")
   }
-  else stop("A data of class ", class(data), " is not supported.")
+  else stop("A data of class ", paste(class(data), collapse = ", "), " is not supported.")
   
   # Plot data and labels
   # ++++++++++++++++++++++++
@@ -223,8 +223,8 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
   if("text" %in% geom) label = TRUE
   if(!("point" %in% geom)) pointsize = 0
   
-  plot.data <- cbind.data.frame(ind, cluster = cluster, stringsAsFactors = TRUE)
-  label_coord <- cbind.data.frame(label_coord, cluster = cluster, stringsAsFactors = TRUE)
+  plot.data <- cbind.data.frame(ind, cluster = cluster)
+  label_coord <- cbind.data.frame(label_coord, cluster = cluster)
   # Augment data
   if(inherits(object, "Mclust")){
     plot.data$uncertainty <- object$uncertainty
@@ -254,7 +254,7 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
   if("text" %in% geom) lab <- "name"
   if(is.null(shape)) shape <- "cluster"
   
-  if(inherits(object, "partition") & missing(show.clust.cent))
+  if(inherits(object, "partition") && missing(show.clust.cent))
     show.clust.cent <- FALSE # hide mean point for PAM, CLARA
   
   p <- ggpubrplus::ggscatter(plot.data, "x", "y",
@@ -304,4 +304,3 @@ fviz_cluster <- function(object, data = NULL, choose.vars = NULL, stand = TRUE,
     
   return(p)
 }
-

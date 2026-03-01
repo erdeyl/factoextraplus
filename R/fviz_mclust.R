@@ -74,12 +74,12 @@ fviz_mclust_bic <- function(object, model.names = NULL, shape = 19, color = "mod
   dnx <- dimnames(x)
   x <- matrix(as.vector(x), ncol = n)
   dimnames(x) <- dnx
-  x <- as.data.frame(x, stringsAsFactors = TRUE)
+  x <- as.data.frame(x)
   if (is.null(model.names)) 
     model.names <- dimnames(x)[[2]]
   x <- x[, model.names, drop = FALSE]
   # Add number of clusters
-  x <- cbind.data.frame(cluster = rownames(x), x, stringsAsFactors = TRUE)
+  x <- cbind.data.frame(cluster = rownames(x), x)
   # Convert wide to long format using base R (replaces tidyr::pivot_longer)
   value_cols <- setdiff(colnames(x), "cluster")
   x <- stats::reshape(x, direction = "long",

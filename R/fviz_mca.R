@@ -228,7 +228,7 @@ fviz_mca_var <- function(X, choice = c("var.cat", "mca.cor", "var", "quanti.sup"
   
   col.col.sup <- col.quanti.sup
   extra_args <- list(...)
-  if(missing(choice) & !is.null(extra_args$choix))
+  if(missing(choice) && !is.null(extra_args$choix))
     choice <- extra_args$choix
   
   # Define plot types
@@ -283,6 +283,5 @@ fviz_mca_biplot <- function(X,  axes = c(1,2), geom = c("point", "text"),
 fviz_mca <- function(X, ...){
   fviz_mca_biplot(X, ...)
 }
-
 
 

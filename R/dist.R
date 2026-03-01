@@ -74,8 +74,7 @@ fviz_dist<- function(dist.obj, order = TRUE, show_labels = TRUE, lab_size = NULL
   d <- data.frame(
     Var1 = rep(rownames(dist.obj), ncol(dist.obj)),
     Var2 = rep(colnames(dist.obj), each = nrow(dist.obj)),
-    value = as.vector(dist.obj),
-    stringsAsFactors = TRUE
+    value = as.vector(dist.obj)
   )
   # FIX: ggplot2 3.0.0+ deprecation - aes_string() replaced with aes() + .data pronoun
   # See: https://github.com/kassambara/factoextra/issues/190

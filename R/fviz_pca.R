@@ -252,7 +252,7 @@ fviz_pca_biplot <- function(X,  axes = c(1,2), geom = c("point", "text"),
   colnames(var)[2:3] <-  c("x", "y")
   
   pca.ind <- get_pca_ind(X)
-  ind <- data.frame(pca.ind$coord[, axes, drop=FALSE], stringsAsFactors = TRUE)
+  ind <- data.frame(pca.ind$coord[, axes, drop=FALSE])
   colnames(ind)<- c("x", "y")
   
   # Rescale variable coordinates based on biplot.type
@@ -300,7 +300,7 @@ fviz_pca_biplot <- function(X,  axes = c(1,2), geom = c("point", "text"),
   # Reason: individuals are in discrete color and variable in gradient colors, 
   # and we can't change the color (https://github.com/kassambara/factoextra/issues/42)
   ellipse.border.remove  <- FALSE
-  if(is.individuals.colored.by.variable & is.variables.colored.by.variable)
+  if(is.individuals.colored.by.variable && is.variables.colored.by.variable)
     ellipse.border.remove <- TRUE
 
   
@@ -331,4 +331,3 @@ fviz_pca_biplot <- function(X,  axes = c(1,2), geom = c("point", "text"),
   
   p+labs(title=title)
 }
-

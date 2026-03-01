@@ -63,7 +63,7 @@ get_pca_ind<-function(res.pca, ...){
   if(inherits(res.pca, c('PCA'))) ind <- res.pca$ind
   
   # ade4 package
-  else if(inherits(res.pca, 'pca') & inherits(res.pca, 'dudi')){
+  else if(inherits(res.pca, "pca") && inherits(res.pca, "dudi")){
     ind.coord <- res.pca$li
     # OPTIMIZED: get the original data using vectorized sweep() instead of apply()
     # sweep() is much faster than t(apply()) for element-wise row operations
@@ -89,11 +89,11 @@ get_pca_ind<-function(res.pca, ...){
                                 res.pca$center, res.pca$scale)
   }
   # ExPosition package
-  else if (inherits(res.pca, "expoOutput") & inherits(res.pca$ExPosition.Data,'epPCA')){
+  else if (inherits(res.pca, "expoOutput") && inherits(res.pca$ExPosition.Data, "epPCA")){
     res <- res.pca$ExPosition.Data
     ind <- list(coord = res$fi,  cos2 = res$ri, contrib = res$ci*100)
   }
-  else stop("An object of class : ", class(res.pca), 
+  else stop("An object of class : ", paste(class(res.pca), collapse = ", "), 
             " can't be handled by the function get_pca_ind()")
   
   class(ind)<-c("factoextra", "pca_ind")
@@ -108,7 +108,7 @@ get_pca_var<-function(res.pca){
   # FactoMineR package
   if(inherits(res.pca, c('PCA'))) var <- res.pca$var
   # ade4 package
-  else if(inherits(res.pca, 'pca') & inherits(res.pca, 'dudi')){
+  else if(inherits(res.pca, "pca") && inherits(res.pca, "dudi")){
     var <- .get_pca_var_results(res.pca$co)
   }
   # stats package
@@ -127,7 +127,7 @@ get_pca_var<-function(res.pca){
     var <- .get_pca_var_results(var.cor)
   }
   # ExPosition package
-  else if (inherits(res.pca, "expoOutput") & inherits(res.pca$ExPosition.Data,'epPCA')){
+  else if (inherits(res.pca, "expoOutput") && inherits(res.pca$ExPosition.Data, "epPCA")){
     res <- res.pca$ExPosition.Data
     data_matrix <- res$X
     factor_scores <- res$fi
@@ -135,7 +135,7 @@ get_pca_var<-function(res.pca){
     var.coord <- replace(var.coord, is.na(var.coord), 0)
     var <- list(coord = var.coord, cor = var.coord, cos2 = res$rj, contrib = res$cj*100)
   }
-  else stop("An object of class : ", class(res.pca), 
+  else stop("An object of class : ", paste(class(res.pca), collapse = ", "), 
             " can't be handled by the function get_pca_var()")
   class(var)<-c("factoextra", "pca_var")
   var

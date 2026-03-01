@@ -1,3 +1,26 @@
+# factoextraplus 1.2.0.5
+
+## Maintenance
+
+- Synchronize package-level examples and breaking-change documentation with the current `ggpubrplus` baseline (`>= 0.9.0.6`).
+- Regenerate manuals and package documentation metadata after release-prep updates.
+- Finalize release workflow checks and branch/release housekeeping for the 1.2.0.5 publication.
+
+# factoextraplus 1.2.0.4
+
+## Maintenance
+
+- Replace residual legacy extraction via `eval(parse(...))` with deterministic nested list access in supplementary-element helpers.
+- Refactor CA extractors (`ca` and `MASS::correspondence` backends) to vectorized `sweep()/rowSums()/colSums()` paths.
+- Vectorize Hopkins nearest-neighbor distance computation and harden input validation in `get_clust_tendency()`.
+- Add stricter `k` and scaling validations for `hcut()` and `hkmeans()`.
+- Clarify `hcut(isdiss = TRUE)` behavior with explicit dist-class validation.
+- Remove deprecated Travis CI config and add GitHub Actions `R-CMD-check` workflow.
+- Expand CI checks to a multi-platform/multi-R matrix (Linux/macOS/Windows; release/devel/oldrel).
+- Expand regression/smoke test coverage across clustering, CA backends, and visualization helpers.
+- Refresh README upstream-status narrative and update `ggpubrplus` pinning to `v0.9.0.6`.
+- Remove explicit `stringsAsFactors = TRUE` legacy settings and stale commented-out code blocks.
+
 # factoextraplus 1.2.0.3
 
 ## Maintenance

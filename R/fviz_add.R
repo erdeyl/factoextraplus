@@ -49,12 +49,12 @@ fviz_add <- function(ggp, df, axes = c(1,2), geom=c("point", "arrow"), color ="b
 
   extra_args <- list(...)
   if (!is.null(extra_args$jitter)) {
-    if(!is.null(extra_args$jitter$width) | !is.null(extra_args$jitter$height) ) repel = TRUE
+    if(!is.null(extra_args$jitter$width) || !is.null(extra_args$jitter$height) ) repel = TRUE
   }
   
   if(!inherits(df, c("data.frame", "matrix")))
      stop("df should be a data frame or a matrix")
-  if(!inherits(df, "data.frame")) df <- as.data.frame(df, stringsAsFactors = TRUE)
+  if(!inherits(df, "data.frame")) df <- as.data.frame(df)
      
   if(ncol(df) < 2)
     stop("df should have at least two columns (x and y coordinates)")
@@ -89,7 +89,7 @@ fviz_add <- function(ggp, df, axes = c(1,2), geom=c("point", "arrow"), color ="b
     p <- ggp
   }
   
-  if(addlabel | "text" %in% geom){
+  if(addlabel || "text" %in% geom){
     if(repel){
       p <- p + ggpubrplus::geom_exec(ggrepel::geom_text_repel, data = df, x = "x", y = "y", 
                                  label = "name", color = color, size = labelsize,
@@ -99,10 +99,6 @@ fviz_add <- function(ggp, df, axes = c(1,2), geom=c("point", "arrow"), color ="b
       p <- p + ggpubrplus::geom_exec(geom_text, data = df, x = "x", y = "y", 
                                  label = "name", color = color, size = labelsize,
                                  vjust=vjust, hjust = hjust, family = font.family)
-      
-#       p <- p + geom_text(data = df, aes_string("x", "y"), color = color,
-#                          label = df$name, size = labelsize, vjust=vjust, hjust = hjust)
-      
     } 
   }
   
