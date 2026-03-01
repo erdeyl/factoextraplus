@@ -1,5 +1,59 @@
 # Changelog
 
+## factoextraplus 1.2.0.6
+
+### Maintenance
+
+- Fix citation metadata drift and align `inst/CITATION` with the current
+  release metadata.
+- Eliminate residual RNG side effects in
+  [`eclust()`](https://erdeyl.github.io/factoextraplus/reference/eclust.md)
+  and internal deterministic plotting/data helpers.
+- Replace remaining runtime
+  [`sapply()`](https://rdrr.io/r/base/lapply.html) usage with
+  type-stable [`vapply()`](https://rdrr.io/r/base/lapply.html) paths.
+- Refresh examples/manuals/docs, rerun checks, and finalize release
+  housekeeping for 1.2.0.6.
+
+## factoextraplus 1.2.0.5
+
+### Maintenance
+
+- Synchronize package-level examples and breaking-change documentation
+  with the current `ggpubrplus` baseline (`>= 0.9.0.6`).
+- Regenerate manuals and package documentation metadata after
+  release-prep updates.
+- Finalize release workflow checks and branch/release housekeeping for
+  the 1.2.0.5 publication.
+
+## factoextraplus 1.2.0.4
+
+### Maintenance
+
+- Replace residual legacy extraction via `eval(parse(...))` with
+  deterministic nested list access in supplementary-element helpers.
+- Refactor CA extractors (`ca` and `MASS::correspondence` backends) to
+  vectorized `sweep()/rowSums()/colSums()` paths.
+- Vectorize Hopkins nearest-neighbor distance computation and harden
+  input validation in
+  [`get_clust_tendency()`](https://erdeyl.github.io/factoextraplus/reference/get_clust_tendency.md).
+- Add stricter `k` and scaling validations for
+  [`hcut()`](https://erdeyl.github.io/factoextraplus/reference/hcut.md)
+  and
+  [`hkmeans()`](https://erdeyl.github.io/factoextraplus/reference/hkmeans.md).
+- Clarify `hcut(isdiss = TRUE)` behavior with explicit dist-class
+  validation.
+- Remove deprecated Travis CI config and add GitHub Actions
+  `R-CMD-check` workflow.
+- Expand CI checks to a multi-platform/multi-R matrix
+  (Linux/macOS/Windows; release/devel/oldrel).
+- Expand regression/smoke test coverage across clustering, CA backends,
+  and visualization helpers.
+- Refresh README upstream-status narrative and update `ggpubrplus`
+  pinning to `v0.9.0.6`.
+- Remove explicit `stringsAsFactors = TRUE` legacy settings and stale
+  commented-out code blocks.
+
 ## factoextraplus 1.2.0.3
 
 ### Maintenance
@@ -69,10 +123,9 @@
 ### Package Rename
 
 This package is a modernized fork of `factoextra` renamed to
-`factoextraplus` to avoid conflicts while the upstream pull request
-(kassambara/factoextra#194) is pending. Once the PR is merged and the
-original `factoextra` is updated on CRAN, users can switch back to the
-original package.
+`factoextraplus` to avoid conflicts while pursuing upstream
+compatibility alignment. Historical note: the upstream pull request
+(kassambara/factoextra#194) was later closed unmerged on 2026-02-25.
 
 **Note:** This package depends on `ggpubrplus` (the modernized fork of
 `ggpubr`).

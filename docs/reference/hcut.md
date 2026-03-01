@@ -28,11 +28,13 @@ hcut(
 
 - k:
 
-  the number of clusters to be generated.
+  a single integer specifying the number of clusters to be generated.
+  Must be at least 2 and smaller than the number of observations.
 
 - isdiss:
 
-  logical value specifying wether x is a dissimilarity matrix.
+  logical value specifying whether `x` is already a dissimilarity
+  matrix. If TRUE, `x` must inherit from class `"dist"`.
 
 - hc_func:
 

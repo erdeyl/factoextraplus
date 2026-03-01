@@ -85,6 +85,15 @@ eclust <- function(x, FUNcluster = c("kmeans", "pam", "clara", "fanny", "hclust"
                    nboot = 100, verbose = interactive(),
                    seed = 123,  ...)
   {
+  has_seed <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+  if(has_seed) old_seed <- get(".Random.seed", envir = .GlobalEnv)
+  on.exit({
+    if(!has_seed && exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)){
+      rm(".Random.seed", envir = .GlobalEnv)
+    } else if(has_seed){
+      assign(".Random.seed", old_seed, envir = .GlobalEnv)
+    }
+  }, add = TRUE)
   set.seed(seed)
   data <- x
   if(stand) x <- scale(x)
@@ -165,6 +174,5 @@ eclust <- function(x, FUNcluster = c("kmeans", "pam", "clara", "fanny", "hclust"
   k <- .maxSE(gap, se, method = gap_maxSE$method, SE.factor = gap_maxSE$SE.factor)
   list(stat = gap_stat, k = k)
 }
-
 
 

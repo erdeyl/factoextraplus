@@ -260,9 +260,11 @@ fviz_mfa_axes <- function(X,  axes = c(1,2), geom=c("arrow", "text"),
   habillage <- "none"
   if(is.null(col.axes)){
     axes.names <- rownames(X$partial.axes$coord)
-    axes.groups <- sapply(axes.names, 
-                          function(x) gsub("^Dim[0-9]+\\.",  "", x, perl = TRUE)
-                          )
+    axes.groups <- vapply(
+      axes.names,
+      function(x) gsub("^Dim[0-9]+\\.",  "", x, perl = TRUE),
+      character(1)
+    )
     habillage <- as.factor(axes.groups)
   }
   fviz (X, element = "partial.axes", axes = axes, geom = geom,

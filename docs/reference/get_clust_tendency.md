@@ -32,8 +32,9 @@ get_clust_tendency(
 
 - n:
 
-  the number of points selected from sample space which is also the
-  number of points selected from the given sample(data).
+  a positive integer specifying the number of points selected from
+  sample space and from the observed data. Must be smaller than the
+  number of complete observations.
 
 - graph:
 
@@ -47,8 +48,9 @@ get_clust_tendency(
 
 - seed:
 
-  an integer specifying the seed for random number generator. Specify
-  seed for reproducible results.
+  an integer seed for reproducibility, or NULL to use the current RNG
+  stream. When non-NULL, the function restores the caller RNG state on
+  exit.
 
 ## Value
 

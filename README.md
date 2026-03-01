@@ -87,17 +87,16 @@ remotes::install_github("erdeyl/factoextraplus")
 - Hopkins statistic formula corrections (Wright 2022)
 - `facto_summarize()` axes parameter handling
 
-## Latest Maintenance (1.2.0.5)
+## Latest Maintenance (1.2.0.6)
 
-- Vectorized CA extraction internals for `ca` and `MASS::correspondence`
-  backends.
-- Vectorized Hopkins nearest-neighbor distances with stricter input
-  validation.
-- Added validation guards for invalid `k` and unstable scaling paths in
-  `hcut()`/`hkmeans()`.
-- Added GitHub Actions `R-CMD-check` CI and removed legacy Travis CI
-  config.
-- Expanded test suite with regression and visualization smoke tests.
+- Synchronized stale `inst/CITATION` metadata with the current release
+  version and dependency baseline.
+- Removed residual global RNG side effects in `eclust()` and internal
+  deterministic helper paths.
+- Replaced remaining runtime `sapply()` calls with type-stable
+  `vapply()` implementations.
+- Refreshed examples/manuals/documentation and reran full check/release
+  workflow.
 
 ## Citation
 
@@ -110,7 +109,7 @@ package version 1.0.7. <https://CRAN.R-project.org/package=factoextra>
 **This fork:** \> Erdey L (2026). Supplementary compatibility updates
 for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support
 (ggplot2 ≥4.0.2, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the
-original package. R package version 1.2.0.5.
+original package. R package version 1.2.0.6.
 <https://doi.org/10.5281/zenodo.18131494>
 
 ## Original Package

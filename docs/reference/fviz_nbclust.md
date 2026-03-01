@@ -98,7 +98,11 @@ fviz_gap_stat(
 
 - ...:
 
-  optionally further arguments for FUNcluster()
+  optionally further arguments: arguments for FUNcluster() in
+  "wss"/"silhouette" modes; arguments for
+  [`clusGap`](https://rdrr.io/pkg/cluster/man/clusGap.html)() in
+  "gap_stat" mode. A `maxSE` list can also be supplied in "gap_stat"
+  mode and is forwarded to `fviz_gap_stat()`.
 
 - gap_stat:
 

@@ -224,8 +224,7 @@ fviz_dend <- function(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,  s
   graph_net <- igraph::graph.edgelist(graph_edges)
   
   # extract layout (x-y coords)
-  set.seed(123)
-  graph_layout = layout_func(graph_net)
+  graph_layout <- .with_preserved_seed(123, layout_func(graph_net))
   # number of observations
   nobs <- length(hc$labels)
   
