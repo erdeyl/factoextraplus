@@ -22,7 +22,8 @@ hkmeans_tree(hkmeans, rect.col = NULL, ...)
 \arguments{
 \item{x}{a numeric matrix, data frame or vector}
 
-\item{k}{the number of clusters to be generated}
+\item{k}{a single integer specifying the number of clusters to be generated.
+Must be at least 2 and smaller than \code{nrow(x)}.}
 
 \item{hc.metric}{the distance measure to be used. Possible values are "euclidean", "maximum", "manhattan", 
 "canberra", "binary" or "minkowski" (see ?dist).}

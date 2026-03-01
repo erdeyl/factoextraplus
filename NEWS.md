@@ -1,3 +1,15 @@
+# factoextraplus 1.2.0.4
+
+## Maintenance
+
+- Replace residual legacy extraction via `eval(parse(...))` with deterministic nested list access in supplementary-element helpers.
+- Refactor CA extractors (`ca` and `MASS::correspondence` backends) to vectorized `sweep()/rowSums()/colSums()` paths.
+- Vectorize Hopkins nearest-neighbor distance computation and harden input validation in `get_clust_tendency()`.
+- Add stricter `k` and scaling validations for `hcut()` and `hkmeans()`.
+- Remove deprecated Travis CI config and add GitHub Actions `R-CMD-check` workflow.
+- Expand regression/smoke test coverage across clustering, CA backends, and visualization helpers.
+- Remove explicit `stringsAsFactors = TRUE` legacy settings and stale commented-out code blocks.
+
 # factoextraplus 1.2.0.3
 
 ## Maintenance

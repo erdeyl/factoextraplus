@@ -61,7 +61,11 @@ using gap statistic.}
 \item{print.summary}{logical value. If true, the optimal number of clusters 
 are printed in fviz_nbclust().}
 
-\item{...}{optionally further arguments for FUNcluster()}
+\item{...}{optionally further arguments:
+arguments for FUNcluster() in "wss"/"silhouette" modes; arguments for
+\code{\link[cluster]{clusGap}}() in "gap_stat" mode. A \code{maxSE} list
+can also be supplied in "gap_stat" mode and is forwarded to
+\code{fviz_gap_stat()}.}
 
 \item{gap_stat}{an object of class "clusGap" returned by the function
 clusGap() [in cluster package]}

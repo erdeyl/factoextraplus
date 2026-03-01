@@ -103,9 +103,9 @@ get_eig<-function(X){
   if(inherits(X, c('PCA', 'CA', 'MCA', 'FAMD', 'MFA', 'HMFA', 'sPCA', 'sCA', 'sMCA', 'sMFA', 'sHMFA'))) eig <- X$eig
   else{
     # stats package
-    if(inherits(X, 'prcomp') | inherits(X, 'princomp')) eig <- (X$sdev)^2
+    if(inherits(X, "prcomp") || inherits(X, "princomp")) eig <- (X$sdev)^2
     # ade4 package
-    else if(inherits(X, c('pca', 'coa', 'acm')) & inherits(X, 'dudi')) eig <- X$eig
+    else if(inherits(X, c("pca", "coa", "acm")) && inherits(X, "dudi")) eig <- X$eig
     # ca package
     else if(inherits(X, 'ca'))  eig <- X$sv^2
     else if(inherits(X, 'mjca')) eig <- X$inertia.e
@@ -113,7 +113,7 @@ get_eig<-function(X){
     else if(inherits(X, 'correspondence'))  eig <- X$cor^2
     # ExPosition package
     else if (inherits(X, "expoOutput")) eig <- X$ExPosition.Data$eigs
-    else stop("An object of class : ", class(X), 
+    else stop("An object of class : ", paste(class(X), collapse = ", "), 
               " can't be handled by the function get_eigenvalue()")
     
     variance <- eig*100/sum(eig)

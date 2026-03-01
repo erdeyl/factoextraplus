@@ -17,3 +17,4 @@
 ^DEPENDENCY_AUDIT\.md$
 ^tools/dependency-audit$
 ^\.github$
+^Rplots\.pdf$

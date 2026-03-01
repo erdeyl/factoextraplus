@@ -38,6 +38,20 @@ NULL
  return(length(pal) == 1 && pal[1] %in% all_pals)
 }
 
+.class_label <- function(x){
+  paste(class(x), collapse = ", ")
+}
+
+.extract_nested_element <- function(x, element){
+  parts <- strsplit(element, "$", fixed = TRUE)[[1]]
+  out <- x
+  for(part in parts){
+    if(is.null(out)) return(NULL)
+    out <- out[[part]]
+  }
+  out
+}
+
 # Check and get the class of the output of a factor analysis
 # ++++++++++++++++++++++++++++
 # X: an output of factor analysis (PCA, CA, MCA, MFA) 
@@ -46,7 +60,7 @@ NULL
   
   if(inherits(X, c('PCA', 'princomp', 'prcomp')))
     facto_class ="PCA"
-  else if(inherits(X, 'pca') & inherits(X, 'dudi'))
+  else if(inherits(X, "pca") && inherits(X, "dudi"))
     facto_class ="PCA"
   else if(inherits(X, c("CA", "ca", "coa", "correspondence"))) facto_class="CA"
   else if(inherits(X, c("MCA", "acm"))) facto_class = "MCA"
@@ -58,7 +72,7 @@ NULL
    else if (inherits(X$ExPosition.Data,'epPCA')) facto_class="PCA"
    else if (inherits(X$ExPosition.Data,'epMCA')) facto_class="MCA"
   }
-  else stop("An object of class : ", class(X), 
+  else stop("An object of class : ", .class_label(X), 
             " can't be handled by factoextra")   
 }
 
@@ -75,17 +89,16 @@ NULL
 .get_supp <- function(X, element = NULL, axes = 1:2, 
                       result = c("coord", "cos2"), select = NULL){
   
-  if(inherits(X, "MFA") & element == "group")
+  if(inherits(X, "MFA") && element == "group")
     elmt <- .get_mfa_group_sup(X)
   else if(inherits(X, c("CA", "PCA", "MCA", "MFA", "HMFA", "FAMD"))) {
-    exprs <- paste0("X$", element)
-    elmt <- eval(parse(text=exprs ))
+    elmt <- .extract_nested_element(X, element)
   }
   else if(inherits(X, "ca")){
     if(element == "col.sup") elmt <- .get_ca_col_sup(X)
     else if(element == "row.sup") elmt <- .get_ca_row_sup(X)
   }
-  else stop("An object of class : ", class(X), 
+  else stop("An object of class : ", .class_label(X), 
             " can't be handled by the function .get_supp()")
   
   # summarize the result
@@ -104,19 +117,19 @@ NULL
     
     # 1.Extract the coordinates x, y and coord
     if("coord" %in% result){
-      dd <- data.frame(elmt$coord[, axes, drop=FALSE], stringsAsFactors = TRUE)
-      coord <- apply(dd^2, 1, sum) # x^2 + y2 + ...
+      dd <- data.frame(elmt$coord[, axes, drop=FALSE])
+      coord <- rowSums(dd^2, na.rm = TRUE) # x^2 + y2 + ...
       res <- cbind(dd, coord = coord)
     }
     
     # 2. Extract the cos2
     if("cos2" %in% result){
-      cos2 <- data.frame(elmt$cos2[, axes, drop=FALSE], stringsAsFactors = TRUE)
-      if(length(axes) > 1) cos2 <- apply(cos2, 1, sum, na.rm=TRUE)
+      cos2 <- data.frame(elmt$cos2[, axes, drop=FALSE])
+      if(length(axes) > 1) cos2 <- rowSums(cos2, na.rm = TRUE)
       res <- cbind(res, cos2 = cos2)
     }
     
-    res <- cbind.data.frame(name =rownames(elmt$coord), res, stringsAsFactors = TRUE)
+    res <- cbind.data.frame(name =rownames(elmt$coord), res)
     
     # selection of variables
     if(!is.null(select)){
@@ -415,8 +428,8 @@ NULL
   }
   # Mass package
   else if(inherits(res.ca, "correspondence")){
-    row.sum <- apply(res.ca$Freq, 1, sum)
-    col.sum <- apply(res.ca$Freq, 2, sum)
+    row.sum <- rowSums(res.ca$Freq)
+    col.sum <- colSums(res.ca$Freq)
     n <- sum(res.ca$Freq)
     if(element =="row") mass <- row.sum/n
     else if(element =="col") mass <- col.sum/n
@@ -426,7 +439,7 @@ NULL
     if(element =="row") mass <- res.ca$ExPosition.Data$M
     else if(element =="col") mass <- res.ca$ExPosition.Data$W
   }
-  else stop("An object of class : ", class(res.ca), 
+  else stop("An object of class : ", .class_label(res.ca), 
             " can't be handled") 
   return(mass)
 }
@@ -439,7 +452,7 @@ NULL
     centered <- is.numeric(res.pca$center)
     scaled <- is.numeric(res.pca$scale)
     
-    if(centered & scaled) 
+    if(centered && scaled) 
       t(t(res.pca$x %*% t(res.pca$rotation)) * res.pca$scale + res.pca$center)
     else if(centered)
       t(t(res.pca$x %*% t(res.pca$rotation)) + res.pca$center)
@@ -456,7 +469,7 @@ NULL
               "scores = TRUE.")
   }
   
-  else stop("Can't handle an object of class ", class(res.pca))
+  else stop("Can't handle an object of class ", .class_label(res.pca))
 }
 
 
@@ -512,18 +525,16 @@ NULL
       name <- filter$name
       common <- intersect(name, d$name)
       diff <- setdiff(name, d$name)
-      #if(check & length(common) == 0) stop("Can't find the specified names")
-      # if(check & length(diff)!=0) warning("Can't find the the following name(s): ", diff)
       d <- d[common, , drop = FALSE]
     }
     
     # Filter by cos2
-    if(!is.null(filter$cos2) & nrow(d) >= 1){
+    if(!is.null(filter$cos2) && nrow(d) >= 1){
       # case 1 cos2 is in [0, 1]
       # rows with cos2 > value are selected
-      if(0 <= filter$cos2 & filter$cos2 <= 1){
+      if(0 <= filter$cos2 && filter$cos2 <= 1){
         d <- d[which(d$cos2 >= filter$cos2), , drop = FALSE]
-        if(check & nrow(d)==0)
+        if(check && nrow(d)==0)
           stop("There are no observations with cos2 >=", filter$cos2, 
                ". Please, change the value of cos2 and try again.")
       }
@@ -536,7 +547,7 @@ NULL
     }
     
     # Filter by contrib: the top rows are selected 
-    if(!is.null(filter$contrib) & nrow(d) >= 1){
+    if(!is.null(filter$contrib) && nrow(d) >= 1){
       contrib <- round(filter$contrib)
       if(contrib < 1) stop("The value of the argument contrib >", 1)
       d <- d[order(d$contrib, decreasing = TRUE), , drop = FALSE]
@@ -566,7 +577,7 @@ NULL
   
  
   # top elements
-  if(top!=Inf & top < length(x))
+  if(top != Inf && top < length(x))
     x <- sort(x, decreasing=TRUE)[1:top]
   # sorting
   if(sort.value[1]=="desc") x <- sort(x, decreasing = TRUE)
@@ -575,7 +586,7 @@ NULL
   if(is.null(names(x))) names(x) <- seq_along(x)
   
   #data frame for ggplot2
-  d <- cbind.data.frame(name = factor(names(x), levels = names(x)), val = x, stringsAsFactors = TRUE)
+  d <- cbind.data.frame(name = factor(names(x), levels = names(x)), val = x)
   
   # plot
   # FIX: ggplot2 3.0.0+ deprecation - aes_string() replaced with aes() + .data pronoun
@@ -659,7 +670,7 @@ NULL
                "col", "col.sup" # col - ca
                )
   for(el in element){
-    if(label[1] == "all" | el %in% label) lab[[el]] <- TRUE
+    if(label[1] == "all" || el %in% label) lab[[el]] <- TRUE
     else lab[[el]] <- FALSE
   }
   lab
@@ -720,7 +731,7 @@ NULL
   x5 <- runif(50, min = -1.5, 1.5)
   y5 <- rnorm(50, -1, 1)
   shape <- c(shape, rep(6, 50))
-  multishapes <- data.frame(x = c(x1, x2, x3, x4, x5, x6), y = c(y1, y2, y3, y4, y5, y6), shape = shape, stringsAsFactors = TRUE)
+  multishapes <- data.frame(x = c(x1, x2, x3, x4, x5, x6), y = c(y1, y2, y3, y4, y5, y6), shape = shape)
   multishapes
 }
 
@@ -742,8 +753,8 @@ NULL
 # ind: individuals data generated by facto_summarize()
 # grp: group column index or factor
 .add_ind_groups <- function(X, ind, grp){
-  if(inherits(X, c("PCA", "MCA", "MFA", "FAMD")) & length(grp) > 1){
-    if(is.numeric(grp) | is.character(grp)){
+  if(inherits(X, c("PCA", "MCA", "MFA", "FAMD")) && length(grp) > 1){
+    if(is.numeric(grp) || is.character(grp)){
       data <- X$call$X
       # Only treat grp as column selectors when it isn't a per-row grouping vector.
       if(length(grp) != nrow(ind)){
@@ -756,7 +767,7 @@ NULL
             stop("Some grouping variable names are not present in the original data.")
           }
         }
-        grp <- as.data.frame(data[rownames(ind), grp, drop = FALSE], stringsAsFactors = TRUE)
+        grp <- as.data.frame(data[rownames(ind), grp, drop = FALSE])
       }
     }
     #if(!is.null(X$call$ind.sup)) grp <- grp[-X$call$ind.sup, , drop = FALSE]
@@ -766,7 +777,7 @@ NULL
   if(inherits(grp, c("matrix", "data.frame"))){
     if(nrow(ind) != nrow(grp)) stop("The length of grouping variables ",
                                     "should be the same as the number of individuals.")
-    ind <- cbind.data.frame(ind, grp, stringsAsFactors = TRUE)
+    ind <- cbind.data.frame(ind, grp)
     ind[, colnames(grp)] <- apply(ind[, colnames(grp)], 2, as.character)
     # Convert wide to long format using base R (replaces tidyr::pivot_longer)
     grp_cols <- colnames(grp)
@@ -784,11 +795,11 @@ NULL
   }
   else{
     # X is from FactoMineR outputs
-    if(inherits(X, c("PCA", "MCA", "MFA", "FAMD")) & length(habillage) == 1){
+    if(inherits(X, c("PCA", "MCA", "MFA", "FAMD")) && length(habillage) == 1){
       data <- X$call$X
       if (is.numeric(habillage)) name.quali <- colnames(data)[habillage]
       else name.quali <- habillage 
-      ind <- cbind.data.frame(data[rownames(ind),name.quali], ind, stringsAsFactors = TRUE)
+      ind <- cbind.data.frame(data[rownames(ind),name.quali], ind)
       colnames(ind)[1]<-name.quali
       if(!inherits(ind[, 1], "factor")) ind[, 1]<-as.factor(ind[,1])
     }
@@ -798,7 +809,7 @@ NULL
              "from the length of the factor habillage. Please, remove the supplementary ",
              "individuals in the variable habillage.")
       name.quali <- "Groups"
-      ind <- cbind.data.frame(Groups = habillage, ind, stringsAsFactors = TRUE)
+      ind <- cbind.data.frame(Groups = habillage, ind)
       if(!inherits(ind[, 1], "factor")) ind[, 1] <- as.factor(ind[,1])
     }
   }
@@ -851,7 +862,7 @@ NULL
 
   is.group.sup <- rep(FALSE, length(group.sizes))
   if(!is.null(X$call$num.group.sup)) is.group.sup[X$call$num.group.sup] <- TRUE
-  var.is.numeric <- sapply(data[, seq_along(vars), drop = FALSE], is.numeric)
+  var.is.numeric <- vapply(data[, seq_along(vars), drop = FALSE], is.numeric, logical(1))
 
   var.type <- character(length(vars))
   for(i in seq_along(vars)){
@@ -913,7 +924,7 @@ NULL
 }
 
 .split_partial_names <- function(names, group.names = NULL){
-  if(length(names) == 0) return(data.frame(name = character(0), group.name = character(0), stringsAsFactors = TRUE))
+  if(length(names) == 0) return(data.frame(name = character(0), group.name = character(0)))
   name.part <- rep(NA_character_, length(names))
   group.part <- rep(NA_character_, length(names))
 
@@ -944,7 +955,7 @@ NULL
     group.part[fallback] <- ifelse(split.pos > 0, substr(names[fallback], split.pos + 1, nchar(names[fallback])), NA_character_)
   }
 
-  data.frame(name = name.part, group.name = group.part, stringsAsFactors = TRUE)
+  data.frame(name = name.part, group.name = group.part)
 }
 
 #' Map FactoMineR category labels to legacy naming patterns

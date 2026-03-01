@@ -14,15 +14,17 @@ NULL
 #' @param data a numeric data frame or matrix. Columns are variables and rows 
 #'   are samples. Computation are done on rows (samples) by default. If you want
 #'   to calculate Hopkins statistic on variables, transpose the data before.
-#' @param n the number of points selected from sample space which is also the 
-#'   number of points selected from the given sample(data).
+#' @param n a positive integer specifying the number of points selected from
+#'   sample space and from the observed data. Must be smaller than the number
+#'   of complete observations.
 #' @param graph logical value; if TRUE the ordered dissimilarity image (ODI) is 
 #'   shown.
 #' @param gradient a list containing three elements specifying the colors for 
 #'   low, mid and high values in the ordered dissimilarity image. The element 
 #'   "mid" can take the value of NULL.
-#' @param seed an integer specifying the seed for random number generator. 
-#'   Specify seed for reproducible results.
+#' @param seed an integer seed for reproducibility, or NULL to use the current
+#'   RNG stream. When non-NULL, the function restores the caller RNG state on
+#'   exit.
 #' @details
 #' 
 #' \strong{Hopkins statistic}: If the value of Hopkins statistic is close to
@@ -75,17 +77,34 @@ get_clust_tendency <- function(data, n, graph = TRUE,
                                gradient = list(low = "red", mid = "white", high = "blue"),
                                seed = 123) 
 {
-  
-  set.seed(seed)
   if (is.data.frame(data)) 
     data <- as.matrix(data)
   if (!(is.matrix(data))) 
     stop("data must be data.frame or matrix")
-  if (n >= nrow(data))
-    stop("n must be no larger than num of samples")
+  if (!is.numeric(data))
+    stop("data must contain numeric values only")
+  if (!is.numeric(n) || length(n) != 1L || is.na(n) || n < 1 || n %% 1 != 0)
+    stop("n must be a positive integer")
 
   data <- na.omit(data)
+  if (nrow(data) < 2)
+    stop("data must contain at least two complete rows")
+  if (n >= nrow(data))
+    stop("n must be no larger than num of samples")
   rownames(data) <- paste0("r", seq_len(nrow(data)))
+
+  if (!is.null(seed)) {
+    has_seed <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+    if (has_seed) old_seed <- get(".Random.seed", envir = .GlobalEnv)
+    on.exit({
+      if (!has_seed && exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
+        rm(".Random.seed", envir = .GlobalEnv)
+      } else if (has_seed) {
+        assign(".Random.seed", old_seed, envir = .GlobalEnv)
+      }
+    }, add = TRUE)
+    set.seed(seed)
+  }
 
   if (isTRUE(getOption("factoextraplus.warn_hopkins", TRUE))) {
     warning(
@@ -103,31 +122,33 @@ get_clust_tendency <- function(data, n, graph = TRUE,
   }
   
   # Hopkins statistic
-  p <- apply(data, 2, function(x, n){runif(n, min(x), max(x))}, n)
+  # Sample synthetic points uniformly within the observed ranges.
+  mins <- vapply(seq_len(ncol(data)), function(j) min(data[, j]), numeric(1))
+  maxs <- vapply(seq_len(ncol(data)), function(j) max(data[, j]), numeric(1))
+  p <- vapply(seq_len(ncol(data)), function(j) {
+    runif(n, min = mins[j], max = maxs[j])
+  }, numeric(n))
 
-  
-  # Use sample() for uniform row selection (fixes biased sampling from PR #133)
+  # Use sample() for uniform row selection (fixes biased sampling from PR #133).
   k <- sample(seq_len(nrow(data)), n, replace = TRUE)
-  q <- as.matrix(data[k, ])
-  distp = rep(0, nrow(data))
-  distq = 0
-  minp = rep(0, n)
-  minq = rep(0, n)
-  for (i in seq_len(n)) {
-    distp[1] <- stats::dist(rbind(p[i, ], data[1, ]))
-    minqi <- stats::dist(rbind(q[i, ], data[1, ]))
-    for (j in seq_len(nrow(data))[-1]) {
-      distp[j] <- stats::dist(rbind(p[i, ], data[j, ]))
-      error <- q[i, ] - data[j, ]
-      if (sum(abs(error)) != 0) {
-        distq <- stats::dist(rbind(q[i, ], data[j, ]))
-        if (distq < minqi) 
-          minqi <- distq
-      }
-    }
-    minp[i] <- min(distp)
-    minq[i] <- minqi
+  q <- data[k, , drop = FALSE]
+
+  euclid_sq <- function(a, b){
+    a_sq <- rowSums(a^2)
+    b_sq <- rowSums(b^2)
+    # Squared Euclidean distances between all rows of a and b.
+    pmax(outer(a_sq, b_sq, "+") - 2 * tcrossprod(a, b), 0)
   }
+
+  d2p <- euclid_sq(p, data)
+  minp <- sqrt(apply(d2p, 1, min))
+
+  d2q <- euclid_sq(q, data)
+  # Exclude self/identical observations from nearest-neighbor lookup.
+  d2q[d2q <= .Machine$double.eps] <- Inf
+  minq_sq <- apply(d2q, 1, min)
+  minq_sq[!is.finite(minq_sq)] <- 0
+  minq <- sqrt(minq_sq)
   
   # Hopkins statistic formula fix: use exponent d=D (dimensionality) as per
 

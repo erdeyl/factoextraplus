@@ -19,7 +19,8 @@ hcut(
 \arguments{
 \item{x}{a numeric matrix, numeric data frame or a dissimilarity matrix.}
 
-\item{k}{the number of clusters to be generated.}
+\item{k}{a single integer specifying the number of clusters to be generated.
+Must be at least 2 and smaller than the number of observations.}
 
 \item{isdiss}{logical value specifying wether x is a dissimilarity matrix.}
 

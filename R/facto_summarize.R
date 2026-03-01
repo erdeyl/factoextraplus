@@ -141,7 +141,7 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
   # OPTIMIZATION: Replaced apply(dd^2, 1, sum) with rowSums(dd^2)
   # rowSums() is significantly faster than apply() for row summation
   if("coord" %in% result){
-    dd <- data.frame(elmt$coord[, axes, drop=FALSE], stringsAsFactors = TRUE)
+    dd <- data.frame(elmt$coord[, axes, drop=FALSE])
     coord <- rowSums(dd^2) # x^2 + y2 + ... (vectorized)
     res = cbind(dd, coord = coord)
   }
@@ -181,20 +181,20 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
   # OPTIMIZATION: Replaced lapply/do.call with vectorized string operations
   # and apply() with rowSums()
   if("coord.partial" %in% result){
-    dd <- data.frame(elmt$coord.partiel[, axes, drop=FALSE], stringsAsFactors = TRUE)
+    dd <- data.frame(elmt$coord.partiel[, axes, drop=FALSE])
     rnames <- rownames(dd)
     group.names <- .mfa_group_names(X)
     groupnames <- .split_partial_names(rnames, group.names)
     # OPTIMIZED: Use rowSums instead of apply
     coord.partial <- rowSums(dd^2)
-    res.partial <- data.frame(groupnames, dd, coord.partial, stringsAsFactors = TRUE)
+    res.partial <- data.frame(groupnames, dd, coord.partial)
   }
   
   # 5. Extract the coordinates x, y and coord partial - HMFA
   # OPTIMIZATION: Pre-allocate vectors and use rowSums instead of apply
   if("coord.node.partial" %in% result){
     # Select hierarchical node
-    node <- as.data.frame(elmt[[node.level]], stringsAsFactors = TRUE)
+    node <- as.data.frame(elmt[[node.level]])
     n_rows <- nrow(node)
     n_groups <- length(group.names)
     n_axes <- length(axes)
@@ -217,11 +217,11 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
     }
 
     colnames(dd) <- paste0("Dim", axes)
-    dd <- as.data.frame(dd, stringsAsFactors = TRUE)
+    dd <- as.data.frame(dd)
 
     # OPTIMIZED: Use rowSums instead of apply
     coord.partial <- rowSums(dd^2)
-    res.partial <- data.frame(group.name = dim.group, name, dd, coord.partial, stringsAsFactors = TRUE)
+    res.partial <- data.frame(group.name = dim.group, name, dd, coord.partial)
   }
   
   if("coord.node.partial" %in% result) 
@@ -230,7 +230,7 @@ facto_summarize <- function(X, element, node.level = 1, group.names,
     name <- rownames(elmt$coord)
     if(is.null(name)) name <- as.character(seq_len(nrow(elmt$coord)))
     name <- as.character(name)
-    res <- cbind.data.frame(name = name, res, stringsAsFactors = TRUE)
+    res <- cbind.data.frame(name = name, res)
     rownames(res) <- name
     if(!is.null(select) && !is.null(select$name) && .factominer_needs_category_map(facto_class, element)){
       select$name <- map_factominer_legacy_names(X, select$name, element = element)

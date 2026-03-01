@@ -17,8 +17,9 @@ get_clust_tendency(
 are samples. Computation are done on rows (samples) by default. If you want
 to calculate Hopkins statistic on variables, transpose the data before.}
 
-\item{n}{the number of points selected from sample space which is also the 
-number of points selected from the given sample(data).}
+\item{n}{a positive integer specifying the number of points selected from
+sample space and from the observed data. Must be smaller than the number
+of complete observations.}
 
 \item{graph}{logical value; if TRUE the ordered dissimilarity image (ODI) is 
 shown.}
@@ -27,8 +28,9 @@ shown.}
 low, mid and high values in the ordered dissimilarity image. The element 
 "mid" can take the value of NULL.}
 
-\item{seed}{an integer specifying the seed for random number generator. 
-Specify seed for reproducible results.}
+\item{seed}{an integer seed for reproducibility, or NULL to use the current
+RNG stream. When non-NULL, the function restores the caller RNG state on
+exit.}
 }
 \value{
 A list containing the elements:

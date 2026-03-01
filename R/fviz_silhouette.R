@@ -82,11 +82,11 @@
 fviz_silhouette <- function(sil.obj, label = FALSE, print.summary = TRUE, ...){
   
   if(inherits(sil.obj, c("eclust", "hcut", "pam", "clara", "fanny"))){
-    df <- as.data.frame(sil.obj$silinfo$widths, stringsAsFactors = TRUE)
+    df <- as.data.frame(sil.obj$silinfo$widths)
   }
   else if(inherits(sil.obj, "silhouette"))
-    df <- as.data.frame(sil.obj[, 1:3], stringsAsFactors = TRUE)
-  else stop("Don't support an oject of class ", class(sil.obj))
+    df <- as.data.frame(sil.obj[, 1:3])
+  else stop("Don't support an oject of class ", paste(class(sil.obj), collapse = ", "))
   
   # order by cluster and by sil_width
   df <- df[order(df$cluster, -df$sil_width), ]
@@ -116,10 +116,9 @@ fviz_silhouette <- function(sil.obj, label = FALSE, print.summary = TRUE, ...){
   ave <- tapply(df$sil_width, df$cluster, mean)
   n <- tapply(df$cluster, df$cluster, length)
   sil.sum <- data.frame(cluster = names(ave), size = n,
-                      ave.sil.width = round(ave,2), stringsAsFactors = TRUE)
+                      ave.sil.width = round(ave,2))
   if(print.summary) print(sil.sum)
   
   p
 }
-
 

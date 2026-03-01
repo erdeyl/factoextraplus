@@ -12,7 +12,8 @@
 #' }
 #' 
 #' @param x a numeric matrix, data frame or vector
-#' @param k the number of clusters to be generated
+#' @param k a single integer specifying the number of clusters to be generated.
+#'   Must be at least 2 and smaller than \code{nrow(x)}.
 #' @param hc.metric the distance measure to be used. Possible values are "euclidean", "maximum", "manhattan", 
 #' "canberra", "binary" or "minkowski" (see ?dist).
 #' @param hc.method the agglomeration method to be used. Possible values include "ward.D", "ward.D2", "single", 
@@ -69,6 +70,14 @@
 #' @export
 hkmeans <- function(x, k, hc.metric = "euclidean", hc.method = "ward.D2",
                     iter.max = 10, km.algorithm = "Hartigan-Wong"){
+  if(!inherits(x, c("matrix", "data.frame")))
+    stop("x must be a matrix or data.frame")
+  if(nrow(x) < 2 || ncol(x) < 1)
+    stop("x must have at least 2 rows and 1 column")
+  if(!is.numeric(k) || length(k) != 1L || is.na(k) || k %% 1 != 0 || k < 2)
+    stop("k must be a single integer >= 2")
+  if(k >= nrow(x))
+    stop("k must be smaller than the number of rows in x")
   
   res.hc <- stats::hclust(stats::dist(x, method = hc.metric), method = hc.method)
   grp <- stats::cutree(res.hc, k = k)
@@ -119,6 +128,4 @@ hkmeans_tree <- function(hkmeans, rect.col = NULL, ...)
   k <- length(unique(res.hk$cluster))
   stats::rect.hclust(res.hk$hclust, k = k, border = rect.col)
 }
-
-
 

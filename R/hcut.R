@@ -6,7 +6,8 @@ NULL
 #' Computes hierarchical clustering (hclust, agnes, diana) and cut the tree into k clusters. It also accepts 
 #' correlation based distance measure methods such as "pearson", "spearman" and "kendall".
 #' @param x a numeric matrix, numeric data frame or a dissimilarity matrix.
-#' @param k the number of clusters to be generated.
+#' @param k a single integer specifying the number of clusters to be generated.
+#'   Must be at least 2 and smaller than the number of observations.
 #' @param hc_method the agglomeration method to be used (?hclust) for hclust() and agnes(): 
 #' "ward.D", "ward.D2", "single", "complete", "average", ...
 #' @param hc_metric character string specifying the metric to be used for calculating 
@@ -63,13 +64,22 @@ hcut <- function(x, k = 2, isdiss = inherits(x, "dist"),
   
   if(!inherits(x, c("matrix", "data.frame", "dist")))
     stop("The data must be of class matrix, data.frame, or dist")
-  if(stand) x <- scale(x)
+  if(!is.numeric(k) || length(k) != 1L || is.na(k) || k %% 1 != 0 || k < 2)
+    stop("k must be a single integer >= 2")
+  if(stand && !inherits(x, "dist")) {
+    x <- scale(x)
+    if(anyNA(x))
+      stop("Scaling produced NA values. Check for constant columns or non-finite values.")
+  }
   data <- x
   
   hc_func <- match.arg(hc_func)
   hc_func <- hc_func[1]
   
   if(!isdiss) x <- get_dist(x, method = hc_metric)
+  n_obs <- attr(x, "Size")
+  if(k >= n_obs)
+    stop("k must be smaller than the number of observations")
   
   
   if(hc_func == "hclust") hc <- stats::hclust(x, method = hc_method)

@@ -66,11 +66,11 @@ get_ca_col <- function(res.ca){
   # ca package
   else if(inherits(res.ca, "ca")){
     # principal coord = standard coord X sqrt(eig)
-    coord <- t(apply(res.ca$colcoord, 1, "*", res.ca$sv))
-    cos2 <- apply(coord^2, 2, "/", res.ca$coldist^2)
+    coord <- sweep(res.ca$colcoord, 2, res.ca$sv, "*")
+    cos2 <- sweep(coord^2, 1, res.ca$coldist^2, "/")
     # col.contrib <- res.ca$colmass * col.coord^2/res.ca$sv^2
-    cc <- apply(coord^2, 2, "*", res.ca$colmass)
-    contrib <- t(apply(cc, 1, "/", res.ca$sv^2)) *100
+    cc <- sweep(coord^2, 1, res.ca$colmass, "*")
+    contrib <- sweep(cc, 2, res.ca$sv^2, "/") * 100
     inertia <- res.ca$colinertia
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     # remove supplementary points
@@ -82,28 +82,27 @@ get_ca_col <- function(res.ca){
   # Mass package
   else if(inherits(res.ca, "correspondence")){
     # principal coord = standard coord X sqrt(eig)
-    coord <- t(apply(res.ca$cscore, 1, "*", res.ca$cor))
+    coord <- sweep(res.ca$cscore, 2, res.ca$cor, "*")
     # cos2 = coord^2/d^2
-    row.sum <- apply(res.ca$Freq, 1, sum)
-    col.sum <- apply(res.ca$Freq, 2, sum)
+    row.sum <- rowSums(res.ca$Freq)
+    col.sum <- colSums(res.ca$Freq)
     n <- sum(res.ca$Freq)
-    profile <- t(apply(res.ca$Freq, 1, "/", col.sum))
+    profile <- sweep(res.ca$Freq, 2, col.sum, "/")
     average.profile <- row.sum/n
-    d2 <- apply(profile, 2, 
-                function(row.p, av.p){sum(((row.p - av.p)^2)/av.p)}, 
-                average.profile)
-    cos2 <- apply(coord^2, 2, "/", d2)
+    centered <- sweep(profile, 1, average.profile, "-")
+    d2 <- colSums((centered^2) / average.profile)
+    cos2 <- sweep(coord^2, 1, d2, "/")
     # contrib <- mass * coord^2/eig
     mass <- col.sum/n
-    cc <- apply(coord^2, 2, "*", mass)
-    contrib <- t(apply(cc, 1, "/", res.ca$cor^2)) *100
+    cc <- sweep(coord^2, 1, mass, "*")
+    contrib <- sweep(cc, 2, res.ca$cor^2, "/") * 100
     # inertia = mass * d^2
     inertia <- mass * d2
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     cols <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = inertia)
   }
   # ade4 package
-  else if(inherits(res.ca, "coa") & inherits(res.ca, 'dudi')){
+  else if(inherits(res.ca, "coa") && inherits(res.ca, "dudi")){
     if (!requireNamespace("ade4", quietly = TRUE)) {
       stop("ade4 package needed for this function to work. Please install it.")
     }
@@ -125,7 +124,7 @@ get_ca_col <- function(res.ca){
     cols <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = NA)
   }
   # ExPosition package
-  else if (inherits(res.ca, "expoOutput") & inherits(res.ca$ExPosition.Data,'epCA')) {
+  else if (inherits(res.ca, "expoOutput") && inherits(res.ca$ExPosition.Data, "epCA")) {
     coord <- res.ca$ExPosition.Data$fj
     inertia <- res.ca$ExPosition.Data$dj*res.ca$ExPosition.Data$W
     cos2 <- res.ca$ExPosition.Data$rj
@@ -136,7 +135,7 @@ get_ca_col <- function(res.ca){
                  inertia = inertia)
   }
   
-  else stop("An object of class : ", class(res.ca), 
+  else stop("An object of class : ", paste(class(res.ca), collapse = ", "), 
             " can't be handled by the function get_ca_col()")
   class(cols)<-c("factoextra", "ca_col")
   return(cols)
@@ -152,11 +151,11 @@ get_ca_row <- function(res.ca){
   # ca package
   else if(inherits(res.ca, "ca")){
     # principal coord = standard coord X sqrt(eig)
-    coord <- t(apply(res.ca$rowcoord, 1, "*", res.ca$sv))
-    cos2 <- apply(coord^2, 2, "/", res.ca$rowdist^2)
+    coord <- sweep(res.ca$rowcoord, 2, res.ca$sv, "*")
+    cos2 <- sweep(coord^2, 1, res.ca$rowdist^2, "/")
     # contrib <- res.ca$rowmass * coord^2/res.ca$sv^2
-    cc <- apply(coord^2, 2, "*", res.ca$rowmass)
-    contrib <- t(apply(cc, 1, "/", res.ca$sv^2)) *100
+    cc <- sweep(coord^2, 1, res.ca$rowmass, "*")
+    contrib <- sweep(cc, 2, res.ca$sv^2, "/") * 100
     inertia <- res.ca$rowinertia
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
     # remove supplementary points
@@ -168,21 +167,20 @@ get_ca_row <- function(res.ca){
   # Mass package
   else if(inherits(res.ca, "correspondence")){
     # principal coord = standard coord X sqrt(eig)
-    coord <- t(apply(res.ca$rscore, 1, "*", res.ca$cor))
+    coord <- sweep(res.ca$rscore, 2, res.ca$cor, "*")
     # cos2 = coord^2/d^2
-    row.sum <- apply(res.ca$Freq, 1, sum)
-    col.sum <- apply(res.ca$Freq, 2, sum)
+    row.sum <- rowSums(res.ca$Freq)
+    col.sum <- colSums(res.ca$Freq)
     n <- sum(res.ca$Freq)
-    profile <- res.ca$Freq/row.sum
+    profile <- sweep(res.ca$Freq, 1, row.sum, "/")
     average.profile <- col.sum/n
-    d2 <- apply(profile, 1, 
-                function(row.p, av.p){sum(((row.p - av.p)^2)/av.p)}, 
-                average.profile)
-    cos2 <- apply(coord^2, 2, "/", d2)
+    centered <- sweep(profile, 2, average.profile, "-")
+    d2 <- rowSums(sweep(centered^2, 2, average.profile, "/"))
+    cos2 <- sweep(coord^2, 1, d2, "/")
     # contrib <- mass * coord^2/eig
     mass <- row.sum/n
-    cc <- apply(coord^2, 2, "*", mass)
-    contrib <- t(apply(cc, 1, "/", res.ca$cor^2)) *100
+    cc <- sweep(coord^2, 1, mass, "*")
+    contrib <- sweep(cc, 2, res.ca$cor^2, "/") * 100
     # inertia = mass * d^2
     inertia <- mass * d2
     colnames(coord) <- colnames(cos2) <- colnames(contrib) <- paste0("Dim.", seq_len(ncol(coord))) 
@@ -190,7 +188,7 @@ get_ca_row <- function(res.ca){
   }
   
   # ade4 package
-  else if(inherits(res.ca, "coa") & inherits(res.ca, 'dudi')){
+  else if(inherits(res.ca, "coa") && inherits(res.ca, "dudi")){
     if (!requireNamespace("ade4", quietly = TRUE)) {
       stop("ade4 package needed for this function to work. Please install it.")
     }
@@ -212,7 +210,7 @@ get_ca_row <- function(res.ca){
     row <- list(coord = coord, contrib = contrib, cos2 = cos2, inertia = NA)
   }
   # ExPosition package
-  else if (inherits(res.ca, "expoOutput") & inherits(res.ca$ExPosition.Data,'epCA')) {
+  else if (inherits(res.ca, "expoOutput") && inherits(res.ca$ExPosition.Data, "epCA")) {
     coord <- res.ca$ExPosition.Data$fi
     inertia <- res.ca$ExPosition.Data$di*res.ca$ExPosition.Data$M
     cos2 <- res.ca$ExPosition.Data$ri
@@ -222,11 +220,9 @@ get_ca_row <- function(res.ca){
     row <- list(coord = coord, contrib = contrib, cos2 = cos2, 
                 inertia = inertia)
   }
-  else stop("An object of class : ", class(res.ca), 
+  else stop("An object of class : ", paste(class(res.ca), collapse = ", "), 
             " can't be handled by the function get_ca_row()")
   class(row)<-c("factoextra", "ca_row")
   return(row)
 }
-
-
 
