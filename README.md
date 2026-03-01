@@ -87,7 +87,7 @@ remotes::install_github("erdeyl/factoextraplus")
 - Hopkins statistic formula corrections (Wright 2022)
 - `facto_summarize()` axes parameter handling
 
-## Latest Maintenance (1.2.0.4)
+## Latest Maintenance (1.2.0.5)
 
 - Vectorized CA extraction internals for `ca` and `MASS::correspondence`
   backends.
@@ -110,7 +110,7 @@ package version 1.0.7. <https://CRAN.R-project.org/package=factoextra>
 **This fork:** \> Erdey L (2026). Supplementary compatibility updates
 for factoextra (Kassambara & Mundt, 2020): Modern R ecosystem support
 (ggplot2 ≥4.0.2, FactoMineR ≥2.13, R ≥4.1.0) — to be cited with the
-original package. R package version 1.2.0.4.
+original package. R package version 1.2.0.5.
 <https://doi.org/10.5281/zenodo.18131494>
 
 ## Original Package

@@ -1,3 +1,11 @@
+# factoextraplus 1.2.0.5
+
+## Maintenance
+
+- Synchronize package-level examples and breaking-change documentation with the current `ggpubrplus` baseline (`>= 0.9.0.6`).
+- Regenerate manuals and package documentation metadata after release-prep updates.
+- Finalize release workflow checks and branch/release housekeeping for the 1.2.0.5 publication.
+
 # factoextraplus 1.2.0.4
 
 ## Maintenance

@@ -24,8 +24,8 @@ General resources:
 
 
 \itemize{
-\item Requires R >= 4.1.0, ggplot2 >= 4.0.2, FactoMineR >= 2.13, and ggpubrplus >= 0.9.0.2.
-\item Dependency switched from ggpubr to ggpubrplus (>= 0.9.0.2).
+\item Requires R >= 4.1.0, ggplot2 >= 4.0.2, FactoMineR >= 2.13, and ggpubrplus >= 0.9.0.6.
+\item Dependency switched from ggpubr to ggpubrplus (>= 0.9.0.6).
 \item Hopkins statistic uses the corrected formula (Wright 2022); results differ from legacy factoextra.
 \item Legacy FactoMineR category labels may no longer match; use
   \code{\link{map_factominer_legacy_names}} to translate them.
@@ -33,7 +33,7 @@ General resources:
 
 \preformatted{
 # Install ggpubrplus first
-remotes::install_github("erdeyl/ggpubrplus@v0.9.0.2")
+remotes::install_github("erdeyl/ggpubrplus@v0.9.0.6")
 remotes::install_github("erdeyl/factoextraplus")
 
 # Hopkins statistic (corrected formula; warns once per session)
