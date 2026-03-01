@@ -219,9 +219,6 @@ fviz_gap_stat <- function(gap_stat,  linecolor = "steelblue",
   gap <- gap_stat$Tab[, "gap"]
   se <- gap_stat$Tab[, "SE.sim"]
   k <- .maxSE(gap, se, method = maxSE$method, SE.factor = maxSE$SE.factor)
-  
-  #k <- length(gap)
-  #k = if (any(decr)) which.max(decr) else k
 
   df <- as.data.frame(gap_stat$Tab)
   df$clusters <- as.factor(seq_len(nrow(df)))

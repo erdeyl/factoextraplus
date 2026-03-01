@@ -6,7 +6,7 @@
 \alias{factoextraplus-package}
 \title{factoextraplus: Extract and Visualize the Results of Multivariate Data Analyses (Extended)}
 \description{
-Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020). Modern R ecosystem support (ggplot2 >= 4.0.2, ggpubrplus >= 0.9.0.2, FactoMineR >= 2.13, R >= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including 'PCA' (Principal Component Analysis), 'CA' (Correspondence Analysis), 'MCA' (Multiple Correspondence Analysis), 'FAMD' (Factor Analysis of Mixed Data), 'MFA' (Multiple Factor Analysis) and 'HMFA' (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides 'ggplot2'-based elegant data visualization.
+Supplementary compatibility updates for factoextra (Kassambara & Mundt, 2020). Modern R ecosystem support (ggplot2 >= 4.0.2, ggpubrplus >= 0.9.0.6, FactoMineR >= 2.13, R >= 4.1.0) - to be cited with the original package. Provides easy-to-use functions to extract and visualize the output of multivariate data analyses, including 'PCA' (Principal Component Analysis), 'CA' (Correspondence Analysis), 'MCA' (Multiple Correspondence Analysis), 'FAMD' (Factor Analysis of Mixed Data), 'MFA' (Multiple Factor Analysis) and 'HMFA' (Hierarchical Multiple Factor Analysis) functions from different R packages. It contains also functions for simplifying some clustering analysis steps and provides 'ggplot2'-based elegant data visualization.
 }
 \details{
 factoextraplus is an extended version of factoextra with modernized code

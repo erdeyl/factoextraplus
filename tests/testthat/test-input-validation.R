@@ -13,6 +13,14 @@ test_that("hcut validates k and scaled inputs", {
   )
 })
 
+test_that("hcut requires dist input when isdiss is TRUE", {
+  x <- iris[, 1:4]
+  expect_error(
+    hcut(x, k = 2, isdiss = TRUE),
+    "must be an object of class dist"
+  )
+})
+
 test_that("hkmeans validates inputs and k bounds", {
   x <- iris[, 1:4]
   expect_error(hkmeans(x, k = 1), "k must be a single integer >= 2")

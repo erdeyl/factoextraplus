@@ -6,8 +6,11 @@
 - Refactor CA extractors (`ca` and `MASS::correspondence` backends) to vectorized `sweep()/rowSums()/colSums()` paths.
 - Vectorize Hopkins nearest-neighbor distance computation and harden input validation in `get_clust_tendency()`.
 - Add stricter `k` and scaling validations for `hcut()` and `hkmeans()`.
+- Clarify `hcut(isdiss = TRUE)` behavior with explicit dist-class validation.
 - Remove deprecated Travis CI config and add GitHub Actions `R-CMD-check` workflow.
+- Expand CI checks to a multi-platform/multi-R matrix (Linux/macOS/Windows; release/devel/oldrel).
 - Expand regression/smoke test coverage across clustering, CA backends, and visualization helpers.
+- Refresh README upstream-status narrative and update `ggpubrplus` pinning to `v0.9.0.6`.
 - Remove explicit `stringsAsFactors = TRUE` legacy settings and stale commented-out code blocks.
 
 # factoextraplus 1.2.0.3

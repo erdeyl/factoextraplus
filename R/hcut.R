@@ -16,7 +16,9 @@ NULL
 #' @param stand logical value; default is FALSE. If TRUE, then the data will be standardized using the function scale(). 
 #' Measurements are standardized for each variable (column), by subtracting the variable's mean value and 
 #' dividing by the variable's standard deviation.
-#' @param isdiss logical value specifying wether x is a dissimilarity matrix.
+#' @param isdiss logical value specifying whether \code{x} is already a
+#'   dissimilarity matrix. If TRUE, \code{x} must inherit from class
+#'   \code{"dist"}.
 #' @param hc_func the hierarchical clustering function to be used. Default value is "hclust". Possible values 
 #' is one of "hclust", "agnes", "diana". Abbreviation is allowed.
 #' @param graph logical value. If TRUE, the dendrogram is displayed.
@@ -66,6 +68,8 @@ hcut <- function(x, k = 2, isdiss = inherits(x, "dist"),
     stop("The data must be of class matrix, data.frame, or dist")
   if(!is.numeric(k) || length(k) != 1L || is.na(k) || k %% 1 != 0 || k < 2)
     stop("k must be a single integer >= 2")
+  if(isdiss && !inherits(x, "dist"))
+    stop("When isdiss = TRUE, x must be an object of class dist")
   if(stand && !inherits(x, "dist")) {
     x <- scale(x)
     if(anyNA(x))
@@ -78,6 +82,8 @@ hcut <- function(x, k = 2, isdiss = inherits(x, "dist"),
   
   if(!isdiss) x <- get_dist(x, method = hc_metric)
   n_obs <- attr(x, "Size")
+  if(is.null(n_obs) || !is.numeric(n_obs))
+    stop("Unable to determine number of observations from distance data")
   if(k >= n_obs)
     stop("k must be smaller than the number of observations")
   
