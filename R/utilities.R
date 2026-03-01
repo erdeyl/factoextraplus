@@ -52,6 +52,20 @@ NULL
   out
 }
 
+.with_preserved_seed <- function(seed, expr){
+  has_seed <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+  if(has_seed) old_seed <- get(".Random.seed", envir = .GlobalEnv)
+  on.exit({
+    if(!has_seed && exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)){
+      rm(".Random.seed", envir = .GlobalEnv)
+    } else if(has_seed){
+      assign(".Random.seed", old_seed, envir = .GlobalEnv)
+    }
+  }, add = TRUE)
+  set.seed(seed)
+  eval.parent(substitute(expr))
+}
+
 # Check and get the class of the output of a factor analysis
 # ++++++++++++++++++++++++++++
 # X: an output of factor analysis (PCA, CA, MCA, MFA) 
@@ -612,15 +626,13 @@ NULL
   if(!is.null(data)){
     if(!is.null(jitter$width)){
       width <- abs(jitter$width)
-     set.seed(1234)
-      xjit <- runif(nrow(data), min = -width, max = width)
+      xjit <- .with_preserved_seed(1234, runif(nrow(data), min = -width, max = width))
       data$x <- data$x + ((xjit + rev(xjit))/2)
     }
     
     if(!is.null(jitter$height)){
       height <- abs(jitter$height)
-       set.seed(12345)
-      yjit <- runif(nrow(data), min = -height, max = height)
+      yjit <- .with_preserved_seed(12345, runif(nrow(data), min = -height, max = height))
       data$y <- data$y + ((yjit + rev(yjit))/2)
     }
     
@@ -703,36 +715,36 @@ NULL
 # Generate a data containing a cluster of any shapes
 # For comparison between dbscan and k-means
 .generate_multishapes <- function(){
-  # First circle (big)
-  set.seed(1234)
-  x <- matrix(rnorm(800, sd = 2), ncol=2)
-  y <- x/sqrt(rowSums(x^2))
-  y[,1] <- y[,1] + rnorm(400, 0, 0.1)
-  y[,2] <- y[,2] + rnorm(400, 0, 0.1)
-  x1 <- y[, 1]
-  y1 <- y[, 2]
-  # Second circle (small)
-  x2 <- x1/2.5
-  y2 <- y1/2.5
-  shape <- rep(c(1,2), each = 400)
-  # Line 1
-  x3 <- runif(100, min = -1.5, 0)
-  y3 <- rnorm(100, -2, 0.1)
-  shape <- c(shape, rep(3, 100))
-  # Line 2
-  x4 <- runif(100, min = -1.5, 0)
-  y4 <- rnorm(100, -3, 0.1)
-  shape <- c(shape, rep(4, 100))
-  # compact points
-  x6 <- rnorm(50, 1, 0.1)
-  y6 <- rnorm(50, -2.5, 0.1)
-  shape <- c(shape, rep(5, 50))
-  # noises/outliers
-  x5 <- runif(50, min = -1.5, 1.5)
-  y5 <- rnorm(50, -1, 1)
-  shape <- c(shape, rep(6, 50))
-  multishapes <- data.frame(x = c(x1, x2, x3, x4, x5, x6), y = c(y1, y2, y3, y4, y5, y6), shape = shape)
-  multishapes
+  .with_preserved_seed(1234, {
+    # First circle (big)
+    x <- matrix(rnorm(800, sd = 2), ncol = 2)
+    y <- x/sqrt(rowSums(x^2))
+    y[,1] <- y[,1] + rnorm(400, 0, 0.1)
+    y[,2] <- y[,2] + rnorm(400, 0, 0.1)
+    x1 <- y[, 1]
+    y1 <- y[, 2]
+    # Second circle (small)
+    x2 <- x1/2.5
+    y2 <- y1/2.5
+    shape <- rep(c(1,2), each = 400)
+    # Line 1
+    x3 <- runif(100, min = -1.5, 0)
+    y3 <- rnorm(100, -2, 0.1)
+    shape <- c(shape, rep(3, 100))
+    # Line 2
+    x4 <- runif(100, min = -1.5, 0)
+    y4 <- rnorm(100, -3, 0.1)
+    shape <- c(shape, rep(4, 100))
+    # compact points
+    x6 <- rnorm(50, 1, 0.1)
+    y6 <- rnorm(50, -2.5, 0.1)
+    shape <- c(shape, rep(5, 50))
+    # noises/outliers
+    x5 <- runif(50, min = -1.5, 1.5)
+    y5 <- rnorm(50, -1, 1)
+    shape <- c(shape, rep(6, 50))
+    data.frame(x = c(x1, x2, x3, x4, x5, x6), y = c(y1, y2, y3, y4, y5, y6), shape = shape)
+  })
 }
 
 
@@ -1004,7 +1016,7 @@ factominer_category_map <- function(X, element = c("quali.var", "quali.sup", "va
                       legacy_level = NA_character_, stringsAsFactors = FALSE))
   }
   data <- as.data.frame(data)
-  is.quali <- which(!sapply(data, is.numeric))
+  is.quali <- which(!vapply(data, is.numeric, logical(1)))
   if(length(is.quali) == 0){
     return(data.frame(current = current.names, variable = NA_character_, level = NA_character_,
                       legacy_dot = NA_character_, legacy_underscore = NA_character_,
@@ -1025,7 +1037,7 @@ factominer_category_map <- function(X, element = c("quali.var", "quali.sup", "va
     }
   }
 
-  variable <- rep(names(data.quali), sapply(data.quali, nlevels))
+  variable <- rep(names(data.quali), vapply(data.quali, nlevels, integer(1)))
   listModa <- unlist(lapply(data.quali, levels))
   wlistModa <- which(listModa %in% c("y", "n", "Y", "N"))
   if(length(wlistModa) > 0){

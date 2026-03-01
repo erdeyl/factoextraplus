@@ -78,9 +78,9 @@
 ## Package Rename
 
 This package is a modernized fork of `factoextra` renamed to `factoextraplus` to avoid
-conflicts while the upstream pull request (kassambara/factoextra#194) is pending.
-Once the PR is merged and the original `factoextra` is updated on CRAN, users can
-switch back to the original package.
+conflicts while pursuing upstream compatibility alignment.
+Historical note: the upstream pull request (kassambara/factoextra#194) was later
+closed unmerged on 2026-02-25.
 
 **Note:** This package depends on `ggpubrplus` (the modernized fork of `ggpubr`).
 
